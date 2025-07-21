@@ -2603,14 +2603,12 @@ button, a {
     z-index: 999;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
-    display: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .more-menu-overlay.active {
     opacity: 1;
     visibility: visible;
-    display: block;
 }
 
 .more-menu-modal {
@@ -2622,19 +2620,15 @@ button, a {
     border-radius: 20px 20px 0 0;
     z-index: 1000;
     transform: translateY(100%);
-    transition: transform 0.3s ease;
-    max-height: 80vh;
-    overflow-y: auto;
-    visibility: hidden;
     opacity: 0;
-    display: none;
+    visibility: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .more-menu-modal.active {
     transform: translateY(0);
-    visibility: visible;
     opacity: 1;
-    display: block;
+    visibility: visible;
 }
 
 .more-menu-header {

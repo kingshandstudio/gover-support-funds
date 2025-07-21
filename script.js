@@ -429,16 +429,20 @@ function openMoreMenu() {
     const modal = document.getElementById('moreMenuModal');
     
     if (overlay && modal) {
-        overlay.style.display = 'block';
-        modal.style.display = 'block';
-        
-        // 약간의 지연 후 애니메이션 시작
-        setTimeout(() => {
-            overlay.classList.add('active');
-            modal.classList.add('active');
-        }, 10);
-        
+        overlay.classList.add('active');
+        modal.classList.add('active');
         document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeMoreMenu() {
+    const overlay = document.getElementById('moreMenuOverlay');
+    const modal = document.getElementById('moreMenuModal');
+    
+    if (overlay && modal) {
+        overlay.classList.remove('active');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
     }
 }
 
@@ -450,57 +454,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (overlay && modal) {
         overlay.classList.remove('active');
         modal.classList.remove('active');
-        overlay.style.display = 'none';
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
     }
-});
 
-// 페이지 로드 즉시 실행 (DOMContentLoaded 전에도)
-(function() {
-    const hideModal = () => {
-        const overlay = document.getElementById('moreMenuOverlay');
-        const modal = document.getElementById('moreMenuModal');
-        
-        if (overlay && modal) {
-            overlay.classList.remove('active');
-            modal.classList.remove('active');
-            overlay.style.display = 'none';
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
+    // ESC 키로 더보기 메뉴 닫기
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeMoreMenu();
         }
-    };
-    
-    // 즉시 실행
-    hideModal();
-    
-    // 100ms 후에도 실행 (안전장치)
-    setTimeout(hideModal, 100);
-})();
-
-function closeMoreMenu() {
-    const overlay = document.getElementById('moreMenuOverlay');
-    const modal = document.getElementById('moreMenuModal');
-    
-    if (overlay && modal) {
-        overlay.classList.remove('active');
-        modal.classList.remove('active');
-        
-        // 애니메이션 완료 후 display none
-        setTimeout(() => {
-            overlay.style.display = 'none';
-            modal.style.display = 'none';
-        }, 300);
-        
-        document.body.style.overflow = '';
-    }
-}
-
-// ESC 키로 더보기 메뉴 닫기
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        closeMoreMenu();
-    }
+    });
 });
 
 // 전역으로 함수들 노출
