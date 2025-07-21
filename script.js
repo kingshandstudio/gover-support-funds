@@ -204,7 +204,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 // 머니피드 탭 전환 기능
-function switchFeedTab(tabType) {
+function switchFeedTab(tabType, clickedElement) {
     if (!preventSpamClick()) return;
     
     // 모든 탭에서 active 클래스 제거
@@ -212,7 +212,9 @@ function switchFeedTab(tabType) {
     tabs.forEach(tab => tab.classList.remove('active'));
     
     // 클릭된 탭에 active 클래스 추가
-    event.target.classList.add('active');
+    if (clickedElement) {
+        clickedElement.classList.add('active');
+    }
     
     // 모든 피드 숨기기
     const feeds = document.querySelectorAll('.news-grid');
@@ -225,10 +227,12 @@ function switchFeedTab(tabType) {
     }
     
     // 버튼 클릭 효과
-    event.target.style.transform = 'scale(0.95)';
-    setTimeout(() => {
-        event.target.style.transform = 'scale(1)';
-    }, 150);
+    if (clickedElement) {
+        clickedElement.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            clickedElement.style.transform = 'scale(1)';
+        }, 150);
+    }
     
     // 토스트 메시지
     const tabNames = {
@@ -249,15 +253,20 @@ function switchFeedTab(tabType) {
 // 탭 스크롤 기능
 function scrollTabs(direction) {
     const tabsContainer = document.querySelector('.category-tabs');
-    if (!tabsContainer) return;
+    if (!tabsContainer) {
+        console.log('category-tabs를 찾을 수 없습니다.');
+        return;
+    }
     
     const scrollAmount = 200; // 한 번에 스크롤할 픽셀 수
     const currentScroll = tabsContainer.scrollLeft;
     
     if (direction === 'right') {
         tabsContainer.scrollLeft = currentScroll + scrollAmount;
+        console.log('오른쪽으로 스크롤:', currentScroll + scrollAmount);
     } else if (direction === 'left') {
         tabsContainer.scrollLeft = currentScroll - scrollAmount;
+        console.log('왼쪽으로 스크롤:', currentScroll - scrollAmount);
     }
 }
 

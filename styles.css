@@ -478,6 +478,7 @@ body {
 
 .scroll-arrow.right {
     right: -16px;
+    display: flex !important;
 }
 
 .scroll-arrow.left {
