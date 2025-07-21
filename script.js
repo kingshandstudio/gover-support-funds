@@ -429,8 +429,15 @@ function openMoreMenu() {
     const modal = document.getElementById('moreMenuModal');
     
     if (overlay && modal) {
-        overlay.classList.add('active');
-        modal.classList.add('active');
+        overlay.style.display = 'block';
+        modal.style.display = 'block';
+        
+        // 약간의 지연 후 애니메이션 시작
+        setTimeout(() => {
+            overlay.classList.add('active');
+            modal.classList.add('active');
+        }, 10);
+        
         document.body.style.overflow = 'hidden';
     }
 }
@@ -443,8 +450,33 @@ document.addEventListener('DOMContentLoaded', function() {
     if (overlay && modal) {
         overlay.classList.remove('active');
         modal.classList.remove('active');
+        overlay.style.display = 'none';
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
     }
 });
+
+// 페이지 로드 즉시 실행 (DOMContentLoaded 전에도)
+(function() {
+    const hideModal = () => {
+        const overlay = document.getElementById('moreMenuOverlay');
+        const modal = document.getElementById('moreMenuModal');
+        
+        if (overlay && modal) {
+            overlay.classList.remove('active');
+            modal.classList.remove('active');
+            overlay.style.display = 'none';
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    };
+    
+    // 즉시 실행
+    hideModal();
+    
+    // 100ms 후에도 실행 (안전장치)
+    setTimeout(hideModal, 100);
+})();
 
 function closeMoreMenu() {
     const overlay = document.getElementById('moreMenuOverlay');
@@ -453,6 +485,13 @@ function closeMoreMenu() {
     if (overlay && modal) {
         overlay.classList.remove('active');
         modal.classList.remove('active');
+        
+        // 애니메이션 완료 후 display none
+        setTimeout(() => {
+            overlay.style.display = 'none';
+            modal.style.display = 'none';
+        }, 300);
+        
         document.body.style.overflow = '';
     }
 }
