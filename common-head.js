@@ -84,6 +84,7 @@ function loadCommonHead() {
         '<meta name="google" content="notranslate">',
         '<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">',
         '<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">',
+        '<meta name="google-adsense-account" content="ca-pub-9853437874631712">',
         
         // 보안
         '<meta http-equiv="X-UA-Compatible" content="IE=edge">',
