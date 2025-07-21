@@ -66,6 +66,14 @@
             </div>
         </section>
 
+        <!-- 민생회복지원금 신청하기 버튼 -->
+        <div class="apply-button-container" style="padding: 20px; text-align: center;">
+            <button class="main-cta-btn" onclick="document.getElementById('cardCompanySection').scrollIntoView({behavior: 'smooth'})">
+                <i class="fas fa-external-link-alt"></i>
+                민생회복지원금 신청하기
+            </button>
+        </div>
+
         <!-- 지원대상 섹션 -->
         <section class="eligibility-section">
             <div class="section-icon">
@@ -406,7 +414,7 @@
             </a>
             
             <!-- 카드사별 신청 링크 -->
-            <div class="card-company-links">
+            <div class="card-company-links" id="cardCompanySection">
                 <h4>카드사별 신청하기</h4>
                 <div class="company-grid">
                     <a href="https://card.kbcard.com/CRD/DVIEW/HCAMCXPRICAC0002?mainCC=a&cooperId=EMCKBCARD" target="_blank" class="company-link">
