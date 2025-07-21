@@ -2645,92 +2645,79 @@ button, a {
     border-bottom: 1px solid #f0f0f0;
 }
 
-.more-menu-header h3 {
+.more-menu-header h2 {
     margin: 0;
     font-size: 18px;
     font-weight: 700;
     color: #333;
 }
 
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 18px;
-    color: #666;
-    cursor: pointer;
-    padding: 4px;
-    border-radius: 4px;
-    transition: background 0.2s ease;
-}
-
-.close-btn:hover {
-    background: #f5f5f5;
-}
-
-.more-menu-content {
+.more-menu-body {
     padding: 24px;
 }
 
-.menu-grid {
+.menu-items-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
     margin-bottom: 24px;
 }
 
-.menu-item {
+.menu-link-box {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 16px;
-    padding: 16px;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
     background: #f8f9fa;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s ease;
     border: 1px solid #e9ecef;
+    text-decoration: none;
+    color: inherit;
 }
 
-.menu-item:hover {
+.menu-link-box:hover {
     background: #e9ecef;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.menu-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 20px;
-    flex-shrink: 0;
+.menu-link-icon {
+    margin-bottom: 12px;
 }
 
-.menu-text {
+.menu-link-icon svg {
+    width: 48px;
+    height: 48px;
+}
+
+.menu-link-text-content {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.menu-title {
+.menu-link-title {
     font-size: 16px;
     font-weight: 600;
     color: #333;
+    margin: 0;
 }
 
-.menu-subtitle {
+.menu-link-subtitle {
     font-size: 12px;
     color: #666;
 }
 
-.kakao-talk-section {
+.kakao-action-wrapper {
     border-top: 1px solid #f0f0f0;
     padding-top: 20px;
 }
 
-.kakao-talk-btn {
+.kakao-button {
     width: 100%;
     background: #FEE500;
     color: #333;
@@ -2745,21 +2732,17 @@ button, a {
     justify-content: center;
     gap: 8px;
     transition: all 0.2s ease;
+    text-decoration: none;
 }
 
-.kakao-talk-btn:hover {
+.kakao-button:hover {
     background: #FDD835;
     transform: translateY(-1px);
 }
 
-.kakao-talk-btn i {
-    font-size: 18px;
-}
-
-/* 초기 상태 강제 숨김 */
-.more-menu-overlay:not(.active),
-.more-menu-modal:not(.active) {
-    display: none !important;
+.kakao-button svg {
+    width: 16px;
+    height: 16px;
 }
 
 /* 모바일 반응형 */
@@ -2772,39 +2755,38 @@ button, a {
         padding: 16px 20px 12px 20px;
     }
     
-    .more-menu-header h3 {
+    .more-menu-header h2 {
         font-size: 16px;
     }
     
-    .more-menu-content {
+    .more-menu-body {
         padding: 20px;
     }
     
-    .menu-grid {
-        grid-template-columns: 1fr;
+    .menu-items-container {
+        grid-template-columns: repeat(2, 1fr);
         gap: 12px;
         margin-bottom: 20px;
     }
     
-    .menu-item {
-        padding: 14px;
+    .menu-link-box {
+        padding: 16px;
     }
     
-    .menu-icon {
+    .menu-link-icon svg {
         width: 40px;
         height: 40px;
-        font-size: 18px;
     }
     
-    .menu-title {
+    .menu-link-title {
         font-size: 15px;
     }
     
-    .menu-subtitle {
+    .menu-link-subtitle {
         font-size: 11px;
     }
     
-    .kakao-talk-btn {
+    .kakao-button {
         padding: 14px 20px;
         font-size: 15px;
     }
