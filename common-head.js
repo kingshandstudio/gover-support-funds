@@ -6,8 +6,17 @@ function loadCommonHead() {
         adSenseScript.async = true;
         adSenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9853437874631712';
         adSenseScript.crossOrigin = 'anonymous';
+        adSenseScript.setAttribute('data-ad-client', 'ca-pub-9853437874631712');
         // head 태그의 맨 앞에 삽입하여 크롤러가 쉽게 찾을 수 있도록 함
         document.head.insertBefore(adSenseScript, document.head.firstChild);
+        
+        // 추가: AdSense 스크립트 로드 확인
+        adSenseScript.onload = function() {
+            console.log('AdSense script loaded successfully');
+        };
+        adSenseScript.onerror = function() {
+            console.error('AdSense script failed to load');
+        };
     }
     
     // Google Search Console 검증
@@ -71,9 +80,14 @@ function loadCommonHead() {
         '<meta name="apple-mobile-web-app-capable" content="yes">',
         '<meta name="apple-mobile-web-app-status-bar-style" content="default">',
         
+        // AdSense 최적화
+        '<meta name="google" content="notranslate">',
+        '<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">',
+        '<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">',
+        
         // 보안
         '<meta http-equiv="X-UA-Compatible" content="IE=edge">',
-        '<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">'
+        '<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; script-src \'self\' \'unsafe-inline\' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com; connect-src \'self\' https://pagead2.googlesyndication.com https://www.google-analytics.com;">'
     ];
     
     commonMetaTags.forEach(tag => {
