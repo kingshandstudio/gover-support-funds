@@ -1,12 +1,13 @@
 // 공통 헤더 요소들을 관리하는 파일
 function loadCommonHead() {
-    // AdSense 스크립트 추가
+    // AdSense 스크립트를 head 태그의 맨 앞에 추가 (크롤러가 쉽게 찾을 수 있도록)
     if (!document.querySelector('script[src*="googlesyndication"]')) {
         const adSenseScript = document.createElement('script');
         adSenseScript.async = true;
         adSenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9853437874631712';
         adSenseScript.crossOrigin = 'anonymous';
-        document.head.appendChild(adSenseScript);
+        // head 태그의 맨 앞에 삽입하여 크롤러가 쉽게 찾을 수 있도록 함
+        document.head.insertBefore(adSenseScript, document.head.firstChild);
     }
     
     // Google Search Console 검증
@@ -118,9 +119,12 @@ function loadCommonHead() {
     }
 }
 
-// 페이지 로드 시 즉시 실행
+// 페이지 로드 시 즉시 실행 (크롤러가 스크립트를 찾을 수 있도록)
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', loadCommonHead);
 } else {
     loadCommonHead();
-} 
+}
+
+// 즉시 실행 (DOMContentLoaded 이전에도 실행되도록)
+loadCommonHead(); 
