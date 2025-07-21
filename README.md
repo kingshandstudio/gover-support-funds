@@ -1,11 +1,11 @@
-# 🏛️ 지원금24 - 한국 정부 지원금 정보 플랫폼
+# 🏛️ 숨은지원금24 - 한국 정부 지원금 정보 플랫폼
 
 [![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=flat&logo=vercel)](https://gover-support-funds.vercel.app)
 [![GitHub](https://img.shields.io/badge/Source-GitHub-blue?style=flat&logo=github)](https://github.com/kingshandstudio/gover-support-funds)
 
 ## 🌟 **프로젝트 소개**
 
-**지원금24**는 한국 정부의 다양한 지원금 정보를 쉽고 빠르게 제공하는 웹 플랫폼입니다. 
+**숨은지원금24**는 한국 정부의 다양한 지원금 정보를 쉽고 빠르게 제공하는 웹 플랫폼입니다. 
 민생회복지원금, 근로장려금, 에너지캐시백 등 다양한 정부 지원정책을 한눈에 확인하고 신청할 수 있습니다.
 
 ## 🚀 **배포된 사이트**

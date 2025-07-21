@@ -337,7 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 로딩 완료 메시지
     setTimeout(() => {
-        showToast('지원금24에 오신 것을 환영합니다!');
+        showToast('숨은지원금24에 오신 것을 환영합니다!');
     }, 1000);
 });
 
