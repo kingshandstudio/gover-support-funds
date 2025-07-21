@@ -435,6 +435,17 @@ function openMoreMenu() {
     }
 }
 
+// 페이지 로드 시 모달 초기화
+document.addEventListener('DOMContentLoaded', function() {
+    const overlay = document.getElementById('moreMenuOverlay');
+    const modal = document.getElementById('moreMenuModal');
+    
+    if (overlay && modal) {
+        overlay.classList.remove('active');
+        modal.classList.remove('active');
+    }
+});
+
 function closeMoreMenu() {
     const overlay = document.getElementById('moreMenuOverlay');
     const modal = document.getElementById('moreMenuModal');

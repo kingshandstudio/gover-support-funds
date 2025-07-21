@@ -2623,10 +2623,14 @@ button, a {
     transition: transform 0.3s ease;
     max-height: 80vh;
     overflow-y: auto;
+    visibility: hidden;
+    opacity: 0;
 }
 
 .more-menu-modal.active {
     transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
 }
 
 .more-menu-header {
@@ -2752,6 +2756,12 @@ button, a {
 @media (max-width: 768px) {
     .more-menu-modal {
         max-height: 85vh;
+    }
+    
+    .more-menu-modal:not(.active) {
+        transform: translateY(100%);
+        visibility: hidden;
+        opacity: 0;
     }
     
     .more-menu-header {
