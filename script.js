@@ -203,6 +203,49 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// 머니피드 탭 전환 기능
+function switchFeedTab(tabType) {
+    if (!preventSpamClick()) return;
+    
+    // 모든 탭에서 active 클래스 제거
+    const tabs = document.querySelectorAll('.category-tab');
+    tabs.forEach(tab => tab.classList.remove('active'));
+    
+    // 클릭된 탭에 active 클래스 추가
+    event.target.classList.add('active');
+    
+    // 모든 피드 숨기기
+    const feeds = document.querySelectorAll('.news-grid');
+    feeds.forEach(feed => feed.style.display = 'none');
+    
+    // 해당 피드 보이기
+    const targetFeed = document.getElementById(tabType + '-feed');
+    if (targetFeed) {
+        targetFeed.style.display = 'grid';
+    }
+    
+    // 버튼 클릭 효과
+    event.target.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        event.target.style.transform = 'scale(1)';
+    }, 150);
+    
+    // 토스트 메시지
+    const tabNames = {
+        'support': '지원/정책',
+        'small-business': '소상공인',
+        'mortgage': '담보대출',
+        'insurance': '보험',
+        'credit': '신용대출',
+        'credit-card': '신용카드',
+        'savings': '예적금',
+        'asset': '자산관리',
+        'jeonse': '전세대출'
+    };
+    
+    showToast(`${tabNames[tabType]} 피드를 확인하세요!`);
+}
+
 // 탭 스크롤 기능
 function scrollTabs(direction) {
     const tabsContainer = document.querySelector('.category-tabs');
