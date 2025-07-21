@@ -1,187 +1,163 @@
-# 지원금24 클론 사이트
+# 🏛️ 지원금24 - 한국 정부 지원금 정보 플랫폼
 
-gg24.kr의 모바일 최적화된 클론 사이트입니다. 정부 지원금, 환급금, 대출 정보를 제공하는 플랫폼을 재현했습니다.
+[![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=flat&logo=vercel)](https://gover-support-funds.vercel.app)
+[![GitHub](https://img.shields.io/badge/Source-GitHub-blue?style=flat&logo=github)](https://github.com/kingshandstudio/gover-support-funds)
 
-## 🚀 주요 특징
+## 🌟 **프로젝트 소개**
 
-- **모바일 퍼스트 디자인**: 모바일 환경에 완전히 최적화된 반응형 웹
-- **매끄러운 애니메이션**: 부드러운 전환 효과와 인터랙션
-- **직관적인 UI/UX**: 사용자 친화적인 인터페이스
-- **완벽한 기능 구현**: 탭 전환, 사이드 메뉴, 무한 스크롤 등
+**지원금24**는 한국 정부의 다양한 지원금 정보를 쉽고 빠르게 제공하는 웹 플랫폼입니다. 
+민생회복지원금, 근로장려금, 에너지캐시백 등 다양한 정부 지원정책을 한눈에 확인하고 신청할 수 있습니다.
 
-## 📱 화면 구성
+## 🚀 **배포된 사이트**
 
-### 메인 페이지 (index.html)
-- 상단 알림 배너
-- 로고와 헤더 네비게이션
-- 메인 프로모션 배너
-- 지원금24 랭킹 섹션
-- 탭 메뉴 (지원금/환급금/대출 정보)
-- 머니 피드 뉴스 섹션
+**🌐 Live Demo**: [https://gover-support-funds.vercel.app](https://gover-support-funds.vercel.app)
+
+## 💡 **주요 기능**
+
+### 📱 **메인 페이지**
+- **지원금 카드**: 주요 정부 지원금 정보 카드
+- **머니 피드**: 최신 지원금 뉴스 및 정보
+- **인기 랭킹**: 인기 있는 지원금 순위
+- **카테고리별 탭**: 체계적인 정보 분류
+
+### 📋 **상세 페이지들**
+- **민생회복지원금** (`/detail.html`)
+  - 행정안전부 공식 이미지 갤러리 (확대 기능)
+  - 10개 카드사 직접 신청 링크
+  - 행정안전부 공식 페이지 연동
+- **근로장려금** (`/detail-geunro.html`)
+- **주택용 에너지캐시백** (`/detail-energy.html`)
+- **일반전세자금보증** (`/detail-jeonse.html`)
+
+### 📰 **뉴스 아티클**
+- **민생회복 소비쿠폰 가이드** (`/article-coupon.html`)
+- **부가가치세 신고 가이드** (`/article-tax.html`)
+- **실업급여 신청 가이드** (`/article-unemployment.html`)
+- **민생회복 소비쿠폰 2025** (`/article-coupon2025.html`)
+
+### 🎯 **추가 페이지**
+- **맞춤 정책** (`/policy.html`) - 개인별 맞춤 정책 추천
+- **머니 피드** (`/feed.html`) - 종합 뉴스 페이지
+
+## 🛠️ **기술 스택**
+
+### **Frontend**
+- **HTML5** - 시맨틱 마크업
+- **CSS3** - Flexbox, Grid, 애니메이션
+- **JavaScript (ES6+)** - DOM 조작, 이벤트 처리
+
+### **디자인**
+- **반응형 디자인** - 모바일 퍼스트
+- **Font Awesome** - 아이콘
+- **Google Fonts** - Noto Sans KR
+
+### **배포**
+- **GitHub** - 소스 코드 관리
+- **Vercel** - 자동 배포 및 호스팅
+
+## 🎨 **UI/UX 특징**
+
+### **📱 모바일 최적화**
+- 터치 친화적 인터페이스
 - 하단 고정 네비게이션
-
-### 상세 페이지 (detail.html)
-- 뒤로가기 버튼이 있는 헤더
-- 지원금 상세 정보
-- 혜택 요약 섹션
-- 탭 기반 상세 정보 (사업내용/지원대상/지원내용/절차방법)
-- 신청 단계별 가이드
-- 하단 고정 액션 버튼
-
-## 🛠️ 기술 스택
-
-- **HTML5**: 시맨틱 마크업
-- **CSS3**: 
-  - Flexbox & Grid 레이아웃
-  - CSS 애니메이션 & 트랜지션
-  - 미디어 쿼리를 통한 반응형 디자인
-- **JavaScript (ES6+)**:
-  - DOM 조작
-  - 이벤트 처리
-  - 인터섹션 옵저버 API
-  - 터치 제스처 지원
-- **Font Awesome**: 아이콘
-- **Google Fonts**: Noto Sans KR 폰트
-
-## 📂 프로젝트 구조
-
-```
-gover/
-├── index.html          # 메인 페이지
-├── detail.html         # 지원금 상세 페이지
-├── styles.css          # 메인 스타일시트
-├── script.js           # JavaScript 기능
-└── README.md           # 프로젝트 설명서
-```
-
-## 🎨 디자인 시스템
-
-### 색상 팔레트
-- **Primary Blue**: `#2196F3` - 메인 브랜드 컬러
-- **Dark Blue**: `#1976D2` - 강조 색상
-- **Orange**: `#FFA726` - 액센트 컬러
-- **Gray**: `#666` - 텍스트 컬러
-- **Light Gray**: `#f8f9fa` - 배경 컬러
-
-### 타이포그래피
-- **Font Family**: Noto Sans KR
-- **Font Weights**: 300, 400, 500, 700
-- **Responsive Font Sizes**: 12px ~ 32px
-
-### 간격 시스템
-- **Base Unit**: 4px
-- **Common Spacings**: 8px, 12px, 16px, 20px, 24px
-
-## 🚀 실행 방법
-
-1. 프로젝트 폴더에서 HTML 파일을 웹 브라우저로 열기
-```bash
-# 메인 페이지
-open index.html
-
-# 또는 라이브 서버 사용 (권장)
-npx live-server
-```
-
-2. 모바일 디바이스에서 테스트하려면 Chrome DevTools의 모바일 모드 사용
-
-## 📱 모바일 최적화 기능
-
-### 터치 최적화
-- 터치 친화적인 버튼 크기 (최소 44px)
-- 터치 피드백 애니메이션
 - 스와이프 제스처 지원
 
-### 성능 최적화
-- 이미지 레이지 로딩
-- CSS 애니메이션 하드웨어 가속
-- 디바운스/스로틀 적용
+### **🖼️ 인터랙티브 요소**
+- 호버 효과 및 클릭 애니메이션
+- 이미지 갤러리 (확대/축소)
+- 모달 팝업
+- 탭 전환 효과
 
-### 사용성 개선
-- 무한 스크롤 (더보기 버튼)
-- 토스트 메시지
-- 로딩 상태 표시
-- 오프라인 감지
+### **🎯 사용자 경험**
+- 직관적인 네비게이션
+- 빠른 로딩 속도
+- 일관된 디자인 시스템
+- 접근성 고려
 
-## 🎯 주요 기능
+## 📊 **프로젝트 구조**
 
-### 네비게이션
-- **사이드 메뉴**: 햄버거 메뉴를 통한 슬라이딩 네비게이션
-- **하단 탭바**: 고정된 하단 네비게이션
-- **브레드크럼**: 페이지 경로 표시
-
-### 인터랙션
-- **탭 전환**: 부드러운 탭 네비게이션
-- **아코디언**: 확장/축소 가능한 컨텐츠
-- **모달**: 오버레이 팝업
-
-### 데이터 표시
-- **카드 레이아웃**: 정보를 카드 형태로 구성
-- **그리드 시스템**: 반응형 그리드 레이아웃
-- **리스트 뷰**: 구조화된 정보 표시
-
-## 🔧 커스터마이징
-
-### 색상 변경
-`styles.css`에서 CSS 변수를 수정하여 브랜드 색상 변경 가능:
-
-```css
-:root {
-  --primary-color: #2196F3;
-  --secondary-color: #FFA726;
-  --text-color: #333;
-  --background-color: #f8f9fa;
-}
+```
+gover-support-funds/
+├── 📄 index.html              # 메인 페이지
+├── 🎨 styles.css              # 통합 스타일시트
+├── ⚡ script.js               # JavaScript 로직
+├── 📋 상세 페이지들
+│   ├── detail.html            # 민생회복지원금
+│   ├── detail-geunro.html     # 근로장려금
+│   ├── detail-energy.html     # 에너지캐시백
+│   └── detail-jeonse.html     # 전세자금보증
+├── 📰 뉴스 아티클들
+│   ├── article-coupon.html
+│   ├── article-tax.html
+│   ├── article-coupon2025.html
+│   └── article-unemployment.html
+├── 🎯 기타 페이지들
+│   ├── policy.html            # 맞춤 정책
+│   └── feed.html              # 머니 피드
+├── 🖼️ public/                 # 이미지 자산
+│   ├── gov.png               # 정부 로고
+│   ├── nts.png               # 국세청 로고
+│   ├── hood1.jpg, hood2.jpg, hood3.jpg  # 공식 안내 이미지
+│   └── 1.png, 2.png, 3.png, 4.png      # 뉴스 이미지
+├── ⚙️ package.json            # 프로젝트 설정
+├── 🚀 vercel.json             # 배포 설정
+└── 📝 README.md               # 프로젝트 문서
 ```
 
-### 콘텐츠 수정
-`script.js`의 데이터 배열을 수정하여 뉴스 카드나 지원금 정보 변경 가능
+## 🔗 **외부 연동**
 
-### 새로운 섹션 추가
-HTML 구조를 유지하면서 새로운 섹션을 추가할 수 있습니다.
+### **정부 기관 연동**
+- **행정안전부**: 민생회복지원금 공식 페이지
+- **국세청**: 근로장려금 신청 페이지
+- **한국에너지공단**: 에너지캐시백 정보
 
-## 📱 호환성
+### **카드사 연동** (10개사)
+- KB국민카드, 신한카드, 삼성카드, 현대카드, 롯데카드
+- BC카드, 씨티카드, 우리카드, 하나카드, 수협카드
 
-### 브라우저 지원
-- Chrome 60+
-- Safari 12+
-- Firefox 55+
-- Edge 79+
+## 📱 **반응형 브레이크포인트**
 
-### 디바이스 지원
-- iPhone (iOS 12+)
-- Android (API 21+)
-- 태블릿 (iPadOS, Android)
+- **Mobile**: ~ 768px
+- **Tablet**: 769px ~ 1024px  
+- **Desktop**: 1025px ~
 
-## 🐛 알려진 이슈
+## 🛡️ **보안 및 성능**
 
-1. Internet Explorer는 지원하지 않습니다
-2. 일부 오래된 Android 브라우저에서 CSS Grid 지원 제한
-3. iOS Safari에서 100vh 이슈 (해결됨)
+### **보안 헤더**
+- `X-Content-Type-Options: nosniff`
+- `X-Frame-Options: DENY`
+- `X-XSS-Protection: 1; mode=block`
 
-## 🤝 기여하기
+### **성능 최적화**
+- 이미지 지연 로딩 (`loading="lazy"`)
+- CDN 캐싱 (31536000초)
+- CSS/JS 압축
+- 웹폰트 최적화
 
-1. 포크 (Fork) 프로젝트
-2. 피처 브랜치 생성 (`git checkout -b feature/AmazingFeature`)
-3. 변경사항 커밋 (`git commit -m 'Add some AmazingFeature'`)
-4. 브랜치에 푸시 (`git push origin feature/AmazingFeature`)
-5. Pull Request 열기
+## 🌐 **SEO 최적화**
 
-## 📄 라이선스
+- 시맨틱 HTML5 마크업
+- 메타 태그 최적화
+- Open Graph 태그
+- 구조화된 데이터 (JSON-LD)
+- 모바일 친화적 설계
 
-이 프로젝트는 교육 목적으로 제작된 클론 사이트입니다. 
-원본 사이트 gg24.kr의 디자인과 콘텐츠를 참조했습니다.
 
-## 🙏 크레딧
 
-- **원본 사이트**: [gg24.kr](https://gg24.kr)
-- **아이콘**: [Font Awesome](https://fontawesome.com)
-- **폰트**: [Google Fonts - Noto Sans KR](https://fonts.google.com/specimen/Noto+Sans+KR)
+## 📄 **라이센스**
 
-## 📞 문의
+MIT License - 자유롭게 사용 및 수정 가능
 
-프로젝트에 대한 질문이나 피드백이 있으시면 이슈를 등록해 주세요.
+## 🤝 **기여하기**
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ---
 
-**Note**: 이 프로젝트는 학습 목적으로 제작되었으며, 실제 서비스와는 관련이 없습니다. 
+**⭐ 이 프로젝트가 유용하다면 Star를 눌러주세요!**
+
+**🚀 배포된 사이트**: [gover-support-funds.vercel.app](https://gover-support-funds.vercel.app) 

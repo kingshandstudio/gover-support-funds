@@ -424,7 +424,7 @@ const utils = {
 };
 
 // 전역으로 유틸리티 노출
-window.gg24Utils = utils;
+window.supportUtils = utils;
 
 // 모달 관련 함수들
 function openSupportModal() {
