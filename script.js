@@ -203,6 +203,21 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// 탭 스크롤 기능
+function scrollTabs(direction) {
+    const tabsContainer = document.querySelector('.category-tabs');
+    if (!tabsContainer) return;
+    
+    const scrollAmount = 200; // 한 번에 스크롤할 픽셀 수
+    const currentScroll = tabsContainer.scrollLeft;
+    
+    if (direction === 'right') {
+        tabsContainer.scrollLeft = currentScroll + scrollAmount;
+    } else if (direction === 'left') {
+        tabsContainer.scrollLeft = currentScroll - scrollAmount;
+    }
+}
+
 // 탭 전환 기능
 tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {

@@ -434,18 +434,59 @@ body {
     margin-bottom: 8px;
 }
 
+.category-tabs-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
 .category-tabs {
     display: flex;
     gap: 8px;
     overflow-x: auto;
     padding-bottom: 8px;
-    margin-bottom: 20px;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    scroll-behavior: smooth;
 }
 
 .category-tabs::-webkit-scrollbar {
     display: none;
+}
+
+.scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.scroll-arrow:hover {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.scroll-arrow.right {
+    right: -16px;
+}
+
+.scroll-arrow.left {
+    left: -16px;
+}
+
+.scroll-arrow i {
+    color: #666;
+    font-size: 14px;
 }
 
 .category-tab {
