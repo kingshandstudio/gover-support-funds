@@ -10,13 +10,13 @@ function loadCommonHead() {
         document.head.insertBefore(adSenseScript, document.head.firstChild);
     }
     
-    // Google Search Console 검증 (실제 검증 코드로 교체 필요)
-    // if (!document.querySelector('meta[name="google-site-verification"]')) {
-    //     const googleVerification = document.createElement('meta');
-    //     googleVerification.name = 'google-site-verification';
-    //     googleVerification.content = 'your-google-verification-code'; // 실제 코드로 교체 필요
-    //     document.head.appendChild(googleVerification);
-    // }
+    // Google Search Console 검증
+    if (!document.querySelector('meta[name="google-site-verification"]')) {
+        const googleVerification = document.createElement('meta');
+        googleVerification.name = 'google-site-verification';
+        googleVerification.content = '1y9emmE8Sg_geNGc6lHUnytT3enu4zOE4vP0lZXXCr8';
+        document.head.appendChild(googleVerification);
+    }
     
     // 네이버 웹마스터 도구 검증
     if (!document.querySelector('meta[name="naver-site-verification"]')) {
