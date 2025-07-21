@@ -19,10 +19,13 @@
         }
         
         .feed-title {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
             color: #333;
-            margin-bottom: 16px;
+            margin-bottom: 0;
+            line-height: 1.3;
+            word-break: keep-all;
+            white-space: nowrap;
         }
         
         .floating-banner {
@@ -62,11 +65,16 @@
             min-height: 100vh;
         }
         
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
         .search-menu-area {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-left: auto;
         }
         
         .search-btn, .menu-btn {
@@ -83,9 +91,9 @@
             background: linear-gradient(135deg, #87CEEB, #4682B4);
             border-radius: 16px;
             margin: 20px;
-            padding: 24px;
+            padding: 20px;
             overflow: hidden;
-            height: 200px;
+            height: 180px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -95,20 +103,48 @@
             text-align: center;
             color: white;
             z-index: 2;
+            width: 100%;
+            position: relative;
         }
 
         .banner-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 16px;
             line-height: 1.3;
+            word-break: keep-all;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            color: white;
+            text-align: center;
+            padding: 0 10px;
+            white-space: pre-line;
+        }
+        
+        .banner-title .main-copy {
+            font-size: 20px;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 8px;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.6);
+        }
+        
+        .banner-title .sub-copy {
+            font-size: 16px;
+            font-weight: 600;
+            display: block;
+            opacity: 0.95;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
         }
 
         .banner-dots {
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-top: 16px;
+            margin-top: 0;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .banner-dot {
@@ -116,10 +152,12 @@
             height: 8px;
             border-radius: 50%;
             background: rgba(255,255,255,0.5);
+            transition: all 0.3s ease;
         }
 
         .banner-dot.active {
             background: white;
+            transform: scale(1.2);
         }
 
         .banner-illustration {
@@ -128,6 +166,126 @@
             bottom: 20px;
             font-size: 80px;
             opacity: 0.8;
+        }
+        
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(135, 206, 235, 0.8), rgba(70, 130, 180, 0.8));
+            z-index: 1;
+        }
+        
+        /* 모바일 최적화 */
+        @media (max-width: 768px) {
+            .feed-title {
+                font-size: 18px;
+                line-height: 1.2;
+            }
+            
+            .hero-banner {
+                margin: 16px;
+                padding: 16px;
+                height: 160px;
+            }
+            
+            .banner-title {
+                font-size: 16px;
+                line-height: 1.2;
+                margin-bottom: 12px;
+                padding: 0 8px;
+            }
+            
+            .banner-title .main-copy {
+                font-size: 18px;
+                font-weight: 800;
+                margin-bottom: 6px;
+            }
+            
+            .banner-title .sub-copy {
+                font-size: 14px;
+                font-weight: 600;
+            }
+            
+            .banner-dots {
+                bottom: -8px;
+            }
+            
+            .banner-dot {
+                width: 6px;
+                height: 6px;
+            }
+            
+            .feed-categories {
+                padding: 16px;
+            }
+            
+            .category-title {
+                font-size: 16px;
+                margin-bottom: 12px;
+            }
+            
+            .category-tab {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            
+            .feed-content {
+                padding: 0 16px 16px;
+            }
+            
+            .news-card-content {
+                padding: 16px;
+            }
+            
+            .news-title {
+                font-size: 15px;
+                line-height: 1.3;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .feed-header {
+                padding: 12px 16px;
+            }
+            
+            .feed-title {
+                font-size: 16px;
+            }
+            
+            .hero-banner {
+                margin: 12px;
+                padding: 12px;
+                height: 140px;
+            }
+            
+            .banner-title {
+                font-size: 14px;
+                line-height: 1.1;
+                padding: 0 6px;
+            }
+            
+            .banner-title .main-copy {
+                font-size: 16px;
+                font-weight: 800;
+                margin-bottom: 4px;
+            }
+            
+            .banner-title .sub-copy {
+                font-size: 12px;
+                font-weight: 600;
+            }
+            
+            .search-menu-area {
+                gap: 8px;
+            }
+            
+            .search-btn, .menu-btn {
+                font-size: 18px;
+                padding: 6px;
+            }
         }
 
         .feed-categories {
@@ -295,7 +453,7 @@
     <div class="main-content">
         <!-- 피드 헤더 -->
         <header class="feed-header">
-            <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div class="header-content">
                 <h1 class="feed-title">지금 확인해야 할 머니 피드!</h1>
                 <div class="search-menu-area">
                     <button class="search-btn">
@@ -309,14 +467,17 @@
         </header>
 
         <!-- 히어로 배너 -->
-        <section class="hero-banner" style="background-image: url('public/2.png'); background-size: cover; background-position: center; position: relative;">
-            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(135, 206, 235, 0.8), rgba(70, 130, 180, 0.8));"></div>
-            <div class="banner-content" style="position: relative; z-index: 2;">
-                <h2 class="banner-title">민생회복 소비쿠폰 신청 시작! (+지원금 25만원부터<br>최대 55만원까지 받는 법)</h2>
-                <div class="banner-dots">
-                    <div class="banner-dot active"></div>
-                    <div class="banner-dot"></div>
-                    <div class="banner-dot"></div>
+        <section class="hero-banner" id="heroBanner">
+            <div class="banner-overlay"></div>
+            <div class="banner-content">
+                <h2 class="banner-title" id="bannerTitle">
+                    <span class="main-copy">민생회복 소비쿠폰 신청 시작!</span>
+                    <span class="sub-copy">(+지원금 25만원부터<br>최대 55만원까지 받는 법)</span>
+                </h2>
+                <div class="banner-dots" id="bannerDots">
+                    <div class="banner-dot active" data-slide="0"></div>
+                    <div class="banner-dot" data-slide="1"></div>
+                    <div class="banner-dot" data-slide="2"></div>
                 </div>
             </div>
         </section>
@@ -475,11 +636,113 @@
     </div>
 
     <script>
+        // ===================================
+        // 보안 및 방지 기능
+        // ===================================
+        
+        // 스팸 클릭 방지
+        let clickCount = 0;
+        const maxClickCount = 10;
+        const clickTimeout = 5000; // 5초
+        
+        function preventSpamClick(element) {
+            const currentTime = Date.now();
+            const lastClickTime = sessionStorage.getItem('lastClickTime');
+            
+            if (lastClickTime && (currentTime - parseInt(lastClickTime)) < clickTimeout) {
+                clickCount++;
+                sessionStorage.setItem('clickCount', clickCount.toString());
+                
+                if (clickCount >= maxClickCount) {
+                    showToast('너무 자주 클릭하고 있습니다. 잠시 후 다시 시도해주세요.');
+                    return false;
+                }
+            } else {
+                clickCount = 1;
+                sessionStorage.setItem('clickCount', clickCount.toString());
+            }
+            
+            sessionStorage.setItem('lastClickTime', currentTime.toString());
+            return true;
+        }
+        
+        // 토스트 메시지 표시 함수
+        function showToast(message) {
+            // 기존 토스트 제거
+            const existingToast = document.querySelector('.toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            
+            // 토스트 스타일
+            Object.assign(toast.style, {
+                position: 'fixed',
+                top: '20px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                background: '#333',
+                color: 'white',
+                padding: '12px 24px',
+                borderRadius: '20px',
+                fontSize: '14px',
+                zIndex: '9999',
+                opacity: '0',
+                transition: 'all 0.3s ease'
+            });
+            
+            document.body.appendChild(toast);
+            
+            // 애니메이션
+            setTimeout(() => {
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateX(-50%) translateY(10px)';
+            }, 100);
+            
+            // 3초 후 제거
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(-50%) translateY(-10px)';
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            }, 3000);
+        }
+        
         // 배너 닫기 기능
         function closeBanner() {
             const banner = document.getElementById('topBanner');
             banner.style.display = 'none';
             document.querySelector('.main-content').style.marginTop = '0';
+        }
+
+        // 더보기 메뉴 열기
+        function openMoreMenu() {
+            if (!preventSpamClick()) return;
+            
+            const overlay = document.getElementById('moreMenuOverlay');
+            const modal = document.getElementById('moreMenuModal');
+            if (overlay && modal) {
+                overlay.classList.add('active');
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // 더보기 메뉴 닫기
+        function closeMoreMenu() {
+            const overlay = document.getElementById('moreMenuOverlay');
+            const modal = document.getElementById('moreMenuModal');
+            if (overlay && modal) {
+                overlay.classList.remove('active');
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         }
 
         // 카테고리 탭 전환 기능
@@ -505,12 +768,16 @@
             const menuOverlay = document.getElementById('menuOverlay');
             const closeBtn = document.getElementById('closeBtn');
             
-            if (menuBtn && sideMenu) {
+            // 햄버거 메뉴 버튼 기능
+            if (menuBtn) {
                 menuBtn.addEventListener('click', () => {
-                    sideMenu.classList.add('active');
-                    document.body.style.overflow = 'hidden';
+                    if (!preventSpamClick(menuBtn)) return;
+                    openMoreMenu();
                 });
-                
+            }
+            
+            // 기존 사이드 메뉴 기능 (있다면)
+            if (menuBtn && sideMenu) {
                 function closeSideMenu() {
                     sideMenu.classList.remove('active');
                     document.body.style.overflow = '';
@@ -532,12 +799,97 @@
 
             // 검색 버튼 기능
             document.querySelector('.search-btn').addEventListener('click', () => {
-                alert('검색 기능이 곧 업데이트됩니다! 🔍');
+                if (!preventSpamClick()) return;
+                showToast('검색 기능이 곧 업데이트됩니다! 🔍');
             });
-
+            
             // 더보기 버튼 기능
             document.querySelector('button[style*="background: #f5f5f5"]').addEventListener('click', () => {
-                alert('더 많은 컨텐츠를 준비 중입니다! 📰');
+                if (!preventSpamClick()) return;
+                showToast('더 많은 컨텐츠를 준비 중입니다! 📰');
+            });
+
+            // ESC 키로 모달 닫기
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeMoreMenu();
+                }
+            });
+            
+            // 개발자 도구 방지
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                    e.preventDefault();
+                    showToast('개발자 도구 사용이 제한됩니다.');
+                    return false;
+                }
+            });
+            
+            // 우클릭 방지 (선택적)
+            document.addEventListener('contextmenu', function(e) {
+                // 특정 요소에서는 우클릭 허용
+                if (e.target.closest('.allow-right-click')) {
+                    return true;
+                }
+                e.preventDefault();
+                showToast('우클릭이 제한됩니다.');
+                return false;
+            });
+            
+            // 캐러셀 자동 전환 기능
+            const bannerData = [
+                {
+                    mainCopy: "민생회복 소비쿠폰 신청 시작!",
+                    subCopy: "(+지원금 25만원부터<br>최대 55만원까지 받는 법)",
+                    background: "linear-gradient(135deg, #87CEEB, #4682B4)"
+                },
+                {
+                    mainCopy: "2025년 신규 지원금 프로그램 안내!",
+                    subCopy: "청년 창업 지원사업 모집 공고",
+                    background: "linear-gradient(135deg, #81C784, #4CAF50)"
+                },
+                {
+                    mainCopy: "부가가치세 확정신고 기간!",
+                    subCopy: "일반과세자·간이과세자 차이부터<br>신고납부 방법까지",
+                    background: "linear-gradient(135deg, #FFB74D, #FF9800)"
+                }
+            ];
+            
+            let currentSlide = 0;
+            const heroBanner = document.getElementById('heroBanner');
+            const bannerTitle = document.getElementById('bannerTitle');
+            const bannerDots = document.getElementById('bannerDots');
+            const dots = bannerDots.querySelectorAll('.banner-dot');
+            
+            function changeSlide(index) {
+                // 모든 점에서 active 제거
+                dots.forEach(dot => dot.classList.remove('active'));
+                
+                // 현재 슬라이드의 점에 active 추가
+                dots[index].classList.add('active');
+                
+                // 배경과 제목 변경
+                heroBanner.style.background = bannerData[index].background;
+                bannerTitle.innerHTML = `
+                    <span class="main-copy">${bannerData[index].mainCopy}</span>
+                    <span class="sub-copy">${bannerData[index].subCopy}</span>
+                `;
+                
+                currentSlide = index;
+            }
+            
+            // 자동 전환 (3초마다)
+            setInterval(() => {
+                const nextSlide = (currentSlide + 1) % bannerData.length;
+                changeSlide(nextSlide);
+            }, 3000);
+            
+            // 점 클릭으로 수동 전환
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    if (!preventSpamClick(dot)) return;
+                    changeSlide(index);
+                });
             });
         });
     </script>

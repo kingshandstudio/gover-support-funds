@@ -466,11 +466,113 @@
     </div>
 
     <script>
+        // ===================================
+        // 보안 및 방지 기능
+        // ===================================
+        
+        // 스팸 클릭 방지
+        let clickCount = 0;
+        const maxClickCount = 10;
+        const clickTimeout = 5000; // 5초
+        
+        function preventSpamClick(element) {
+            const currentTime = Date.now();
+            const lastClickTime = sessionStorage.getItem('lastClickTime');
+            
+            if (lastClickTime && (currentTime - parseInt(lastClickTime)) < clickTimeout) {
+                clickCount++;
+                sessionStorage.setItem('clickCount', clickCount.toString());
+                
+                if (clickCount >= maxClickCount) {
+                    showToast('너무 자주 클릭하고 있습니다. 잠시 후 다시 시도해주세요.');
+                    return false;
+                }
+            } else {
+                clickCount = 1;
+                sessionStorage.setItem('clickCount', clickCount.toString());
+            }
+            
+            sessionStorage.setItem('lastClickTime', currentTime.toString());
+            return true;
+        }
+        
+        // 토스트 메시지 표시 함수
+        function showToast(message) {
+            // 기존 토스트 제거
+            const existingToast = document.querySelector('.toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            
+            // 토스트 스타일
+            Object.assign(toast.style, {
+                position: 'fixed',
+                top: '20px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                background: '#333',
+                color: 'white',
+                padding: '12px 24px',
+                borderRadius: '20px',
+                fontSize: '14px',
+                zIndex: '9999',
+                opacity: '0',
+                transition: 'all 0.3s ease'
+            });
+            
+            document.body.appendChild(toast);
+            
+            // 애니메이션
+            setTimeout(() => {
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateX(-50%) translateY(10px)';
+            }, 100);
+            
+            // 3초 후 제거
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(-50%) translateY(-10px)';
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            }, 3000);
+        }
+        
         // 배너 닫기 기능
         function closeBanner() {
             const banner = document.getElementById('topBanner');
             banner.style.display = 'none';
             document.querySelector('.main-content').style.marginTop = '0';
+        }
+
+        // 더보기 메뉴 열기
+        function openMoreMenu() {
+            if (!preventSpamClick()) return;
+            
+            const overlay = document.getElementById('moreMenuOverlay');
+            const modal = document.getElementById('moreMenuModal');
+            if (overlay && modal) {
+                overlay.classList.add('active');
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // 더보기 메뉴 닫기
+        function closeMoreMenu() {
+            const overlay = document.getElementById('moreMenuOverlay');
+            const modal = document.getElementById('moreMenuModal');
+            if (overlay && modal) {
+                overlay.classList.remove('active');
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         }
 
         // 탭 전환 기능
@@ -489,27 +591,31 @@
             });
         });
 
-        // 메뉴 기능
-        document.addEventListener('DOMContentLoaded', () => {
-            const menuBtn = document.getElementById('menuBtn');
-            const sideMenu = document.getElementById('sideMenu');
-            const menuOverlay = document.getElementById('menuOverlay');
-            const closeBtn = document.getElementById('closeBtn');
-            
-            if (menuBtn && sideMenu) {
-                menuBtn.addEventListener('click', () => {
-                    sideMenu.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                });
+                    // 메뉴 기능
+            document.addEventListener('DOMContentLoaded', () => {
+                const menuBtn = document.getElementById('menuBtn');
+                const sideMenu = document.getElementById('sideMenu');
+                const menuOverlay = document.getElementById('menuOverlay');
+                const closeBtn = document.getElementById('closeBtn');
                 
-                function closeSideMenu() {
-                    sideMenu.classList.remove('active');
-                    document.body.style.overflow = '';
+                // 햄버거 메뉴 버튼 기능
+                if (menuBtn) {
+                    menuBtn.addEventListener('click', () => {
+                        if (!preventSpamClick(menuBtn)) return;
+                        openMoreMenu();
+                    });
                 }
                 
-                if (closeBtn) closeBtn.addEventListener('click', closeSideMenu);
-                if (menuOverlay) menuOverlay.addEventListener('click', closeSideMenu);
-            }
+                // 기존 사이드 메뉴 기능 (있다면)
+                if (menuBtn && sideMenu) {
+                    function closeSideMenu() {
+                        sideMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                    
+                    if (closeBtn) closeBtn.addEventListener('click', closeSideMenu);
+                    if (menuOverlay) menuOverlay.addEventListener('click', closeSideMenu);
+                }
             
             // 버튼 클릭 애니메이션
             document.querySelectorAll('button, .policy-apply-btn').forEach(btn => {
@@ -523,12 +629,41 @@
 
             // 검색 버튼 기능
             document.querySelector('.search-btn').addEventListener('click', () => {
-                alert('검색 기능이 곧 업데이트됩니다! 🔍');
+                if (!preventSpamClick()) return;
+                showToast('검색 기능이 곧 업데이트됩니다! 🔍');
             });
 
             // 카톡 상담 버튼 기능
             document.querySelector('.consultation-btn').addEventListener('click', () => {
-                alert('카카오톡 상담 서비스 준비 중입니다! 💬');
+                if (!preventSpamClick()) return;
+                showToast('카카오톡 상담 서비스 준비 중입니다! 💬');
+            });
+
+            // ESC 키로 모달 닫기
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeMoreMenu();
+                }
+            });
+            
+            // 개발자 도구 방지
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                    e.preventDefault();
+                    showToast('개발자 도구 사용이 제한됩니다.');
+                    return false;
+                }
+            });
+            
+            // 우클릭 방지 (선택적)
+            document.addEventListener('contextmenu', function(e) {
+                // 특정 요소에서는 우클릭 허용
+                if (e.target.closest('.allow-right-click')) {
+                    return true;
+                }
+                e.preventDefault();
+                showToast('우클릭이 제한됩니다.');
+                return false;
             });
         });
     </script>

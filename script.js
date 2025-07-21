@@ -10,25 +10,195 @@ const categoryTabs = document.querySelectorAll('.category-tab');
 const navItems = document.querySelectorAll('.nav-item');
 const loadMoreBtn = document.querySelector('.load-more-btn');
 
+// ===================================
+// 보안 및 방지 기능
+// ===================================
+
+// 무한새로고침 방지
+let refreshCount = 0;
+const maxRefreshCount = 5;
+const refreshTimeout = 10000; // 10초
+
+function preventInfiniteRefresh() {
+    const currentTime = Date.now();
+    const lastRefreshTime = sessionStorage.getItem('lastRefreshTime');
+    
+    if (lastRefreshTime && (currentTime - parseInt(lastRefreshTime)) < refreshTimeout) {
+        refreshCount++;
+        sessionStorage.setItem('refreshCount', refreshCount.toString());
+        
+        if (refreshCount >= maxRefreshCount) {
+            alert('너무 자주 새로고침하고 있습니다. 잠시 후 다시 시도해주세요.');
+            return false;
+        }
+    } else {
+        refreshCount = 1;
+        sessionStorage.setItem('refreshCount', refreshCount.toString());
+    }
+    
+    sessionStorage.setItem('lastRefreshTime', currentTime.toString());
+    return true;
+}
+
+// 광고클릭 방지
+function preventAdClick() {
+    // 광고 관련 요소들에 대한 클릭 방지
+    const adSelectors = [
+        '[data-ad]',
+        '[class*="ad"]',
+        '[class*="ads"]',
+        '[id*="ad"]',
+        '[id*="ads"]',
+        '[href*="ad"]',
+        '[href*="ads"]',
+        '[href*="click"]',
+        '[href*="track"]'
+    ];
+    
+    adSelectors.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(element => {
+            element.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                showToast('유효하지 않은 링크입니다.');
+                return false;
+            });
+        });
+    });
+}
+
+// 스팸 클릭 방지
+let clickCount = 0;
+const maxClickCount = 10;
+const clickTimeout = 5000; // 5초
+
+function preventSpamClick(element) {
+    const currentTime = Date.now();
+    const lastClickTime = sessionStorage.getItem('lastClickTime');
+    
+    if (lastClickTime && (currentTime - parseInt(lastClickTime)) < clickTimeout) {
+        clickCount++;
+        sessionStorage.setItem('clickCount', clickCount.toString());
+        
+        if (clickCount >= maxClickCount) {
+            showToast('너무 자주 클릭하고 있습니다. 잠시 후 다시 시도해주세요.');
+            return false;
+        }
+    } else {
+        clickCount = 1;
+        sessionStorage.setItem('clickCount', clickCount.toString());
+    }
+    
+    sessionStorage.setItem('lastClickTime', currentTime.toString());
+    return true;
+}
+
+// 개발자 도구 방지
+function preventDevTools() {
+    // F12 키 방지
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+            e.preventDefault();
+            showToast('개발자 도구 사용이 제한됩니다.');
+            return false;
+        }
+    });
+    
+    // 우클릭 방지 (선택적)
+    document.addEventListener('contextmenu', function(e) {
+        // 특정 요소에서는 우클릭 허용
+        if (e.target.closest('.allow-right-click')) {
+            return true;
+        }
+        e.preventDefault();
+        showToast('우클릭이 제한됩니다.');
+        return false;
+    });
+}
+
+// 무한 루프 방지
+let loopCount = 0;
+const maxLoopCount = 100;
+
+function preventInfiniteLoop() {
+    loopCount++;
+    if (loopCount > maxLoopCount) {
+        console.error('무한 루프 감지됨');
+        return false;
+    }
+    return true;
+}
+
+// 페이지 보안 초기화
+function initializeSecurity() {
+    // 새로고침 방지
+    window.addEventListener('beforeunload', function(e) {
+        if (!preventInfiniteRefresh()) {
+            e.preventDefault();
+            e.returnValue = '';
+        }
+    });
+    
+    // 광고클릭 방지
+    preventAdClick();
+    
+    // 개발자 도구 방지
+    preventDevTools();
+    
+    // 스크립트 주입 방지
+    const scripts = document.querySelectorAll('script');
+    scripts.forEach(script => {
+        if (script.src && !script.src.includes(window.location.origin)) {
+            script.remove();
+        }
+    });
+    
+    // 외부 링크 보안
+    const externalLinks = document.querySelectorAll('a[href^="http"]');
+    externalLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.href;
+            if (!href.includes(window.location.hostname)) {
+                e.preventDefault();
+                showToast('외부 링크는 보안상 제한됩니다.');
+                return false;
+            }
+        });
+    });
+}
+
+// ===================================
+// 기존 코드 (수정됨)
+// ===================================
+
 // 사이드 메뉴 제어
 function openSideMenu() {
-    sideMenu.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    if (!preventSpamClick()) return;
+    
+    const sideMenu = document.getElementById('sideMenu');
+    if (sideMenu) {
+        sideMenu.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
 }
 
 function closeSideMenu() {
-    sideMenu.classList.remove('active');
-    document.body.style.overflow = '';
+    const sideMenu = document.getElementById('sideMenu');
+    if (sideMenu) {
+        sideMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 }
 
 // 이벤트 리스너 등록
-menuBtn.addEventListener('click', openSideMenu);
-closeBtn.addEventListener('click', closeSideMenu);
-menuOverlay.addEventListener('click', closeSideMenu);
+if (menuBtn) menuBtn.addEventListener('click', openSideMenu);
+if (closeBtn) closeBtn.addEventListener('click', closeSideMenu);
+if (menuOverlay) menuOverlay.addEventListener('click', closeSideMenu);
 
 // ESC 키로 메뉴 닫기
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && sideMenu.classList.contains('active')) {
+    if (e.key === 'Escape' && sideMenu && sideMenu.classList.contains('active')) {
         closeSideMenu();
     }
 });
@@ -36,6 +206,8 @@ document.addEventListener('keydown', (e) => {
 // 탭 전환 기능
 tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
+        if (!preventSpamClick(btn)) return;
+        
         const targetTab = btn.getAttribute('data-tab');
         
         // 모든 탭 버튼에서 active 클래스 제거
@@ -62,6 +234,8 @@ tabBtns.forEach(btn => {
 // 카테고리 탭 전환
 categoryTabs.forEach(tab => {
     tab.addEventListener('click', () => {
+        if (!preventSpamClick(tab)) return;
+        
         // 모든 카테고리 탭에서 active 클래스 제거
         categoryTabs.forEach(t => t.classList.remove('active'));
         // 클릭된 탭에 active 클래스 추가
@@ -81,6 +255,8 @@ categoryTabs.forEach(tab => {
 // 하단 네비게이션 제어
 navItems.forEach(item => {
     item.addEventListener('click', () => {
+        if (!preventSpamClick(item)) return;
+        
         // 모든 네비게이션 아이템에서 active 클래스 제거
         navItems.forEach(nav => nav.classList.remove('active'));
         // 클릭된 아이템에 active 클래스 추가
@@ -99,7 +275,12 @@ navItems.forEach(item => {
 
 // 버튼 클릭 애니메이션
 function addClickAnimation(element) {
-    element.addEventListener('click', function() {
+    element.addEventListener('click', function(e) {
+        if (!preventSpamClick(this)) {
+            e.preventDefault();
+            return;
+        }
+        
         this.style.transform = 'scale(0.95)';
         setTimeout(() => {
             this.style.transform = 'scale(1)';
@@ -121,6 +302,8 @@ document.querySelectorAll('.apply-btn, .item-apply-btn').forEach(btn => {
 // 더보기 버튼 기능
 if (loadMoreBtn) {
     loadMoreBtn.addEventListener('click', () => {
+        if (!preventSpamClick(loadMoreBtn)) return;
+        
         // 로딩 상태 표시
         loadMoreBtn.textContent = '로딩중...';
         loadMoreBtn.disabled = true;
@@ -136,6 +319,8 @@ if (loadMoreBtn) {
 
 // 새로운 뉴스 카드 추가 함수
 function addMoreNewsCards() {
+    if (!preventInfiniteLoop()) return;
+    
     const newsGrid = document.querySelector('.news-grid');
     const newCards = [
         {
@@ -183,6 +368,7 @@ function createNewsCard(cardData) {
     
     // 카드 클릭 이벤트
     article.addEventListener('click', () => {
+        if (!preventSpamClick(article)) return;
         showToast('뉴스 상세 페이지로 이동합니다.');
     });
     
@@ -273,37 +459,46 @@ function setupTouchGestures() {
     // 카테고리 탭 스와이프 기능
     const categoryTabsContainer = document.querySelector('.category-tabs');
     
-    categoryTabsContainer.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-        isDragging = true;
-    });
-    
-    categoryTabsContainer.addEventListener('touchmove', (e) => {
-        if (!isDragging) return;
-        currentX = e.touches[0].clientX;
-        const diffX = startX - currentX;
+    if (categoryTabsContainer) {
+        categoryTabsContainer.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+        });
         
-        // 스크롤 제한
-        if (Math.abs(diffX) > 10) {
-            e.preventDefault();
-        }
-    });
-    
-    categoryTabsContainer.addEventListener('touchend', () => {
-        isDragging = false;
-    });
+        categoryTabsContainer.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            currentX = e.touches[0].clientX;
+            const diffX = startX - currentX;
+            
+            // 스크롤 제한
+            if (Math.abs(diffX) > 10) {
+                e.preventDefault();
+            }
+        });
+        
+        categoryTabsContainer.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+    }
 }
 
 // 검색 기능 (시뮬레이션)
-searchBtn.addEventListener('click', () => {
-    showToast('검색 기능을 준비중입니다.');
-});
+if (searchBtn) {
+    searchBtn.addEventListener('click', () => {
+        if (!preventSpamClick(searchBtn)) return;
+        showToast('검색 기능을 준비중입니다.');
+    });
+}
 
 // 알림 받기 버튼
-document.querySelector('.alarm-btn').addEventListener('click', (e) => {
-    e.preventDefault();
-    showToast('카카오톡 알림을 설정했습니다!');
-});
+const alarmBtn = document.querySelector('.alarm-btn');
+if (alarmBtn) {
+    alarmBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (!preventSpamClick(alarmBtn)) return;
+        showToast('카카오톡 알림을 설정했습니다!');
+    });
+}
 
 // 성능 최적화: 이미지 레이지 로딩
 function setupLazyLoading() {
@@ -331,6 +526,9 @@ function setupLazyLoading() {
 
 // 페이지 로드 완료 후 초기화
 document.addEventListener('DOMContentLoaded', () => {
+    // 보안 초기화
+    initializeSecurity();
+    
     // 모든 초기화 함수를 여기서 호출
     initializeSideMenu();
     initializeTabs();
@@ -349,7 +547,6 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast('숨은지원금24에 오신 것을 환영합니다!');
     }, 1000);
 });
-
 
 // ===================================
 // 초기화 함수들
@@ -381,6 +578,8 @@ function initializeTabs() {
 
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
+            if (!preventSpamClick(btn)) return;
+            
             const targetTab = btn.getAttribute('data-tab');
             tabBtns.forEach(tab => tab.classList.remove('active'));
             btn.classList.add('active');
@@ -394,6 +593,8 @@ function initializeTabs() {
 
     categoryTabs.forEach(tab => {
         tab.addEventListener('click', () => {
+            if (!preventSpamClick(tab)) return;
+            
             categoryTabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
         });
@@ -406,6 +607,8 @@ function initializeNavItems() {
         const isMoreButton = item.querySelector('span')?.textContent === '더보기';
         if (!isMoreButton) {
             item.addEventListener('click', () => {
+                if (!preventSpamClick(item)) return;
+                
                 navItems.forEach(nav => nav.classList.remove('active'));
                 item.classList.add('active');
             });
@@ -420,13 +623,17 @@ function initializeButtons() {
     
     const searchBtn = document.getElementById('searchBtn');
     if(searchBtn) {
-        searchBtn.addEventListener('click', () => showToast('검색 기능을 준비중입니다.'));
+        searchBtn.addEventListener('click', () => {
+            if (!preventSpamClick(searchBtn)) return;
+            showToast('검색 기능을 준비중입니다.');
+        });
     }
 
     const alarmBtn = document.querySelector('.alarm-btn');
     if(alarmBtn) {
         alarmBtn.addEventListener('click', (e) => {
             e.preventDefault();
+            if (!preventSpamClick(alarmBtn)) return;
             showToast('카카오톡 알림을 설정했습니다!');
         });
     }
@@ -436,6 +643,8 @@ function initializeLoadMore() {
     const loadMoreBtn = document.querySelector('.load-more-btn');
     if (loadMoreBtn) {
         loadMoreBtn.addEventListener('click', () => {
+            if (!preventSpamClick(loadMoreBtn)) return;
+            
             loadMoreBtn.textContent = '로딩중...';
             loadMoreBtn.disabled = true;
             setTimeout(() => {
@@ -495,30 +704,14 @@ function initializeModals() {
     });
 }
 
-
 // ===================================
 // 핵심 기능 함수들
 // ===================================
 
-// 사이드 메뉴 제어
-function openSideMenu() {
-    const sideMenu = document.getElementById('sideMenu');
-    if (sideMenu) {
-        sideMenu.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-function closeSideMenu() {
-    const sideMenu = document.getElementById('sideMenu');
-    if (sideMenu) {
-        sideMenu.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-}
-
 // 더보기 메뉴 관련 함수들
 function openMoreMenu() {
+    if (!preventSpamClick()) return;
+    
     const overlay = document.getElementById('moreMenuOverlay');
     const modal = document.getElementById('moreMenuModal');
     if (overlay && modal) {
@@ -540,6 +733,8 @@ function closeMoreMenu() {
 
 // 지원금 모달 관련 함수들
 function openSupportModal() {
+    if (!preventSpamClick()) return;
+    
     const modal = document.getElementById('supportModal');
     if (modal) {
         modal.classList.add('active');
@@ -555,215 +750,9 @@ function closeSupportModal() {
     }
 }
 
-
 // ===================================
 // 보조 및 유틸리티 함수들
 // ===================================
-
-// 버튼 클릭 애니메이션
-function addClickAnimation(element) {
-    element.addEventListener('click', function() {
-        this.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            this.style.transform = 'scale(1)';
-        }, 150);
-    });
-}
-
-// 새로운 뉴스 카드 추가 함수
-function addMoreNewsCards() {
-    const newsGrid = document.querySelector('.news-grid');
-    const newCards = [
-        {
-            title: '2025년 신규 지원금 프로그램 안내',
-            category: '지원/정책',
-            image: 'https://via.placeholder.com/300x200/6C5CE7/FFFFFF?text=신규지원금'
-        },
-        {
-            title: '청년 창업 지원사업 모집 공고',
-            category: '지원/정책',
-            image: 'https://via.placeholder.com/300x200/00B894/FFFFFF?text=창업지원'
-        }
-    ];
-    
-    newCards.forEach(card => {
-        const cardElement = createNewsCard(card);
-        newsGrid.appendChild(cardElement);
-        
-        // 애니메이션 효과
-        cardElement.style.opacity = '0';
-        cardElement.style.transform = 'translateY(20px)';
-        setTimeout(() => {
-            cardElement.style.transition = 'all 0.5s ease';
-            cardElement.style.opacity = '1';
-            cardElement.style.transform = 'translateY(0)';
-        }, 100);
-    });
-}
-
-// 뉴스 카드 생성 함수
-function createNewsCard(cardData) {
-    const article = document.createElement('article');
-    article.className = 'news-card';
-    article.innerHTML = `
-        <div class="card-image">
-            <img src="${cardData.image}" alt="${cardData.title}">
-        </div>
-        <div class="card-content">
-            <div class="card-categories">
-                <span>머니 피드</span>, <span>${cardData.category}</span>
-            </div>
-            <h3>${cardData.title}</h3>
-        </div>
-    `;
-    
-    // 카드 클릭 이벤트
-    article.addEventListener('click', () => {
-        showToast('뉴스 상세 페이지로 이동합니다.');
-    });
-    
-    return article;
-}
-
-// 토스트 메시지 표시 함수
-function showToast(message) {
-    // 기존 토스트 제거
-    const existingToast = document.querySelector('.toast');
-    if (existingToast) {
-        existingToast.remove();
-    }
-    
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.textContent = message;
-    
-    // 토스트 스타일
-    Object.assign(toast.style, {
-        position: 'fixed',
-        top: '20px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        background: '#333',
-        color: 'white',
-        padding: '12px 24px',
-        borderRadius: '20px',
-        fontSize: '14px',
-        zIndex: '9999',
-        opacity: '0',
-        transition: 'all 0.3s ease'
-    });
-    
-    document.body.appendChild(toast);
-    
-    // 애니메이션
-    setTimeout(() => {
-        toast.style.opacity = '1';
-        toast.style.transform = 'translateX(-50%) translateY(10px)';
-    }, 100);
-    
-    // 3초 후 제거
-    setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateX(-50%) translateY(-10px)';
-        setTimeout(() => {
-            if (toast.parentNode) {
-                toast.parentNode.removeChild(toast);
-            }
-        }, 300);
-    }, 3000);
-}
-
-// 스크롤 기반 애니메이션
-function setupScrollAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // 애니메이션 대상 요소들
-    const animateElements = document.querySelectorAll('.support-card, .ranking-card, .news-card, .support-item');
-    
-    animateElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'all 0.6s ease';
-        observer.observe(el);
-    });
-}
-
-// 터치 제스처 지원
-function setupTouchGestures() {
-    let startX = 0;
-    let currentX = 0;
-    let isDragging = false;
-    
-    // 카테고리 탭 스와이프 기능
-    const categoryTabsContainer = document.querySelector('.category-tabs');
-    
-    categoryTabsContainer.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-        isDragging = true;
-    });
-    
-    categoryTabsContainer.addEventListener('touchmove', (e) => {
-        if (!isDragging) return;
-        currentX = e.touches[0].clientX;
-        const diffX = startX - currentX;
-        
-        // 스크롤 제한
-        if (Math.abs(diffX) > 10) {
-            e.preventDefault();
-        }
-    });
-    
-    categoryTabsContainer.addEventListener('touchend', () => {
-        isDragging = false;
-    });
-}
-
-// 검색 기능 (시뮬레이션)
-searchBtn.addEventListener('click', () => {
-    showToast('검색 기능을 준비중입니다.');
-});
-
-// 알림 받기 버튼
-document.querySelector('.alarm-btn').addEventListener('click', (e) => {
-    e.preventDefault();
-    showToast('카카오톡 알림을 설정했습니다!');
-});
-
-// 성능 최적화: 이미지 레이지 로딩
-function setupLazyLoading() {
-    const images = document.querySelectorAll('img');
-    
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                    imageObserver.unobserve(img);
-                }
-            }
-        });
-    });
-    
-    images.forEach(img => {
-        if (img.dataset.src) {
-            imageObserver.observe(img);
-        }
-    });
-}
 
 // 페이지 가시성 변경 처리
 document.addEventListener('visibilitychange', () => {
