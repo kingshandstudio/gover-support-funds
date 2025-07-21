@@ -2592,196 +2592,166 @@ button, a {
     margin: 0;
 }
 
-/* 더보기 메뉴 모달 */
+/* =================================== */
+/* 더보기 메뉴 모달 (수정된 최종 버전) */
+/* =================================== */
+
+/* 1. 오버레이 (배경) 스타일 */
 .more-menu-overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6); /* 어둡게 처리 */
     z-index: 999;
+    
+    /* 초기 상태: 숨김 */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .more-menu-overlay.active {
+    /* 활성 상태: 보임 */
     opacity: 1;
     visibility: visible;
 }
 
+/* 2. 모달창 본문 스타일 */
 .more-menu-modal {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     background: white;
-    border-radius: 20px 20px 0 0;
+    border-radius: 24px 24px 0 0; /* 둥근 모서리 */
     z-index: 1000;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+
+    /* 초기 상태: 화면 아래에 숨김 */
     transform: translateY(100%);
-    opacity: 0;
     visibility: hidden;
-    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.35s ease; /* 부드러운 애니메이션 */
 }
 
 .more-menu-modal.active {
+    /* 활성 상태: 제자리로 올라옴 */
     transform: translateY(0);
-    opacity: 1;
     visibility: visible;
 }
 
+/* 3. 모달 헤더 (제목, 닫기 버튼) */
 .more-menu-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 24px 16px 24px;
-    border-bottom: 1px solid #f0f0f0;
+    padding: 24px 24px 16px 24px;
 }
 
 .more-menu-header h2 {
     margin: 0;
     font-size: 18px;
     font-weight: 700;
-    color: #333;
+    color: #212529;
 }
 
+.more-menu-header .close-btn {
+    background: #f1f3f5;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    color: #495057;
+    transition: background-color 0.2s;
+}
+.more-menu-header .close-btn:hover {
+    background-color: #e9ecef;
+}
+
+/* 4. 모달 바디 (메뉴 항목들) */
 .more-menu-body {
-    padding: 24px;
+    padding: 0 24px 24px 24px;
 }
 
 .menu-items-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-bottom: 24px;
+    grid-template-columns: 1fr 1fr; /* 2열 그리드 */
+    gap: 12px;
 }
 
 .menu-link-box {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 16px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* 아이콘과 텍스트를 세로로 정렬 */
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border: 1px solid #e9ecef;
     text-decoration: none;
-    color: inherit;
+    color: #343a40;
+    border: 1px solid #f1f3f5;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .menu-link-box:hover {
-    background: #e9ecef;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+    background-color: #f1f3f5;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .menu-link-icon {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
-
 .menu-link-icon svg {
-    width: 48px;
-    height: 48px;
-}
-
-.menu-link-text-content {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+    width: 32px; /* 아이콘 크기 조정 */
+    height: 32px;
+    fill: #0067FF; /* SVG 색상 적용 */
 }
 
 .menu-link-title {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
-    color: #333;
-    margin: 0;
+    margin: 0 0 2px 0;
 }
 
 .menu-link-subtitle {
     font-size: 12px;
-    color: #666;
+    color: #868e96;
 }
 
+/* 5. 카카오톡 버튼 */
 .kakao-action-wrapper {
-    border-top: 1px solid #f0f0f0;
-    padding-top: 20px;
+    margin-top: 20px;
 }
 
 .kakao-button {
-    width: 100%;
-    background: #FEE500;
-    color: #333;
-    border: none;
-    padding: 16px 24px;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    transition: all 0.2s ease;
+    width: 100%;
+    padding: 14px;
+    background: #FEE500;
+    color: #191919;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
     text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
-
 .kakao-button:hover {
-    background: #FDD835;
-    transform: translateY(-1px);
+    background-color: #FDD835;
 }
 
-.kakao-button svg {
-    width: 16px;
-    height: 16px;
-}
-
-/* 모바일 반응형 */
+/* 6. 모바일 반응형 */
 @media (max-width: 768px) {
-    .more-menu-modal {
-        max-height: 85vh;
-    }
-    
-    .more-menu-header {
-        padding: 16px 20px 12px 20px;
-    }
-    
-    .more-menu-header h2 {
-        font-size: 16px;
-    }
-    
-    .more-menu-body {
-        padding: 20px;
-    }
-    
     .menu-items-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-        margin-bottom: 20px;
-    }
-    
-    .menu-link-box {
-        padding: 16px;
-    }
-    
-    .menu-link-icon svg {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .menu-link-title {
-        font-size: 15px;
-    }
-    
-    .menu-link-subtitle {
-        font-size: 11px;
-    }
-    
-    .kakao-button {
-        padding: 14px 20px;
-        font-size: 15px;
+        grid-template-columns: 1fr 1fr; /* 모바일에서도 2열 유지 */
     }
 }
