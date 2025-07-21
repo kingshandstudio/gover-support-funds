@@ -2756,16 +2756,16 @@ button, a {
     font-size: 18px;
 }
 
+/* 초기 상태 강제 숨김 */
+.more-menu-overlay:not(.active),
+.more-menu-modal:not(.active) {
+    display: none !important;
+}
+
 /* 모바일 반응형 */
 @media (max-width: 768px) {
     .more-menu-modal {
         max-height: 85vh;
-    }
-    
-    .more-menu-modal:not(.active) {
-        transform: translateY(100%);
-        visibility: hidden;
-        opacity: 0;
     }
     
     .more-menu-header {
