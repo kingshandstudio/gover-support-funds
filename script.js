@@ -1,31 +1,3 @@
-// Google AdSense 스크립트 자동 추가
-function addAdSenseScript() {
-    // 이미 추가되었는지 확인
-    if (document.querySelector('script[src*="googlesyndication"]')) {
-        return;
-    }
-    
-    const adSenseScript = document.createElement('script');
-    adSenseScript.async = true;
-    adSenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9853437874631712';
-    adSenseScript.crossOrigin = 'anonymous';
-    
-    // head 태그에 추가
-    document.head.appendChild(adSenseScript);
-}
-
-// 페이지 로드 시 자동으로 AdSense 스크립트 추가
-document.addEventListener('DOMContentLoaded', function() {
-    addAdSenseScript();
-});
-
-// 즉시 실행 (DOMContentLoaded 이전에도 실행되도록)
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', addAdSenseScript);
-} else {
-    addAdSenseScript();
-}
-
 // DOM 요소들
 const menuBtn = document.getElementById('menuBtn');
 const searchBtn = document.getElementById('searchBtn');
