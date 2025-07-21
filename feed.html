@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>머니 피드 - 지원금24</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .feed-header {
+            background: white;
+            padding: 16px 20px;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .feed-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        
+        .floating-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .floating-banner-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .floating-banner-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 4px;
+        }
+        
+        .main-content {
+            margin-top: 48px;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .search-menu-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: auto;
+        }
+        
+        .search-btn, .menu-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .hero-banner {
+            position: relative;
+            background: linear-gradient(135deg, #87CEEB, #4682B4);
+            border-radius: 16px;
+            margin: 20px;
+            padding: 24px;
+            overflow: hidden;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .banner-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+
+        .banner-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .banner-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .banner-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+        }
+
+        .banner-dot.active {
+            background: white;
+        }
+
+        .banner-illustration {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            font-size: 80px;
+            opacity: 0.8;
+        }
+
+        .feed-categories {
+            padding: 20px;
+            background: white;
+            margin-bottom: 8px;
+        }
+
+        .category-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 16px;
+        }
+
+        .category-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .category-tab {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .category-tab.active {
+            background: #333;
+            color: white;
+        }
+
+        .category-tab:not(.active) {
+            background: #f5f5f5;
+            color: #666;
+        }
+
+        .feed-content {
+            padding: 0 20px 20px;
+        }
+
+        .news-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: transform 0.2s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .news-card-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #87CEEB, #4682B4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-card-image.vat {
+            background: linear-gradient(135deg, #FFD54F, #FFA726);
+        }
+
+        .card-icon {
+            font-size: 60px;
+            color: white;
+            opacity: 0.9;
+        }
+
+        .news-card-content {
+            padding: 20px;
+        }
+
+        .news-categories {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            font-size: 12px;
+            color: #2196F3;
+            font-weight: 500;
+        }
+
+        .news-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .clipboard-illustration {
+            position: relative;
+        }
+
+        .clipboard-illustration::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 100px;
+            background: #FFF8E1;
+            border-radius: 8px;
+            border: 3px solid #FFB74D;
+        }
+
+        .clipboard-illustration::after {
+            content: '';
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 15px;
+            background: #FF8A65;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .vat-coin {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            background: #FFF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #FF6F00;
+            border: 4px solid #FFE082;
+        }
+    </style>
+</head>
+<body>
+    <!-- 상단 알림 배너 -->
+    <div class="floating-banner" id="topBanner">
+        <div class="floating-banner-content">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>새로운 신규 지원금 할인이 있어요!</span>
+        </div>
+        <button class="floating-banner-close" onclick="closeBanner()">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- 메인 콘텐츠 -->
+    <div class="main-content">
+        <!-- 피드 헤더 -->
+        <header class="feed-header">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <h1 class="feed-title">지금 확인해야 할 머니 피드!</h1>
+                <div class="search-menu-area">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="menu-btn" id="menuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- 히어로 배너 -->
+        <section class="hero-banner" style="background-image: url('public/2.png'); background-size: cover; background-position: center; position: relative;">
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(135, 206, 235, 0.8), rgba(70, 130, 180, 0.8));"></div>
+            <div class="banner-content" style="position: relative; z-index: 2;">
+                <h2 class="banner-title">민생회복 소비쿠폰 신청 시작! (+지원금 25만원부터<br>최대 55만원까지 받는 법)</h2>
+                <div class="banner-dots">
+                    <div class="banner-dot active"></div>
+                    <div class="banner-dot"></div>
+                    <div class="banner-dot"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 카테고리 섹션 -->
+        <section class="feed-categories">
+            <h3 class="category-title">머니 피드 카테고리</h3>
+            <div class="category-tabs">
+                <button class="category-tab active">지원/정책</button>
+                <button class="category-tab">담보대출</button>
+                <button class="category-tab">보험</button>
+                <button class="category-tab">신용대출</button>
+                <button class="category-tab">신용카드</button>
+                <button class="category-tab">예적금</button>
+                <button class="category-tab">자산관리</button>
+                <button class="category-tab">전세대출</button>
+            </div>
+        </section>
+
+        <!-- 뉴스 피드 -->
+        <main class="feed-content">
+            <div class="news-grid">
+                <!-- 첫 번째 뉴스 카드 -->
+                <article class="news-card">
+                    <div class="news-card-image">
+                        <img src="public/2.png" alt="민생회복 소비쿠폰" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="news-card-content">
+                        <div class="news-categories">
+                            <span>머니 피드</span>, <span>지원/정책</span>
+                        </div>
+                        <h3 class="news-title">민생회복 소비쿠폰 신청 시작! (+지원금 25만원부터 최대 55만원까지 받는 법)</h3>
+                    </div>
+                </article>
+
+                <!-- 두 번째 뉴스 카드 -->
+                <article class="news-card">
+                    <div class="news-card-image vat">
+                        <img src="public/3.png" alt="부가가치세" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="news-card-content">
+                        <div class="news-categories">
+                            <span>머니 피드</span>, <span>지원/정책</span>
+                        </div>
+                        <h3 class="news-title">부가가치세 확정신고 기간! 일반과세자·간이과세자 차이부터 신고납부 방법까지 총정리!</h3>
+                    </div>
+                </article>
+
+                <!-- 세 번째 뉴스 카드 -->
+                <article class="news-card">
+                    <div class="news-card-image">
+                        <img src="public/1.png" alt="실업급여" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="news-card-content">
+                        <div class="news-categories">
+                            <span>머니 피드</span>, <span>지원/정책</span>
+                        </div>
+                        <h3 class="news-title">실업급여 신청 완벽 가이드! 조건부터 신청방법, 지급액까지 총정리</h3>
+                    </div>
+                </article>
+
+                <!-- 네 번째 뉴스 카드 -->
+                <article class="news-card">
+                    <div class="news-card-image" style="background: linear-gradient(135deg, #81C784, #4CAF50);">
+                        <img src="public/4.png" alt="소비쿠폰" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="news-card-content">
+                        <div class="news-categories">
+                            <span>머니 피드</span>, <span>지원/정책</span>
+                        </div>
+                        <h3 class="news-title">2025년 소비쿠폰 완벽 가이드! 신청방법부터 사용법까지 한번에 정리</h3>
+                    </div>
+                </article>
+
+                <!-- 다섯 번째 뉴스 카드 -->
+                <article class="news-card">
+                    <div class="news-card-image" style="background: linear-gradient(135deg, #FFB74D, #FF9800);">
+                        <i class="fas fa-bolt card-icon"></i>
+                    </div>
+                    <div class="news-card-content">
+                        <div class="news-categories">
+                            <span>머니 피드</span>, <span>지원/정책</span>
+                        </div>
+                        <h3 class="news-title">에너지캐시백으로 전기요금 절약하기! 월 최대 50만원 돌려받는 꿀팁</h3>
+                    </div>
+                </article>
+
+                <!-- 여섯 번째 뉴스 카드 -->
+                <article class="news-card">
+                    <div class="news-card-image" style="background: linear-gradient(135deg, #E57373, #F44336);">
+                        <i class="fas fa-home card-icon"></i>
+                    </div>
+                    <div class="news-card-content">
+                        <div class="news-categories">
+                            <span>머니 피드</span>, <span>전세대출</span>
+                        </div>
+                        <h3 class="news-title">2025년 전세자금대출 완벽 가이드! 신혼부부 우대금리와 한도 총정리</h3>
+                    </div>
+                </article>
+            </div>
+
+            <!-- 더보기 버튼 -->
+            <div style="text-align: center; margin-top: 40px; padding-bottom: 100px;">
+                <button style="background: #f5f5f5; color: #666; border: none; padding: 12px 24px; border-radius: 24px; font-size: 14px; font-weight: 500; cursor: pointer;">
+                    더 많은 머니 피드 보기 <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- 하단 네비게이션 -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>홈</span>
+        </a>
+        <a href="policy.html" class="nav-item">
+            <i class="fas fa-search"></i>
+            <span>맞춤 정책</span>
+        </a>
+        <button class="nav-item active">
+            <i class="fas fa-newspaper"></i>
+            <span>머니 피드</span>
+        </button>
+        <button class="nav-item">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>로그인</span>
+        </button>
+        <button class="nav-item">
+            <i class="fas fa-ellipsis-h"></i>
+            <span>더보기</span>
+        </button>
+    </nav>
+
+    <!-- 사이드 메뉴 -->
+    <div class="side-menu" id="sideMenu">
+        <div class="menu-overlay" id="menuOverlay"></div>
+        <div class="menu-content">
+            <div class="menu-header">
+                <h3>메뉴</h3>
+                <button class="close-btn" id="closeBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="menu-list">
+                <li><a href="index.html"><i class="fas fa-home"></i> 홈</a></li>
+                <li><a href="policy.html"><i class="fas fa-money-bill-wave"></i> 지원금</a></li>
+                <li><a href="#"><i class="fas fa-undo-alt"></i> 환급금</a></li>
+                <li><a href="#"><i class="fas fa-hand-holding-usd"></i> 대출 정보</a></li>
+                <li><a href="#"><i class="fas fa-calculator"></i> 계산기</a></li>
+                <li><a href="feed.html"><i class="fas fa-newspaper"></i> 머니 피드</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> 마이페이지</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> 설정</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // 배너 닫기 기능
+        function closeBanner() {
+            const banner = document.getElementById('topBanner');
+            banner.style.display = 'none';
+            document.querySelector('.main-content').style.marginTop = '0';
+        }
+
+        // 카테고리 탭 전환 기능
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // 모든 탭에서 active 제거
+                document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                // 클릭된 탭에 active 추가
+                tab.classList.add('active');
+                
+                // 탭 클릭 애니메이션
+                tab.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    tab.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+
+        // 메뉴 기능
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('menuBtn');
+            const sideMenu = document.getElementById('sideMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+            const closeBtn = document.getElementById('closeBtn');
+            
+            if (menuBtn && sideMenu) {
+                menuBtn.addEventListener('click', () => {
+                    sideMenu.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+                
+                function closeSideMenu() {
+                    sideMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+                
+                if (closeBtn) closeBtn.addEventListener('click', closeSideMenu);
+                if (menuOverlay) menuOverlay.addEventListener('click', closeSideMenu);
+            }
+            
+            // 뉴스 카드 클릭 애니메이션
+            document.querySelectorAll('.news-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'translateY(-2px) scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-2px) scale(1)';
+                    }, 150);
+                });
+            });
+
+            // 검색 버튼 기능
+            document.querySelector('.search-btn').addEventListener('click', () => {
+                alert('검색 기능이 곧 업데이트됩니다! 🔍');
+            });
+
+            // 더보기 버튼 기능
+            document.querySelector('button[style*="background: #f5f5f5"]').addEventListener('click', () => {
+                alert('더 많은 컨텐츠를 준비 중입니다! 📰');
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주택용 에너지캐시백 - 지원금24</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .detail-header {
+            background: white;
+            padding: 16px 20px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        .detail-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 12px 20px;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #2196F3;
+            text-decoration: none;
+        }
+        
+        .support-detail {
+            background: white;
+            margin-bottom: 8px;
+        }
+        
+        .support-header {
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .support-badge {
+            background: #FFF3E0;
+            color: #F57C00;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        
+        .support-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        
+        .support-agency {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .agency-logo {
+            width: 24px;
+            height: 24px;
+            background: #FFC107;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .support-meta {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .support-actions {
+            padding: 20px;
+            display: flex;
+            gap: 12px;
+        }
+        
+        .primary-btn {
+            flex: 1;
+            background: #FFC107;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .secondary-btn {
+            background: white;
+            color: #666;
+            border: 1px solid #e0e0e0;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .benefit-section {
+            background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+            margin: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .benefit-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: #F57C00;
+            margin-bottom: 8px;
+        }
+        
+        .benefit-description {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .info-tabs {
+            background: white;
+            margin-bottom: 8px;
+        }
+        
+        .tab-headers {
+            display: flex;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .tab-header {
+            flex: 1;
+            padding: 16px;
+            text-align: center;
+            background: none;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab-header.active {
+            color: #F57C00;
+            border-bottom-color: #F57C00;
+        }
+        
+        .tab-content-area {
+            padding: 20px;
+        }
+        
+        .info-list {
+            list-style: none;
+        }
+        
+        .info-item {
+            display: flex;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .info-label {
+            font-weight: 500;
+            color: #333;
+            min-width: 80px;
+            margin-right: 16px;
+        }
+        
+        .info-value {
+            color: #666;
+            flex: 1;
+        }
+        
+        .step-list {
+            counter-reset: step-counter;
+        }
+        
+        .step-item {
+            counter-increment: step-counter;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: #FFC107;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .step-number::before {
+            content: counter(step-counter);
+        }
+        
+        .step-content h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .step-content p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .highlight-box {
+            background: #E8F5E8;
+            border: 1px solid #C8E6C9;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .highlight-box h4 {
+            color: #2E7D32;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .highlight-box p {
+            color: #2E7D32;
+            font-size: 14px;
+        }
+
+        .savings-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+
+        .savings-table th,
+        .savings-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+
+        .savings-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .savings-table td {
+            color: #666;
+        }
+
+        .savings-rate {
+            color: #F57C00;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- 상세 페이지 헤더 -->
+    <header class="detail-header">
+        <button class="back-btn" onclick="history.back()">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <h1 class="detail-title">주택용 에너지캐시백</h1>
+        <div style="margin-left: auto;">
+            <button class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="menu-btn" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 브레드크럼 -->
+    <div class="breadcrumb">
+        <a href="index.html">홈</a> - <a href="#" onclick="history.back()">환급금</a> - 주택용 에너지캐시백
+    </div>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main-content">
+        <!-- 지원금 정보 -->
+        <section class="support-detail">
+            <div class="support-header">
+                <span class="support-badge">환급금</span>
+                <h2 class="support-name">주택용 에너지캐시백</h2>
+                <div class="support-agency">
+                    <div class="agency-logo">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <span>한국전력공사</span>
+                </div>
+                <div class="support-meta">
+                    <p>현재 12명이 보고 있어요</p>
+                </div>
+            </div>
+            
+            <div class="support-actions">
+                <a href="https://pcb.kepco.co.kr" class="primary-btn" target="_blank">신청하기 <i class="fas fa-external-link-alt"></i></a>
+                <button class="secondary-btn">한전 전화 <i class="fas fa-phone"></i></button>
+            </div>
+        </section>
+
+        <!-- 혜택 요약 -->
+        <section class="benefit-section">
+            <div class="benefit-amount">최대 50만원</div>
+            <div class="benefit-description">전년도 대비 전기 절약량에 따라 돌려받는 금액이에요</div>
+        </section>
+
+        <!-- 상세 정보 탭 -->
+        <section class="info-tabs">
+            <div class="tab-headers">
+                <button class="tab-header active" data-target="overview">사업내용</button>
+                <button class="tab-header" data-target="eligibility">지원대상</button>
+                <button class="tab-header" data-target="method">지원내용</button>
+                <button class="tab-header" data-target="process">절차방법</button>
+            </div>
+            
+            <div class="tab-content-area">
+                <div class="tab-content active" id="overview">
+                    <ul class="info-list">
+                        <li class="info-item">
+                            <span class="info-label">지원기관</span>
+                            <span class="info-value">한국전력공사</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">신청 시작일</span>
+                            <span class="info-value">25.01.01(수)</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">신청 마감일</span>
+                            <span class="info-value">25.12.30(화)</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">지원 형태</span>
+                            <span class="info-value">전기요금 할인 또는 현금 환급</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">신청 방법</span>
+                            <span class="info-value">온라인: 한전 사이버지점, 오프라인: 한전 지사</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-leaf"></i> 에너지캐시백이란?</h4>
+                        <p>가정용 전력 고객이 전년 동월 대비 전력 사용량을 절약했을 때, 절약량에 따라 캐시백을 지급하는 전력 절약 인센티브 제도입니다. 환경보호와 에너지 절약을 실천하며 현금도 돌려받을 수 있습니다.</p>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="eligibility">
+                    <h4 style="margin-bottom: 16px; font-size: 16px; font-weight: 600;">지원 대상</h4>
+                    <ul style="list-style: disc; padding-left: 20px; color: #666; line-height: 1.6; margin-bottom: 16px;">
+                        <li>주택용(저압) 전력을 사용하는 일반 가정</li>
+                        <li>전년 동월 대비 전력 사용량을 절약한 고객</li>
+                        <li>최근 1년간 전기요금을 연체 없이 납부한 고객</li>
+                        <li>신청일 기준 3개월 이상 계속 거주한 고객</li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <h4>제외 대상</h4>
+                        <p>• 신재생에너지 발전설비 설치 고객<br>
+                        • 전기차 충전설비 보유 고객<br>
+                        • 복지할인 등 정부지원 할인 적용 고객<br>
+                        • 임시전력 사용 고객</p>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="method">
+                    <h4 style="margin-bottom: 16px; font-size: 16px; font-weight: 600;">지원 내용</h4>
+                    <p style="color: #666; line-height: 1.6; margin-bottom: 16px;">
+                        전년 동월 대비 전력 절약량에 따라 차등 지급됩니다.
+                    </p>
+                    
+                    <table class="savings-table">
+                        <thead>
+                            <tr>
+                                <th>절약률</th>
+                                <th>캐시백 단가</th>
+                                <th>월 최대 한도</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="savings-rate">5% 이상</td>
+                                <td>100원/kWh</td>
+                                <td>10만원</td>
+                            </tr>
+                            <tr>
+                                <td class="savings-rate">10% 이상</td>
+                                <td>150원/kWh</td>
+                                <td>20만원</td>
+                            </tr>
+                            <tr>
+                                <td class="savings-rate">15% 이상</td>
+                                <td>200원/kWh</td>
+                                <td>30만원</td>
+                            </tr>
+                            <tr>
+                                <td class="savings-rate">20% 이상</td>
+                                <td>250원/kWh</td>
+                                <td>50만원</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="highlight-box">
+                        <h4>지급 방식</h4>
+                        <p>매월 전기요금 고지서에 캐시백 금액이 차감되어 고지되며, 고객이 원할 경우 별도 계좌로 현금 지급도 가능합니다.</p>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="process">
+                    <h4 style="margin-bottom: 16px; font-size: 16px; font-weight: 600;">신청 절차</h4>
+                    <div class="step-list">
+                        <div class="step-item">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h4>절약량 확인</h4>
+                                <p>한전 사이버지점에서 전년 동월 대비 전력 사용량 절약 여부를 확인합니다.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-item">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h4>온라인 신청</h4>
+                                <p>한전 사이버지점 접속 → 로그인 → 에너지캐시백 신청 메뉴</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-item">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h4>서류 제출</h4>
+                                <p>신분증, 통장사본 등 필요 서류를 온라인 또는 방문 제출합니다.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-item">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h4>승인 및 지급</h4>
+                                <p>신청 승인 후 다음 달 전기요금에 반영되거나 지정 계좌로 입금됩니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 에너지 절약 팁 -->
+        <section class="info-tabs">
+            <div style="padding: 20px;">
+                <h3 style="margin-bottom: 16px; font-size: 18px; font-weight: 700;">
+                    <i class="fas fa-lightbulb" style="color: #FFC107; margin-right: 8px;"></i>
+                    전기 절약 꿀팁
+                </h3>
+                <div style="background: #F0F4FF; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+                    <ul style="list-style: disc; padding-left: 20px; color: #1565C0; line-height: 1.8;">
+                        <li><strong>에어컨</strong>: 적정 온도(26~28도) 유지, 2주마다 필터 청소</li>
+                        <li><strong>냉장고</strong>: 적정 온도(-18~-15도) 설정, 문 자주 열지 않기</li>
+                        <li><strong>조명</strong>: LED 전구 사용, 사용하지 않는 조명 끄기</li>
+                        <li><strong>전자기기</strong>: 대기전력 차단, 멀티탭 스위치 활용</li>
+                        <li><strong>세탁기</strong>: 찬물 사용, 적정량 세탁하기</li>
+                    </ul>
+                </div>
+                
+                <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 12px;">문의처</h4>
+                <p style="color: #666; line-height: 1.5;">
+                    <strong>한전 고객센터:</strong> 123 (24시간)<br>
+                    <strong>사이버지점:</strong> <a href="https://cyber.kepco.co.kr" style="color: #2196F3;">cyber.kepco.co.kr</a><br>
+                    <strong>에너지캐시백 전용:</strong> <a href="https://pcb.kepco.co.kr" style="color: #2196F3;">pcb.kepco.co.kr</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- 하단 고정 버튼 -->
+        <div style="position: fixed; bottom: 80px; left: 0; right: 0; padding: 20px; background: white; border-top: 1px solid #e0e0e0;">
+            <a href="https://pcb.kepco.co.kr" class="primary-btn" style="width: 100%; display: block; text-align: center;" target="_blank">한전에서 신청하기</a>
+            <button style="background: none; border: none; color: #666; margin-top: 8px; width: 100%; padding: 8px;">공유하기 <i class="fas fa-share-alt"></i></button>
+        </div>
+
+        <!-- 제공서비스 안내 -->
+        <section class="service-info">
+            <div class="service-header">
+                <h3>지원금 24 | 정부 지원금, 정책 자금, 정부 대출 관련 정보 제공 서비스</h3>
+            </div>
+            <div class="service-description">
+                <p>정부지원금 정보를 쉽고 빠르게 전달하는 서비스입니다. 본 사이트에서 제공하는 정보는 참고용이며, 정확한 내용은 해당 기관에서 확인하시기 바랍니다. 해당 사이트에서 제공되는 정보는 신뢰할 만한 자료 및 정보로부터 수집되었지만, 그 정확성이나 완전성을 보장할 수 없으며 사전의 경고없이 변경될 수 있습니다. 그로 인하여 데이터 오차나 부정확성 발견시 그 결과에 대한 책임을 수 있습니다.</p>
+            </div>
+            <div class="service-contact">
+                <p>아드시롬즈나 | 대표: 김지수 | 사업자 등록 번호: 379-43-01260 | 통신판매업신고번호 경기도 145-5, 3층 301-42호 (고양동 동일로타시아)</p>
+                <p>info@loworld.co.kr | 02-151-6384</p>
+            </div>
+            <div class="service-links">
+                <p>오스틸 서비스 제공: 주식회사 로월드 (https://loworldfoundation.org | https://loworld.co.kr)</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- 하단 네비게이션 -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>홈</span>
+        </a>
+        <button class="nav-item">
+            <i class="fas fa-search"></i>
+            <span>맞춤 정책</span>
+        </button>
+        <button class="nav-item">
+            <i class="fas fa-newspaper"></i>
+            <span>머니 피드</span>
+        </button>
+        <button class="nav-item">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>로그인</span>
+        </button>
+        <button class="nav-item">
+            <i class="fas fa-ellipsis-h"></i>
+            <span>더보기</span>
+        </button>
+    </nav>
+
+    <!-- 사이드 메뉴 -->
+    <div class="side-menu" id="sideMenu">
+        <div class="menu-overlay" id="menuOverlay"></div>
+        <div class="menu-content">
+            <div class="menu-header">
+                <h3>메뉴</h3>
+                <button class="close-btn" id="closeBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="menu-list">
+                <li><a href="index.html"><i class="fas fa-home"></i> 홈</a></li>
+                <li><a href="#"><i class="fas fa-money-bill-wave"></i> 지원금</a></li>
+                <li><a href="#"><i class="fas fa-undo-alt"></i> 환급금</a></li>
+                <li><a href="#"><i class="fas fa-hand-holding-usd"></i> 대출 정보</a></li>
+                <li><a href="#"><i class="fas fa-calculator"></i> 계산기</a></li>
+                <li><a href="#"><i class="fas fa-newspaper"></i> 머니 피드</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> 마이페이지</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> 설정</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // 탭 전환 기능
+        document.querySelectorAll('.tab-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const target = header.getAttribute('data-target');
+                
+                // 모든 탭 헤더에서 active 클래스 제거
+                document.querySelectorAll('.tab-header').forEach(h => h.classList.remove('active'));
+                header.classList.add('active');
+                
+                // 모든 탭 콘텐츠 숨기기
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                
+                // 해당 탭 콘텐츠 보이기
+                const targetContent = document.getElementById(target);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            });
+        });
+        
+        // 기본 스크립트 포함
+        document.addEventListener('DOMContentLoaded', () => {
+            // 메뉴 기능
+            const menuBtn = document.getElementById('menuBtn');
+            const sideMenu = document.getElementById('sideMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+            const closeBtn = document.getElementById('closeBtn');
+            
+            if (menuBtn && sideMenu) {
+                menuBtn.addEventListener('click', () => {
+                    sideMenu.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+                
+                function closeSideMenu() {
+                    sideMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+                
+                if (closeBtn) closeBtn.addEventListener('click', closeSideMenu);
+                if (menuOverlay) menuOverlay.addEventListener('click', closeSideMenu);
+            }
+            
+            // 버튼 클릭 애니메이션
+            document.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지원금24 - 당신의 찾는 모든 지원금24</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- 상단 알림 배너 -->
+    <div class="top-banner" onclick="openSupportModal()">
+        <div class="banner-content">
+            <i class="fas fa-info-circle"></i>
+            <span>새로운 신규 지원금 알림이 있어요!</span>
+            <i class="fas fa-chevron-right"></i>
+        </div>
+    </div>
+
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="header-content">
+            <div class="alarm-btn">
+                <i class="fas fa-bell"></i>
+                <span>알림 받기</span>
+            </div>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-comment-dollar"></i>
+                </div>
+                <span>지원금24</span>
+            </div>
+            <div class="header-actions">
+                <button class="search-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="menu-btn" id="menuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main-content">
+        <!-- 메인 배너 섹션 -->
+        <section class="main-banner">
+            <div class="banner-text">
+                <p class="banner-subtitle">나도 <span class="highlight">정부 대출 대상자</span> 일 수 있어요</p>
+                <div class="popular-tags">
+                    <span class="tag">지금 가장 인기있는 정책</span>
+                </div>
+            </div>
+            <div class="main-promotion clickable-promotion" onclick="window.location.href='detail-geunro.html'">
+                <div class="promotion-content">
+                    <div class="promotion-text">
+                        <p class="promotion-subtitle">최대 330만 원 지원, 1분 만에 신청</p>
+                        <h2 class="promotion-title">30초로 확인하는<br>근로장려금 대상자</h2>
+                        <a href="detail-geunro.html" class="apply-btn" onclick="event.stopPropagation();">신청하기</a>
+                    </div>
+                    <div class="promotion-image">
+                        <div class="geometric-shape">
+                            <span class="logo-text">지원금24</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="support-cards">
+                <div class="support-card clickable-card" onclick="window.location.href='detail-geunro.html'">
+                    <div class="card-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>근로장려금</h3>
+                    <p class="card-agency">국세청</p>
+                    <p class="card-deadline">마감: 25.09.11(목)</p>
+                </div>
+                <div class="support-card clickable-card" onclick="window.location.href='detail.html'">
+                    <div class="card-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3>민생회복지원금</h3>
+                    <p class="card-agency">행정안전부</p>
+                    <p class="card-deadline">마감: 25.10.30(목)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 지원금24 랭킹 -->
+        <section class="ranking-section">
+            <div class="section-header">
+                <div class="crown-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h2>지원금24 랭킹</h2>
+            </div>
+            <div class="ranking-cards">
+                <div class="ranking-card clickable-card" onclick="window.location.href='detail.html'">
+                    <div class="rank-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>민생회복지원금 자격 확인</h3>
+                </div>
+                <div class="ranking-card clickable-card" onclick="window.location.href='detail-geunro.html'">
+                    <div class="rank-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>근로 장려금 계산기</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- 탭 메뉴 섹션 -->
+        <section class="tab-section">
+            <div class="section-header">
+                <div class="diamond-icon">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <h2>당신이 원하는 모든 지원금, 지원금24</h2>
+            </div>
+            <div class="tab-navigation">
+                <button class="tab-btn active" data-tab="support">지원금</button>
+                <button class="tab-btn" data-tab="refund">환급금</button>
+                <button class="tab-btn" data-tab="loan">대출 정보</button>
+            </div>
+            <div class="tab-content">
+                <div class="tab-panel active" id="support">
+                    <div class="support-item clickable-item" onclick="window.location.href='detail.html'">
+                        <div class="item-image">
+                            <img src="public/gov.png" alt="민생회복지원금" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover;">
+                        </div>
+                        <div class="item-content">
+                            <div class="item-header">
+                                <h4>민생회복지원금</h4>
+                                <span class="item-category">지원금</span>
+                            </div>
+                            <div class="item-details">
+                                <p class="item-agency">기관: 행정안전부</p>
+                                <p class="item-deadline">신청마감: 25.10.30(목)</p>
+                            </div>
+                        </div>
+                        <a href="detail.html" class="item-apply-btn" onclick="event.stopPropagation();">신청하기</a>
+                    </div>
+                    <div class="support-item clickable-item" onclick="window.location.href='detail-geunro.html'">
+                        <div class="item-image">
+                            <img src="public/nts.png" alt="근로장려금" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover;">
+                        </div>
+                        <div class="item-content">
+                            <div class="item-header">
+                                <h4>근로장려금</h4>
+                                <span class="item-category">지원금</span>
+                            </div>
+                            <div class="item-details">
+                                <p class="item-agency">기관: 국세청</p>
+                                <p class="item-deadline">신청마감: 25.09.11(목)</p>
+                            </div>
+                        </div>
+                        <a href="detail-geunro.html" class="item-apply-btn" onclick="event.stopPropagation();">신청하기</a>
+                    </div>
+                </div>
+                <div class="tab-panel" id="refund">
+                    <div class="support-item">
+                        <div class="item-image">
+                            <img src="https://via.placeholder.com/80x80/FFC107/FFFFFF?text=환급" alt="에너지캐시백">
+                        </div>
+                        <div class="item-content">
+                            <div class="item-header">
+                                <h4>주택용 에너지캐시백</h4>
+                                <span class="item-category">환급금</span>
+                            </div>
+                            <div class="item-details">
+                                <p class="item-agency">기관: 한국전력공사</p>
+                                <p class="item-deadline">신청마감: 25.12.30(화)</p>
+                            </div>
+                        </div>
+                        <a href="detail-energy.html" class="item-apply-btn">신청하기</a>
+                    </div>
+                </div>
+                <div class="tab-panel" id="loan">
+                    <div class="support-item">
+                        <div class="item-image">
+                            <img src="https://via.placeholder.com/80x80/DC3545/FFFFFF?text=대출" alt="전세자금대출">
+                        </div>
+                        <div class="item-content">
+                            <div class="item-header">
+                                <h4>일반전세자금보증</h4>
+                                <span class="item-category">대출 정보</span>
+                            </div>
+                            <div class="item-details">
+                                <p class="item-agency">기관: 한국주택금융공사</p>
+                                <p class="item-deadline">신청마감: 25.12.30(화)</p>
+                            </div>
+                        </div>
+                        <a href="detail-jeonse.html" class="item-apply-btn">신청하기</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 머니 피드 섹션 -->
+        <section class="money-feed-section">
+            <div class="section-header">
+                <div class="feed-icon">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <h2>돈 되는 읽을 거리, 머니 피드에서 확인!</h2>
+            </div>
+            <div class="category-tabs">
+                <button class="category-tab active">지원/정책</button>
+                <button class="category-tab">담보대출</button>
+                <button class="category-tab">보험</button>
+                <button class="category-tab">신용대출</button>
+                <button class="category-tab">신용카드</button>
+                <button class="category-tab">예적금</button>
+                <button class="category-tab">자산관리</button>
+                <button class="category-tab">전세대출</button>
+            </div>
+            <div class="news-grid">
+                <article class="news-card" onclick="window.location.href='article-coupon.html'">
+                    <div class="card-image">
+                        <img src="public/2.png" alt="민생회복 소비쿠폰" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-categories">
+                            <span>머니 피드</span>, <span>지원/정책</span>
+                        </div>
+                        <h3>민생회복 소비쿠폰 신청 시작! (+지원금 25만원부터 최대 55만원까지 받는 법)</h3>
+                    </div>
+                </article>
+                <article class="news-card" onclick="window.location.href='article-tax.html'">
+                    <div class="card-image">
+                        <img src="public/3.png" alt="부가가치세" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-categories">
+                            <span>머니 피드</span>, <span>지원/정책</span>
+                        </div>
+                        <h3>부가가치세 확정신고 기간! 일반과세자·간이과세자 차이부터 신고납부 방법까지 총정리!</h3>
+                    </div>
+                </article>
+                <article class="news-card" onclick="window.location.href='article-coupon2025.html'">
+                    <div class="card-image">
+                        <img src="public/4.png" alt="민생회복 소비쿠폰 2025" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-categories">
+                            <span>머니 피드</span>, <span>지원/정책</span>
+                        </div>
+                        <h3>민생회복 소비쿠폰 2025 총정리(+지급 대상·신청 방법·사용처 한눈에!)</h3>
+                    </div>
+                </article>
+                <article class="news-card" onclick="window.location.href='article-unemployment.html'">
+                    <div class="card-image">
+                        <img src="public/1.png" alt="실업급여" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-categories">
+                            <span>머니 피드</span>, <span>지원/정책</span>
+                        </div>
+                        <h3>실업급여 신청 완벽 가이드! 조건부터 신청방법, 지급액까지 총정리</h3>
+                    </div>
+                </article>
+            </div>
+            <button class="load-more-btn" onclick="window.location.href='feed.html'">더보기</button>
+        </section>
+    </main>
+
+    <!-- 민생회복지원금 모달 -->
+    <div class="modal-overlay" id="supportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>민생회복지원금</h2>
+                <button class="modal-close" onclick="closeSupportModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-logo">
+                    <img src="public/gov.png" alt="행정안전부" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+                </div>
+                <div class="modal-info">
+                    <div class="support-badge">지원금</div>
+                    <h3>민생회복지원금 신청</h3>
+                    <p class="support-agency">행정안전부 · 신청마감: 25.10.30(목)</p>
+                    <div class="support-amount">
+                        <span class="amount-text">최대 55만원</span>
+                        <span class="amount-desc">가구원 수와 소득에 따라 지원</span>
+                    </div>
+                    <div class="support-description">
+                        <h4>📋 지원 대상</h4>
+                        <ul>
+                            <li>기준 중위소득 75% 이하 가구</li>
+                            <li>건강보험료 기준으로 선정</li>
+                            <li>1인 가구 ~ 6인 이상 가구</li>
+                        </ul>
+                        <h4>💰 지원 내용</h4>
+                        <ul>
+                            <li>1인 가구: 25만원</li>
+                            <li>2인 가구: 40만원</li>
+                            <li>3인 가구: 50만원</li>
+                            <li>4인 이상: 55만원</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="detail.html" class="modal-apply-btn">
+                    <i class="fas fa-external-link-alt"></i>
+                    신청 바로가기
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 하단 네비게이션 -->
+    <nav class="bottom-nav">
+        <button class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>홈</span>
+        </button>
+        <a href="policy.html" class="nav-item">
+            <i class="fas fa-search"></i>
+            <span>맞춤 정책</span>
+        </a>
+        <a href="feed.html" class="nav-item">
+            <i class="fas fa-newspaper"></i>
+            <span>머니 피드</span>
+        </a>
+        <button class="nav-item">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>로그인</span>
+        </button>
+        <button class="nav-item">
+            <i class="fas fa-ellipsis-h"></i>
+            <span>더보기</span>
+        </button>
+    </nav>
+
+    <!-- 사이드 메뉴 -->
+    <div class="side-menu" id="sideMenu">
+        <div class="menu-overlay" id="menuOverlay"></div>
+        <div class="menu-content">
+            <div class="menu-header">
+                <h3>메뉴</h3>
+                <button class="close-btn" id="closeBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="menu-list">
+                <li><a href="#"><i class="fas fa-home"></i> 홈</a></li>
+                <li><a href="#"><i class="fas fa-money-bill-wave"></i> 지원금</a></li>
+                <li><a href="#"><i class="fas fa-undo-alt"></i> 환급금</a></li>
+                <li><a href="#"><i class="fas fa-hand-holding-usd"></i> 대출 정보</a></li>
+                <li><a href="#"><i class="fas fa-calculator"></i> 계산기</a></li>
+                <li><a href="#"><i class="fas fa-newspaper"></i> 머니 피드</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> 마이페이지</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> 설정</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

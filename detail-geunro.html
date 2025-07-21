@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>근로장려금 - 지원금24</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .detail-header {
+            background: white;
+            padding: 16px 20px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        .detail-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 12px 20px;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #2196F3;
+            text-decoration: none;
+        }
+        
+        .support-detail {
+            background: white;
+            margin-bottom: 8px;
+        }
+        
+        .support-header {
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .support-badge {
+            background: #E3F2FD;
+            color: #1976D2;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        
+        .support-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        
+        .support-agency {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .agency-logo {
+            width: 24px;
+            height: 24px;
+            background: #28A745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .support-meta {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .support-actions {
+            padding: 20px;
+            display: flex;
+            gap: 12px;
+        }
+        
+        .primary-btn {
+            flex: 1;
+            background: #28A745;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .secondary-btn {
+            background: white;
+            color: #666;
+            border: 1px solid #e0e0e0;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .benefit-section {
+            background: linear-gradient(135deg, #E8F5E8, #C8E6C9);
+            margin: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .benefit-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: #28A745;
+            margin-bottom: 8px;
+        }
+        
+        .benefit-description {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .info-tabs {
+            background: white;
+            margin-bottom: 8px;
+        }
+        
+        .tab-headers {
+            display: flex;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .tab-header {
+            flex: 1;
+            padding: 16px;
+            text-align: center;
+            background: none;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab-header.active {
+            color: #28A745;
+            border-bottom-color: #28A745;
+        }
+        
+        .tab-content-area {
+            padding: 20px;
+        }
+        
+        .info-list {
+            list-style: none;
+        }
+        
+        .info-item {
+            display: flex;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .info-label {
+            font-weight: 500;
+            color: #333;
+            min-width: 80px;
+            margin-right: 16px;
+        }
+        
+        .info-value {
+            color: #666;
+            flex: 1;
+        }
+        
+        .step-list {
+            counter-reset: step-counter;
+        }
+        
+        .step-item {
+            counter-increment: step-counter;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: #28A745;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .step-number::before {
+            content: counter(step-counter);
+        }
+        
+        .step-content h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .step-content p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .highlight-box {
+            background: #FFF3CD;
+            border: 1px solid #FFEAA7;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .highlight-box h4 {
+            color: #856404;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .highlight-box p {
+            color: #856404;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 상세 페이지 헤더 -->
+    <header class="detail-header">
+        <button class="back-btn" onclick="history.back()">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <h1 class="detail-title">근로장려금</h1>
+        <div style="margin-left: auto;">
+            <button class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="menu-btn" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 브레드크럼 -->
+    <div class="breadcrumb">
+        <a href="index.html">홈</a> - <a href="#" onclick="history.back()">지원금</a> - 근로장려금
+    </div>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main-content">
+        <!-- 지원금 정보 -->
+        <section class="support-detail">
+            <div class="support-header">
+                <span class="support-badge">지원금</span>
+                <h2 class="support-name">근로장려금</h2>
+                <div class="support-agency">
+                    <div class="agency-logo">
+                        <img src="public/nts.png" alt="국세청" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover;">
+                    </div>
+                    <span>국세청</span>
+                </div>
+                <div class="support-meta">
+                    <p>현재 8명이 보고 있어요</p>
+                </div>
+            </div>
+            
+            <div class="support-actions">
+                <a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2360&cntntsId=7703" class="primary-btn" target="_blank">지원하기 <i class="fas fa-external-link-alt"></i></a>
+                <button class="secondary-btn">국세청 전화 <i class="fas fa-phone"></i></button>
+            </div>
+        </section>
+
+        <!-- 혜택 요약 -->
+        <section class="benefit-section">
+            <div class="benefit-amount">최대 330만원</div>
+            <div class="benefit-description">가구원 수와 소득에 따라 지원받을 수 있는 금액이에요</div>
+        </section>
+
+        <!-- 상세 정보 탭 -->
+        <section class="info-tabs">
+            <div class="tab-headers">
+                <button class="tab-header active" data-target="overview">사업내용</button>
+                <button class="tab-header" data-target="eligibility">지원대상</button>
+                <button class="tab-header" data-target="method">지원내용</button>
+                <button class="tab-header" data-target="process">절차방법</button>
+            </div>
+            
+            <div class="tab-content-area">
+                <div class="tab-content active" id="overview">
+                    <ul class="info-list">
+                        <li class="info-item">
+                            <span class="info-label">지원기관</span>
+                            <span class="info-value">국세청</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">신청 시작일</span>
+                            <span class="info-value">25.05.01(목)</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">신청 마감일</span>
+                            <span class="info-value">25.09.11(목)</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">지원 형태</span>
+                            <span class="info-value">세액공제 (현금지급)</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">신청 방법</span>
+                            <span class="info-value">온라인: 국세청 홈택스, 오프라인: 세무서 방문</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-lightbulb"></i> 근로장려금이란?</h4>
+                        <p>열심히 일하지만 소득이 적어 생활이 어려운 근로자 가구와 사업자 가구의 근로의욕을 높이고 실질소득을 지원하는 근로연계형 소득지원 제도입니다.</p>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="eligibility">
+                    <h4 style="margin-bottom: 16px; font-size: 16px; font-weight: 600;">지원 대상</h4>
+                    <ul style="list-style: disc; padding-left: 20px; color: #666; line-height: 1.6; margin-bottom: 16px;">
+                        <li>부부합산 총급여액 등이 기준 금액 이하인 가구</li>
+                        <li>가구원의 재산합계액이 2억원 미만인 가구</li>
+                        <li>무주택 또는 기준시가 1억 3천만원 이하 1주택 보유 가구</li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <h4>2025년 소득 기준</h4>
+                        <p>• 단독가구: 2,200만원 이하<br>
+                        • 홑벌이가구: 3,200만원 이하<br>
+                        • 맞벌이가구: 3,800만원 이하</p>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="method">
+                    <h4 style="margin-bottom: 16px; font-size: 16px; font-weight: 600;">지원 내용</h4>
+                    <ul style="list-style: disc; padding-left: 20px; color: #666; line-height: 1.6; margin-bottom: 16px;">
+                        <li><strong>단독가구(1인)</strong>: 최대 165만원</li>
+                        <li><strong>홑벌이가구(2인 이상)</strong>: 최대 285만원</li>
+                        <li><strong>맞벌이가구(2인 이상)</strong>: 최대 330만원</li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <h4>계산 방식</h4>
+                        <p>가구원 수, 총급여액, 가구유형(단독/홑벌이/맞벌이)에 따라 지급액이 결정됩니다. 국세청 홈택스에서 간편하게 계산해보실 수 있습니다.</p>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="process">
+                    <h4 style="margin-bottom: 16px; font-size: 16px; font-weight: 600;">신청 절차</h4>
+                    <div class="step-list">
+                        <div class="step-item">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h4>자격 확인</h4>
+                                <p>국세청 홈택스에서 근로장려금 계산기를 통해 지원 자격과 예상 지급액을 확인합니다.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-item">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h4>온라인 신청</h4>
+                                <p>홈택스 접속 → 로그인 → 신고/납부 → 근로·자녀장려금 신청</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-item">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h4>서류 확인</h4>
+                                <p>소득·재산 증명서류가 자동으로 조회되며, 필요시 추가 서류를 제출합니다.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-item">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h4>심사 및 지급</h4>
+                                <p>국세청 심사 완료 후 약 1-2개월 후 지정 계좌로 지급됩니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 추가 정보 -->
+        <section class="info-tabs">
+            <div style="padding: 20px;">
+                <h3 style="margin-bottom: 16px; font-size: 18px; font-weight: 700;">
+                    <i class="fas fa-exclamation-triangle" style="color: #FFA726; margin-right: 8px;"></i>
+                    신청 시 주의사항
+                </h3>
+                <div style="background: #FFF3E0; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+                    <ul style="list-style: disc; padding-left: 20px; color: #E65100; line-height: 1.6;">
+                        <li>신청 기간을 꼭 확인하세요 (5월 1일 ~ 9월 11일)</li>
+                        <li>가구원의 소득과 재산을 정확히 신고해야 합니다</li>
+                        <li>허위 신고 시 지급받은 금액을 환수하고 가산세가 부과됩니다</li>
+                        <li>지급 후 소득이나 재산 변동이 있으면 신고해야 합니다</li>
+                    </ul>
+                </div>
+                
+                <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 12px;">문의처</h4>
+                <p style="color: #666; line-height: 1.5;">
+                    <strong>국세청 콜센터:</strong> 126 (평일 09:00~18:00)<br>
+                    <strong>홈택스:</strong> <a href="https://www.hometax.go.kr" style="color: #2196F3;">www.hometax.go.kr</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- 하단 고정 버튼 -->
+        <div style="position: fixed; bottom: 80px; left: 0; right: 0; padding: 20px; background: white; border-top: 1px solid #e0e0e0;">
+            <a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2360&cntntsId=7703" class="primary-btn" style="width: 100%; display: block; text-align: center;" target="_blank">국세청에서 신청하기</a>
+            <button style="background: none; border: none; color: #666; margin-top: 8px; width: 100%; padding: 8px;">공유하기 <i class="fas fa-share-alt"></i></button>
+        </div>
+
+        <!-- 제공서비스 안내 -->
+        <section class="service-info">
+            <div class="service-header">
+                <h3>지원금 24 | 정부 지원금, 정책 자금, 정부 대출 관련 정보 제공 서비스</h3>
+            </div>
+            <div class="service-description">
+                <p>정부지원금 정보를 쉽고 빠르게 전달하는 서비스입니다. 본 사이트에서 제공하는 정보는 참고용이며, 정확한 내용은 해당 기관에서 확인하시기 바랍니다. 해당 사이트에서 제공되는 정보는 신뢰할 만한 자료 및 정보로부터 수집되었지만, 그 정확성이나 완전성을 보장할 수 없으며 사전의 경고없이 변경될 수 있습니다. 그로 인하여 데이터 오차나 부정확성 발견시 그 결과에 대한 책임을 수 있습니다.</p>
+            </div>
+            <div class="service-contact">
+                <p>아드시롬즈나 | 대표: 김지수 | 사업자 등록 번호: 379-43-01260 | 통신판매업신고번호 경기도 145-5, 3층 301-42호 (고양동 동일로타시아)</p>
+                <p>info@loworld.co.kr | 02-151-6384</p>
+            </div>
+            <div class="service-links">
+                <p>오스틸 서비스 제공: 주식회사 로월드 (https://loworldfoundation.org | https://loworld.co.kr)</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- 하단 네비게이션 -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>홈</span>
+        </a>
+        <button class="nav-item">
+            <i class="fas fa-search"></i>
+            <span>맞춤 정책</span>
+        </button>
+        <button class="nav-item">
+            <i class="fas fa-newspaper"></i>
+            <span>머니 피드</span>
+        </button>
+        <button class="nav-item">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>로그인</span>
+        </button>
+        <button class="nav-item">
+            <i class="fas fa-ellipsis-h"></i>
+            <span>더보기</span>
+        </button>
+    </nav>
+
+    <!-- 사이드 메뉴 -->
+    <div class="side-menu" id="sideMenu">
+        <div class="menu-overlay" id="menuOverlay"></div>
+        <div class="menu-content">
+            <div class="menu-header">
+                <h3>메뉴</h3>
+                <button class="close-btn" id="closeBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="menu-list">
+                <li><a href="index.html"><i class="fas fa-home"></i> 홈</a></li>
+                <li><a href="#"><i class="fas fa-money-bill-wave"></i> 지원금</a></li>
+                <li><a href="#"><i class="fas fa-undo-alt"></i> 환급금</a></li>
+                <li><a href="#"><i class="fas fa-hand-holding-usd"></i> 대출 정보</a></li>
+                <li><a href="#"><i class="fas fa-calculator"></i> 계산기</a></li>
+                <li><a href="#"><i class="fas fa-newspaper"></i> 머니 피드</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> 마이페이지</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> 설정</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // 탭 전환 기능
+        document.querySelectorAll('.tab-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const target = header.getAttribute('data-target');
+                
+                // 모든 탭 헤더에서 active 클래스 제거
+                document.querySelectorAll('.tab-header').forEach(h => h.classList.remove('active'));
+                header.classList.add('active');
+                
+                // 모든 탭 콘텐츠 숨기기
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                
+                // 해당 탭 콘텐츠 보이기
+                const targetContent = document.getElementById(target);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            });
+        });
+        
+        // 기본 스크립트 포함
+        document.addEventListener('DOMContentLoaded', () => {
+            // 메뉴 기능
+            const menuBtn = document.getElementById('menuBtn');
+            const sideMenu = document.getElementById('sideMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+            const closeBtn = document.getElementById('closeBtn');
+            
+            if (menuBtn && sideMenu) {
+                menuBtn.addEventListener('click', () => {
+                    sideMenu.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+                
+                function closeSideMenu() {
+                    sideMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+                
+                if (closeBtn) closeBtn.addEventListener('click', closeSideMenu);
+                if (menuOverlay) menuOverlay.addEventListener('click', closeSideMenu);
+            }
+            
+            // 버튼 클릭 애니메이션
+            document.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

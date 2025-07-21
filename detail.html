@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>민생회복지원금 자원 대상 확인하기 - 지원금24</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="detail-header">
+        <div class="header-content">
+            <button class="back-btn" onclick="history.back()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1 class="detail-title">민생회복지원금 자원 대상 확인하기</h1>
+            <div class="header-actions">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 브레드크럼 -->
+    <div class="breadcrumb">
+        <a href="index.html">홈</a> > <a href="policy.html">지원금</a> > 민생회복지원금 자격 대상 확인하기
+    </div>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main-content">
+        <!-- 민생회복 소비쿠폰 공식 이미지 갤러리 -->
+        <section class="official-gallery">
+            <h3>민생회복 소비쿠폰 공식 안내</h3>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openImageModal('https://www.mois.go.kr/images/frt/sub/a06/b07/livelihoodCoupon/hood1.jpg', '민생회복 소비쿠폰 신청방법')">
+                    <img src="https://www.mois.go.kr/images/frt/sub/a06/b07/livelihoodCoupon/hood1.jpg" alt="민생회복 소비쿠폰 신청방법" loading="lazy">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <span>신청방법 보기</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openImageModal('https://www.mois.go.kr/images/frt/sub/a06/b07/livelihoodCoupon/hood2.jpg', '민생회복 소비쿠폰 사용처')">
+                    <img src="https://www.mois.go.kr/images/frt/sub/a06/b07/livelihoodCoupon/hood2.jpg" alt="민생회복 소비쿠폰 사용처" loading="lazy">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <span>사용처 보기</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openImageModal('https://www.mois.go.kr/images/frt/sub/a06/b07/livelihoodCoupon/hood3.jpg', '민생회복 소비쿠폰 상세정보')">
+                    <img src="https://www.mois.go.kr/images/frt/sub/a06/b07/livelihoodCoupon/hood3.jpg" alt="민생회복 소비쿠폰 상세정보" loading="lazy">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <span>상세정보 보기</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-note">
+                <i class="fas fa-info-circle"></i>
+                <span>이미지를 클릭하면 확대하여 볼 수 있습니다</span>
+            </div>
+        </section>
+
+        <!-- 지원대상 섹션 -->
+        <section class="eligibility-section">
+            <div class="section-icon">
+                <i class="fas fa-search" style="color: #2196F3;"></i>
+            </div>
+            <h2>지원대상</h2>
+            
+            <div class="eligibility-card">
+                <div class="eligibility-item">
+                    <div class="item-label">지원대상</div>
+                    <div class="item-value">전국민</div>
+                </div>
+                <div class="eligibility-item">
+                    <div class="item-label">대상 가구지</div>
+                    <div class="item-value">전국</div>
+                </div>
+                <div class="eligibility-item">
+                    <div class="item-label">소득 제한</div>
+                    <div class="item-value">없음</div>
+                </div>
+                <div class="eligibility-item detailed">
+                    <div class="item-label">기타 사항</div>
+                    <div class="item-value">
+                        추첨제로 만18세부터 학용품 위한 추가로 소비성향의 소득공인 및 자영업자 매출하락률 위한 만18세부터 소비부문 사업 지역 중소상공인에게 직접 사업 시행자 출신과 1인당 15~55만원, 소특발 민중권역 지역 및 도·시 지역 신청일의 1차: 전국민 1인당 15~40만원 우선 지금 2차: 전국민 90%에게 1인당 10만원 추가 지급 신청 접수 기간: 1차: 2025.07.21.(월) ~ 09.12.(금) 2차: 2025.09.22.(월) ~ 10.31.(금) 신청방법 온라인: 지역사회상품권 가맹점 신용제로 신용제거기 신청센터: 안 매출액 30억원 이하 매장 시용가능 
+                        2025.11.30.(일)까지
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 지원내용 섹션 -->
+        <section class="support-content-section">
+            <div class="section-icon">
+                <i class="fas fa-file-alt" style="color: #2196F3;"></i>
+            </div>
+            <h2>지원내용</h2>
+            
+            <div class="support-content-card">
+                <div class="support-item">
+                    <div class="item-label">지원내용</div>
+                    <div class="item-value">민생회복 회복을 위한 추가로 소비성향의 소득공인 및 자영업자 매출하락률 위한 민생회복 소비쿠폰 지급</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 접수 방법 및 상세 설명 섹션 -->
+        <section class="application-method-section">
+            <div class="section-icon">
+                <i class="fas fa-clipboard-list" style="color: #2196F3;"></i>
+            </div>
+            <h2>접수 방법 및 상세 설명</h2>
+
+            <!-- 신청방법 카드 -->
+            <div class="method-card">
+                <h3>민생회복 소비쿠폰 신청방법</h3>
+                
+                <div class="application-info">
+                    <div class="info-row">
+                        <div class="info-label">신청주체</div>
+                        <div class="info-value">개인별 신청</div>
+                    </div>
+                    <div class="info-note">
+                        ※ 미성년자는 주민등록 세대주가 신청 수령, 주민등록표에 성인인 구성원이 있는 '미성년 세대주'는 직접 신청
+                    </div>
+                </div>
+
+                <div class="application-info">
+                    <div class="info-row">
+                        <div class="info-label">신청지역</div>
+                        <div class="info-value">기준일(25.6.18.) 당시 주민등록상 주소지 관할 지자체(특·광역시, 시·군·구)</div>
+                    </div>
+                </div>
+
+                <div class="application-period">
+                    <div class="info-row">
+                        <div class="info-label">신청·지급 기간</div>
+                        <div class="period-details">
+                            <div class="period-item">
+                                <span class="period-label">1차</span>
+                                <span class="period-date">'25.7.21.(월) ~ '25.9.12.(금)까지 신청·지급</span>
+                            </div>
+                            <div class="period-item">
+                                <span class="period-label">2차</span>
+                                <span class="period-date">'25.9.22.(월) ~ '25.10.31.(금)까지 신청·지급</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-info">
+                    <div class="info-row">
+                        <div class="info-label">지급수단</div>
+                        <div class="info-value">지역사랑상품권(카드·모바일·지류형), 신용·체크카드, 선불카드 중 선택</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 신청지급방식 카드 -->
+            <div class="method-card">
+                <h3>신청 지급방식</h3>
+                
+                <div class="method-tabs">
+                    <div class="method-tab online-tab">
+                        <h4>💻 온라인에서 신청하고 싶다면?</h4>
+                        <div class="time-info">'25.7.21.(월) 9:00 ~ '25.9.12.(금) 18:00, 기간 중 24시간 가능</div>
+                        
+                        <div class="method-options">
+                            <div class="option-row">
+                                <div class="option-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <div class="option-content">
+                                    <span class="option-name">지역사랑상품권(모바일 카드형)</span>
+                                    <span class="option-desc">지역사랑상품권 상품권 앱</span>
+                                </div>
+                            </div>
+                            <div class="option-row">
+                                <div class="option-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <div class="option-content">
+                                    <span class="option-name">신용·체크카드</span>
+                                    <span class="option-desc">카드사 홈페이지·앱·콜센터·ARS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="method-tab offline-tab">
+                        <h4>🏢 오프라인에서 신청하고 싶다면?</h4>
+                        <div class="time-info">'25.7.21.(월) 9:00 ~ '25.9.12.(금) 18:00, 주말 제외</div>
+                        
+                        <div class="method-options">
+                            <div class="option-row">
+                                <div class="option-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <div class="option-content">
+                                    <span class="option-name">지역사랑상품권(지류형 일부 카드형), 선불카드</span>
+                                    <span class="option-desc">주소지 관할 읍면동 주민센터</span>
+                                </div>
+                            </div>
+                            <div class="option-row">
+                                <div class="option-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <div class="option-content">
+                                    <span class="option-name">신용·체크카드</span>
+                                    <span class="option-desc">카드사 제휴은행 영업점(~16:00)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="method-tab special-tab">
+                        <h4>♿ 찾아가는 신청 서비스</h4>
+                        <div class="time-info">자치체별 추후 안내</div>
+                        <div class="special-info">
+                            고령자·장애인 등 거동이 불편한 주민들을 '찾아가는 신청' 요청(유선) 시 자치체에서 방문 접수
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 사용처 안내 -->
+            <div class="usage-guide-card">
+                <h3>한눈에 보는 민생회복 소비쿠폰 신청·지급 절차</h3>
+                
+                <div class="usage-flow">
+                    <div class="flow-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>일일 발송</h4>
+                            <div class="step-platforms">
+                                <div class="platform-item">
+                                    <img src="public/gov.png" alt="행정안전부" style="width: 24px; height: 24px; border-radius: 50%;">
+                                    <span>행정안전부</span>
+                                </div>
+                                <div class="platform-badges">
+                                    <span class="platform-badge naver">N</span>
+                                    <span class="platform-badge kakao">TALK</span>
+                                    <span class="platform-badge telegram">🔵</span>
+                                </div>
+                            </div>
+                            <div class="step-action">지급대상여부 공개 안내</div>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>지원금 조회·지급</h4>
+                            <div class="step-platforms">
+                                <div class="platform-item">
+                                    <img src="public/gov.png" alt="행정안전부" style="width: 24px; height: 24px; border-radius: 50%;">
+                                    <span>행정안전부</span>
+                                </div>
+                                <div class="platform-section">
+                                    <div class="platform-title">온라인</div>
+                                    <div class="platform-desc">(카드사 등 홈페이지, 앱, 콜센터, ARS)</div>
+                                    <div class="platform-action">지원금 조회, 지급신청</div>
+                                    <div class="platform-result">카드, 지역사랑상품권 충전</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>오프라인</h4>
+                            <div class="step-platforms">
+                                <div class="platform-item">
+                                    <img src="public/gov.png" alt="행정안전부" style="width: 24px; height: 24px; border-radius: 50%;">
+                                    <span>행정안전부</span>
+                                </div>
+                                <div class="platform-section">
+                                    <div class="platform-title">오프라인</div>
+                                    <div class="platform-desc">(제휴은행 영업점, 읍면동 주민센터)</div>
+                                    <div class="platform-action">지원금 조회, 지급신청</div>
+                                    <div class="platform-result">선불카드, 지역사랑상품권(지류형 일부 카드형) 지급</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 사용처 구분 -->
+            <div class="usage-places-card">
+                <h3>민생회복 소비쿠폰 사용처</h3>
+                
+                <div class="usage-section">
+                    <div class="usage-period">
+                        <h4>🔵 사용 기간</h4>
+                        <div class="period-info">1~2차분 모두 '25.11.30.(일)까지 사용</div>
+                        <div class="period-note">※ 사용하지 않고 남은 금액은 환불되지 않고 자동 소멸</div>
+                    </div>
+
+                    <div class="usage-location">
+                        <h4>📍 사용지역</h4>
+                        <div class="location-info">신청자 본인의 주소지</div>
+                        <div class="location-details">
+                            <div class="location-item">- 주소지가 '특별시·광역시' 지역인 경우 → 특별시·광역시</div>
+                            <div class="location-item">- 주소지가 '도' 지역인 경우 → 세부 주소지에 해당하는 시·군</div>
+                            <div class="location-note">※ 사용기간 중 이사(전입신고 완료)한 경우 사용지역 변경가능(신용·체크카드 한정)</div>
+                        </div>
+                    </div>
+
+                    <div class="usage-stores">
+                        <h4>🏪 사용처</h4>
+                        <div class="store-info">
+                            <div class="store-type">
+                                <span class="store-icon">💳</span>
+                                <span class="store-name">지역사랑상품권: 지역사랑상품권 가맹점(지자체별 사용처 상이)</span>
+                            </div>
+                            <div class="store-note">※ 지역사랑상품권 가맹점은 지역사랑상품권 앱, 지자체 홈페이지에서 확인 가능</div>
+                            <div class="store-type">
+                                <span class="store-icon">💳</span>
+                                <span class="store-name">신용·체크카드·선불카드: 연 매출액 30억원 이하 매장</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="usage-classification">
+                    <div class="classification-row">
+                        <div class="classification-allowed">
+                            <h4>⭕ 사용가능 업종</h4>
+                            <div class="business-grid">
+                                <div class="business-item">
+                                    <span class="business-icon">🛒</span>
+                                    <span>전통시장, 동네마트</span>
+                                </div>
+                                <div class="business-item">
+                                    <span class="business-icon">🍽️</span>
+                                    <span>식당</span>
+                                </div>
+                                <div class="business-item">
+                                    <span class="business-icon">🏥</span>
+                                    <span>의료원</span>
+                                </div>
+                                <div class="business-item">
+                                    <span class="business-icon">💊</span>
+                                    <span>미용실</span>
+                                </div>
+                                <div class="business-item">
+                                    <span class="business-icon">💄</span>
+                                    <span>안경점</span>
+                                </div>
+                                <div class="business-item">
+                                    <span class="business-icon">🚌</span>
+                                    <span>교습소·학원</span>
+                                </div>
+                                <div class="business-item">
+                                    <span class="business-icon">🏛️</span>
+                                    <span>약국·의원</span>
+                                </div>
+                                <div class="business-item">
+                                    <span class="business-icon">🏪</span>
+                                    <span>프랜차이즈 가맹점<br>(편의점, 빵집, 카페, 치킨집 등)</span>
+                                </div>
+                            </div>
+                            <div class="usage-note">
+                                * 하나로마트의 경우, 유사업종이 있는 면 지역 하나로마트에서만 사용 가능합니다.
+                            </div>
+                        </div>
+
+                        <div class="classification-forbidden">
+                            <h4>❌ 사용불가 업종</h4>
+                            <div class="forbidden-grid">
+                                <div class="forbidden-item">⚠️ 대형마트, 기업형 슈퍼마켓(SSM)</div>
+                                <div class="forbidden-item">⚠️ 백화점</div>
+                                <div class="forbidden-item">⚠️ 면세점</div>
+                                <div class="forbidden-item">⚠️ 대형 외국계 매장(H&M, 에이치, 이케아 등)</div>
+                                <div class="forbidden-item">⚠️ 대형전자제품판매점(하이마xx, 전자xx 등)</div>
+                                <div class="forbidden-item">⚠️ 프랜차이즈 직영점(편의점, 빵집, 카페, 치킨집 등)</div>
+                                <div class="forbidden-item">⚠️ 온라인전자상거래(쇼핑몰, 배달앱* 등)</div>
+                                <div class="forbidden-note">
+                                    * 배달앱으로 주문하더라도, 기업형 가맹 단말기를 사용하여 대면 결제(만나서 결제)하는 경우에는 사용 가능합니다.
+                                </div>
+                                <div class="forbidden-item">⚠️ 유흥·사행업종(유흥주점, 카지노, 복권 등)</div>
+                                <div class="forbidden-item">⚠️ 학원성 업종(상품권 판매점, 귀금속 판매점 등)</div>
+                                <div class="forbidden-item">⚠️ 조세·공공요금, 교통·통신요금 자동이체 등</div>
+                                <div class="forbidden-item">⚠️ 보험업(생명보험, 손해보험, 국민연금, 건강보험 등)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="special-notice">
+                    <div class="notice-content">
+                        <div class="notice-highlight">
+                            <h4>민생회복 소비쿠폰 스티커를 확인하세요!</h4>
+                        </div>
+                        <div class="notice-center">
+                            <div class="sticker-notice">
+                                <span class="sticker-text">회복과 성장의 마중물</span>
+                                <div class="sticker-logo">
+                                    <span class="logo-circle">민생회복<br>소비쿠폰</span>
+                                    <span class="logo-subtitle">함께 기운 내요!</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA 버튼 -->
+        <div class="cta-section">
+            <a href="https://coupon.go.kr" target="_blank" class="main-cta-btn">
+                <i class="fas fa-external-link-alt"></i>
+                민생회복 소비쿠폰 신청하기
+            </a>
+            
+            <!-- 자세히 보기 버튼 -->
+            <a href="https://www.mois.go.kr/frt/sub/a06/b07/livelihoodCoupon/screen.do" target="_blank" class="detail-info-btn">
+                <i class="fas fa-info-circle"></i>
+                행정안전부 공식 상세 정보 보기
+            </a>
+
+            <!-- 카드사별 신청 링크 -->
+            <div class="card-company-links">
+                <h4>카드사별 신청하기</h4>
+                <div class="company-grid">
+                    <a href="https://card.kbcard.com/CRD/DVIEW/HCAMCXPRICAC0002?mainCC=a&cooperId=EMCKBCARD" target="_blank" class="company-link">
+                        <div class="company-logo kb">KB</div>
+                        <span class="company-name">KB국민카드 - 신청하기</span>
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    
+                    <a href="https://www.shinhancard.com/pconts/html/benefit/MOBCXHBE005/1207756_4560.html" target="_blank" class="company-link">
+                        <div class="company-logo shinhan">신한</div>
+                        <span class="company-name">신한카드 - 신청하기</span>
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    
+                    <a href="https://www.samsung1.co.kr/main/personal/card/cardinfo/PGHPPICard3001.cmd" target="_blank" class="company-link">
+                        <div class="company-logo samsung">삼성</div>
+                        <span class="company-name">삼성카드 - 신청하기</span>
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    
+                    <a href="https://www.hyundaicard.com/cpc/ma/CPCMA0101_01.hc" target="_blank" class="company-link">
+                        <div class="company-logo hyundai">현대</div>
+                        <span class="company-name">현대카드 - 신청하기</span>
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    
+                    <a href="https://www.lottecard.co.kr/app/LPWACMA_L004.lc" target="_blank" class="company-link">
+                        <div class="company-logo lotte">롯데</div>
+                        <span class="company-name">롯데카드 - 신청하기</span>
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    
+                    <a href="https://www.bccard.com/app/card/apply/menu/CPAPP025M01.jsp" target="_blank" class="company-link">
+                        <div class="company-logo bc">BC</div>
+                        <span class="company-name">BC카드 - 신청하기</span>
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    
+                    <a href="https://www.citibank.co.kr/SSO?WORK_TYPE=0" target="_blank" class="company-link">
+                        <div class="company-logo citi">CITI</div>
+                        <span class="company-name">씨티카드 - 신청하기</span>
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    
+                    <a href="https://card.wooricard.com/dcpc/yak1/main.do" target="_blank" class="company-link">
+                        <div class="company-logo woori">우리</div>
+                        <span class="company-name">우리카드 - 신청하기</span>
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    
+                    <a href="https://card.hanacard.co.kr/AXDCS/DCAPP0801_L3.web?_fwslinkid=TmRJSXlLajA0VkQ" target="_blank" class="company-link">
+                        <div class="company-logo hana">하나</div>
+                        <span class="company-name">하나카드 - 신청하기</span>
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    
+                    <a href="https://www.shcard.co.kr/" target="_blank" class="company-link">
+                        <div class="company-logo suhyup">수협</div>
+                        <span class="company-name">수협카드 - 신청하기</span>
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+                
+                <div class="card-note">
+                    <p><i class="fas fa-info-circle"></i> 각 카드사별로 신청 방법과 절차가 다를 수 있습니다.</p>
+                    <p><i class="fas fa-clock"></i> 신청 전 본인의 주거래 카드사 확인을 권장합니다.</p>
+                </div>
+            </div>
+
+            <button class="secondary-cta-btn" onclick="window.location.href='index.html'">
+                홈으로 돌아가기
+            </button>
+        </div>
+
+        <!-- 제공서비스 안내 -->
+        <section class="service-info">
+            <div class="service-header">
+                <h3>지원금 24 | 정부 지원금, 정책 자금, 정부 대출 관련 정보 제공 서비스</h3>
+            </div>
+            <div class="service-description">
+                <p>정부지원금 정보를 쉽고 빠르게 전달하는 서비스입니다. 본 사이트에서 제공하는 정보는 참고용이며, 정확한 내용은 해당 기관에서 확인하시기 바랍니다. 해당 사이트에서 제공되는 정보는 신뢰할 만한 자료 및 정보로부터 수집되었지만, 그 정확성이나 완전성을 보장할 수 없으며 사전의 경고없이 변경될 수 있습니다. 그로 인하여 데이터 오차나 부정확성 발견시 그 결과에 대한 책임을 수 있습니다.</p>
+            </div>
+            <div class="service-contact">
+                <p>아드시롬즈나 | 대표: 김지수 | 사업자 등록 번호: 379-43-01260 | 통신판매업신고번호 경기도 145-5, 3층 301-42호 (고양동 동일로타시아)</p>
+                <p>info@loworld.co.kr | 02-151-6384</p>
+            </div>
+            <div class="service-links">
+                <p>오스틸 서비스 제공: 주식회사 로월드 (https://loworldfoundation.org | https://loworld.co.kr)</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- 하단 네비게이션 -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>홈</span>
+        </a>
+        <a href="policy.html" class="nav-item">
+            <i class="fas fa-search"></i>
+            <span>맞춤 정책</span>
+        </a>
+        <a href="feed.html" class="nav-item">
+            <i class="fas fa-newspaper"></i>
+            <span>머니 피드</span>
+        </a>
+        <button class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>내 정보</span>
+        </button>
+        <button class="nav-item">
+            <i class="fas fa-cog"></i>
+            <span>설정</span>
+        </button>
+    </nav>
+
+    <!-- 이미지 확대 모달 -->
+    <div class="image-modal" id="imageModal">
+        <div class="image-modal-overlay" onclick="closeImageModal()"></div>
+        <div class="image-modal-content">
+            <button class="image-modal-close" onclick="closeImageModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="modalImage" src="" alt="">
+            <div class="image-modal-caption" id="modalCaption"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // 이미지 모달 관련 함수
+        function openImageModal(imageSrc, caption) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            
+            modalImage.src = imageSrc;
+            modalImage.alt = caption;
+            modalCaption.textContent = caption;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ESC 키로 모달 닫기
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+
+        // 전역으로 노출
+        window.openImageModal = openImageModal;
+        window.closeImageModal = closeImageModal;
+    </script>
+</body>
+</html> 

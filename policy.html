@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지원금 - 지원금24</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .policy-header {
+            background: white;
+            padding: 16px 20px;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .policy-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        
+        .policy-tabs {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .policy-tab {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .policy-tab.active {
+            background: #333;
+            color: white;
+        }
+        
+        .policy-tab:not(.active) {
+            background: #f5f5f5;
+            color: #666;
+        }
+        
+        .policy-list {
+            padding: 20px;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .policy-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .policy-card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .policy-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        
+        .policy-logo-img {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+        }
+        
+        .policy-info {
+            flex: 1;
+        }
+        
+        .policy-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .policy-badge {
+            background: #E3F2FD;
+            color: #1976D2;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        .policy-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+        
+        .policy-agency {
+            font-weight: 500;
+        }
+        
+        .policy-deadline {
+            color: #666;
+        }
+        
+        .policy-apply-btn {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+        
+        .policy-apply-btn:hover {
+            background: #1976D2;
+            transform: translateY(-1px);
+        }
+        
+        .consultation-section {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .consultation-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 32px;
+            color: white;
+        }
+        
+        .consultation-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .consultation-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .consultation-btn {
+            background: #FFC107;
+            color: #333;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 24px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 0 auto;
+            transition: all 0.2s ease;
+        }
+        
+        .consultation-btn:hover {
+            background: #FFB300;
+            transform: translateY(-2px);
+        }
+        
+        .floating-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .floating-banner-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .floating-banner-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 4px;
+        }
+        
+        .main-content {
+            margin-top: 48px;
+        }
+        
+        .search-menu-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: auto;
+        }
+        
+        .search-btn, .menu-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 상단 알림 배너 -->
+    <div class="floating-banner" id="topBanner">
+        <div class="floating-banner-content">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>새로운 신규 지원금 할인이 있어요!</span>
+        </div>
+        <button class="floating-banner-close" onclick="closeBanner()">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- 메인 콘텐츠 -->
+    <div class="main-content">
+        <!-- 정책 헤더 -->
+        <header class="policy-header">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <h1 class="policy-title">지원금</h1>
+                <div class="search-menu-area">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="menu-btn" id="menuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="policy-tabs">
+                <button class="policy-tab active">지원금</button>
+                <button class="policy-tab">환급금</button>
+                <button class="policy-tab">대출 정보</button>
+            </div>
+        </header>
+
+        <!-- 정책 목록 -->
+        <main class="policy-list">
+            <!-- 민생회복지원금 -->
+            <div class="policy-card">
+                <div class="policy-card-header">
+                    <div class="policy-logo-img">
+                        <img src="public/gov.png" alt="행정안전부" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                    </div>
+                    <div class="policy-info">
+                        <h3 class="policy-name">민생회복지원금</h3>
+                        <span class="policy-badge">지원금</span>
+                    </div>
+                </div>
+                <div class="policy-meta">
+                    <span class="policy-agency">기관: 행정안전부</span>
+                    <span class="policy-deadline">신청마감: 25.10.30(목)</span>
+                </div>
+                <a href="detail.html" class="policy-apply-btn">신청하기 →</a>
+            </div>
+
+            <!-- 근로장려금 -->
+            <div class="policy-card">
+                <div class="policy-card-header">
+                    <div class="policy-logo-img">
+                        <img src="public/nts.png" alt="국세청" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                    </div>
+                    <div class="policy-info">
+                        <h3 class="policy-name">근로장려금</h3>
+                        <span class="policy-badge">지원금</span>
+                    </div>
+                </div>
+                <div class="policy-meta">
+                    <span class="policy-agency">기관: 국세청</span>
+                    <span class="policy-deadline">신청마감: 25.09.11(목)</span>
+                </div>
+                <a href="detail-geunro.html" class="policy-apply-btn">신청하기 →</a>
+            </div>
+
+            <!-- 청년도약계좌 -->
+            <div class="policy-card">
+                <div class="policy-card-header">
+                    <div class="policy-logo" style="background: #673AB7;">
+                        <i class="fas fa-piggy-bank"></i>
+                    </div>
+                    <div class="policy-info">
+                        <h3 class="policy-name">청년도약계좌</h3>
+                        <span class="policy-badge">지원금</span>
+                    </div>
+                </div>
+                <div class="policy-meta">
+                    <span class="policy-agency">기관: 기획재정부</span>
+                    <span class="policy-deadline">신청마감: 25.12.31(화)</span>
+                </div>
+                <a href="#" class="policy-apply-btn">신청하기 →</a>
+            </div>
+
+            <!-- 국민내일배움카드 -->
+            <div class="policy-card">
+                <div class="policy-card-header">
+                    <div class="policy-logo" style="background: #FF9800;">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="policy-info">
+                        <h3 class="policy-name">국민내일배움카드</h3>
+                        <span class="policy-badge">지원금</span>
+                    </div>
+                </div>
+                <div class="policy-meta">
+                    <span class="policy-agency">기관: 고용노동부</span>
+                    <span class="policy-deadline">신청마감: 상시모집</span>
+                </div>
+                <a href="#" class="policy-apply-btn">신청하기 →</a>
+            </div>
+
+            <!-- 청년희망적금 -->
+            <div class="policy-card">
+                <div class="policy-card-header">
+                    <div class="policy-logo" style="background: #E91E63;">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="policy-info">
+                        <h3 class="policy-name">청년희망적금</h3>
+                        <span class="policy-badge">지원금</span>
+                    </div>
+                </div>
+                <div class="policy-meta">
+                    <span class="policy-agency">기관: 기획재정부</span>
+                    <span class="policy-deadline">신청마감: 25.12.31(화)</span>
+                </div>
+                <a href="#" class="policy-apply-btn">신청하기 →</a>
+            </div>
+
+            <!-- 에너지바우처 -->
+            <div class="policy-card">
+                <div class="policy-card-header">
+                    <div class="policy-logo" style="background: #607D8B;">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="policy-info">
+                        <h3 class="policy-name">에너지바우처</h3>
+                        <span class="policy-badge">지원금</span>
+                    </div>
+                </div>
+                <div class="policy-meta">
+                    <span class="policy-agency">기관: 산업통상자원부</span>
+                    <span class="policy-deadline">신청마감: 25.12.15(일)</span>
+                </div>
+                <a href="#" class="policy-apply-btn">신청하기 →</a>
+            </div>
+
+            <!-- 상담 섹션 -->
+            <section class="consultation-section">
+                <div class="consultation-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <h3 class="consultation-title">빠른 정책 자금 & 지원금</h3>
+                <p class="consultation-desc">정보를 얻고 싶다면?</p>
+                <button class="consultation-btn">
+                    <i class="fab fa-comment"></i>
+                    카톡 친구 추가하고 알림 받기
+                </button>
+            </section>
+        </main>
+    </div>
+
+    <!-- 하단 네비게이션 -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>홈</span>
+        </a>
+        <button class="nav-item active">
+            <i class="fas fa-search"></i>
+            <span>맞춤 정책</span>
+        </button>
+        <a href="feed.html" class="nav-item">
+            <i class="fas fa-newspaper"></i>
+            <span>머니 피드</span>
+        </a>
+        <button class="nav-item">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>로그인</span>
+        </button>
+        <button class="nav-item">
+            <i class="fas fa-ellipsis-h"></i>
+            <span>더보기</span>
+        </button>
+    </nav>
+
+    <!-- 사이드 메뉴 -->
+    <div class="side-menu" id="sideMenu">
+        <div class="menu-overlay" id="menuOverlay"></div>
+        <div class="menu-content">
+            <div class="menu-header">
+                <h3>메뉴</h3>
+                <button class="close-btn" id="closeBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="menu-list">
+                <li><a href="index.html"><i class="fas fa-home"></i> 홈</a></li>
+                <li><a href="policy.html"><i class="fas fa-money-bill-wave"></i> 지원금</a></li>
+                <li><a href="#"><i class="fas fa-undo-alt"></i> 환급금</a></li>
+                <li><a href="#"><i class="fas fa-hand-holding-usd"></i> 대출 정보</a></li>
+                <li><a href="#"><i class="fas fa-calculator"></i> 계산기</a></li>
+                <li><a href="#"><i class="fas fa-newspaper"></i> 머니 피드</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> 마이페이지</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> 설정</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // 배너 닫기 기능
+        function closeBanner() {
+            const banner = document.getElementById('topBanner');
+            banner.style.display = 'none';
+            document.querySelector('.main-content').style.marginTop = '0';
+        }
+
+        // 탭 전환 기능
+        document.querySelectorAll('.policy-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // 모든 탭에서 active 제거
+                document.querySelectorAll('.policy-tab').forEach(t => t.classList.remove('active'));
+                // 클릭된 탭에 active 추가
+                tab.classList.add('active');
+                
+                // 탭 클릭 애니메이션
+                tab.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    tab.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+
+        // 메뉴 기능
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('menuBtn');
+            const sideMenu = document.getElementById('sideMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+            const closeBtn = document.getElementById('closeBtn');
+            
+            if (menuBtn && sideMenu) {
+                menuBtn.addEventListener('click', () => {
+                    sideMenu.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+                
+                function closeSideMenu() {
+                    sideMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+                
+                if (closeBtn) closeBtn.addEventListener('click', closeSideMenu);
+                if (menuOverlay) menuOverlay.addEventListener('click', closeSideMenu);
+            }
+            
+            // 버튼 클릭 애니메이션
+            document.querySelectorAll('button, .policy-apply-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            });
+
+            // 검색 버튼 기능
+            document.querySelector('.search-btn').addEventListener('click', () => {
+                alert('검색 기능이 곧 업데이트됩니다! 🔍');
+            });
+
+            // 카톡 상담 버튼 기능
+            document.querySelector('.consultation-btn').addEventListener('click', () => {
+                alert('카카오톡 상담 서비스 준비 중입니다! 💬');
+            });
+        });
+    </script>
+</body>
+</html> 

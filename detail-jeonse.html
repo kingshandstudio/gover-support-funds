@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일반전세자금보증 - 지원금24</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .detail-header {
+            background: white;
+            padding: 16px 20px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        .detail-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 12px 20px;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #2196F3;
+            text-decoration: none;
+        }
+        
+        .support-detail {
+            background: white;
+            margin-bottom: 8px;
+        }
+        
+        .support-header {
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .support-badge {
+            background: #FFEBEE;
+            color: #C62828;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        
+        .support-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        
+        .support-agency {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .agency-logo {
+            width: 24px;
+            height: 24px;
+            background: #DC3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .support-meta {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .support-actions {
+            padding: 20px;
+            display: flex;
+            gap: 12px;
+        }
+        
+        .primary-btn {
+            flex: 1;
+            background: #DC3545;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .secondary-btn {
+            background: white;
+            color: #666;
+            border: 1px solid #e0e0e0;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .benefit-section {
+            background: linear-gradient(135deg, #FFEBEE, #FFCDD2);
+            margin: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .benefit-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: #C62828;
+            margin-bottom: 8px;
+        }
+        
+        .benefit-description {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .info-tabs {
+            background: white;
+            margin-bottom: 8px;
+        }
+        
+        .tab-headers {
+            display: flex;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .tab-header {
+            flex: 1;
+            padding: 16px;
+            text-align: center;
+            background: none;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab-header.active {
+            color: #C62828;
+            border-bottom-color: #C62828;
+        }
+        
+        .tab-content-area {
+            padding: 20px;
+        }
+        
+        .info-list {
+            list-style: none;
+        }
+        
+        .info-item {
+            display: flex;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .info-label {
+            font-weight: 500;
+            color: #333;
+            min-width: 80px;
+            margin-right: 16px;
+        }
+        
+        .info-value {
+            color: #666;
+            flex: 1;
+        }
+        
+        .step-list {
+            counter-reset: step-counter;
+        }
+        
+        .step-item {
+            counter-increment: step-counter;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: #DC3545;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .step-number::before {
+            content: counter(step-counter);
+        }
+        
+        .step-content h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .step-content p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .highlight-box {
+            background: #E1F5FE;
+            border: 1px solid #81D4FA;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .highlight-box h4 {
+            color: #0277BD;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .highlight-box p {
+            color: #0277BD;
+            font-size: 14px;
+        }
+
+        .loan-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+
+        .loan-table th,
+        .loan-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+
+        .loan-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .loan-table td {
+            color: #666;
+        }
+
+        .rate {
+            color: #DC3545;
+            font-weight: 600;
+        }
+
+        .warning-box {
+            background: #FFF3E0;
+            border: 1px solid #FFB74D;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .warning-box h4 {
+            color: #E65100;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .warning-box p {
+            color: #E65100;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 상세 페이지 헤더 -->
+    <header class="detail-header">
+        <button class="back-btn" onclick="history.back()">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <h1 class="detail-title">일반전세자금보증</h1>
+        <div style="margin-left: auto;">
+            <button class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="menu-btn" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 브레드크럼 -->
+    <div class="breadcrumb">
+        <a href="index.html">홈</a> - <a href="#" onclick="history.back()">대출 정보</a> - 일반전세자금보증
+    </div>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main-content">
+        <!-- 지원금 정보 -->
+        <section class="support-detail">
+            <div class="support-header">
+                <span class="support-badge">대출 정보</span>
+                <h2 class="support-name">일반전세자금보증</h2>
+                <div class="support-agency">
+                    <div class="agency-logo">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <span>한국주택금융공사</span>
+                </div>
+                <div class="support-meta">
+                    <p>현재 15명이 보고 있어요</p>
+                </div>
+            </div>
+            
+            <div class="support-actions">
+                <a href="https://www.hf.go.kr" class="primary-btn" target="_blank">신청하기 <i class="fas fa-external-link-alt"></i></a>
+                <button class="secondary-btn">주금공 전화 <i class="fas fa-phone"></i></button>
+            </div>
+        </section>
+
+        <!-- 혜택 요약 -->
+        <section class="benefit-section">
+            <div class="benefit-amount">최대 5억원</div>
+            <div class="benefit-description">전세보증금의 90%까지 대출받을 수 있어요</div>
+        </section>
+
+        <!-- 상세 정보 탭 -->
+        <section class="info-tabs">
+            <div class="tab-headers">
+                <button class="tab-header active" data-target="overview">상품개요</button>
+                <button class="tab-header" data-target="eligibility">대출대상</button>
+                <button class="tab-header" data-target="method">대출조건</button>
+                <button class="tab-header" data-target="process">신청절차</button>
+            </div>
+            
+            <div class="tab-content-area">
+                <div class="tab-content active" id="overview">
+                    <ul class="info-list">
+                        <li class="info-item">
+                            <span class="info-label">취급기관</span>
+                            <span class="info-value">한국주택금융공사</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">대출기간</span>
+                            <span class="info-value">2년 (갱신 가능)</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">대출한도</span>
+                            <span class="info-value">최대 5억원 (전세보증금의 90%)</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">대출금리</span>
+                            <span class="info-value">연 2.1% ~ 4.5%</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">상환방법</span>
+                            <span class="info-value">만기일시상환</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-home"></i> 일반전세자금보증이란?</h4>
+                        <p>무주택 세대주가 전세 계약을 체결하거나 갱신할 때, 전세보증금을 조달할 수 있도록 한국주택금융공사가 보증을 제공하는 대출상품입니다. 시중은행보다 낮은 금리로 전세자금을 마련할 수 있습니다.</p>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="eligibility">
+                    <h4 style="margin-bottom: 16px; font-size: 16px; font-weight: 600;">대출 대상</h4>
+                    <ul style="list-style: disc; padding-left: 20px; color: #666; line-height: 1.6; margin-bottom: 16px;">
+                        <li>세대주를 포함하여 세대원 전원이 무주택인 세대주</li>
+                        <li>부부합산 연소득 6천만원 이하 (신혼부부 7천만원)</li>
+                        <li>순자산가액 4억 6천만원 이하</li>
+                        <li>전세보증금 6억원 이하의 주택</li>
+                    </ul>
+                    
+                    <div class="highlight-box">
+                        <h4>우대조건</h4>
+                        <p>• 신혼부부: 금리 0.2%p 우대<br>
+                        • 다자녀가구(2명 이상): 금리 0.3%p 우대<br>
+                        • 1순위 청약통장 6개월 이상 가입: 금리 0.1%p 우대<br>
+                        • 생애최초 주택구입자: 금리 0.2%p 우대</p>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <h4>제외대상</h4>
+                        <p>• 과거 5년 이내 주택 소유자<br>
+                        • 과거 전세자금대출 연체이력자<br>
+                        • 신용등급 6등급 이하</p>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="method">
+                    <h4 style="margin-bottom: 16px; font-size: 16px; font-weight: 600;">대출 조건</h4>
+                    
+                    <table class="loan-table">
+                        <thead>
+                            <tr>
+                                <th>구분</th>
+                                <th>일반</th>
+                                <th>신혼부부</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>대출한도</td>
+                                <td>최대 3억원</td>
+                                <td>최대 4억원</td>
+                            </tr>
+                            <tr>
+                                <td>소득기준</td>
+                                <td>6천만원 이하</td>
+                                <td>7천만원 이하</td>
+                            </tr>
+                            <tr>
+                                <td class="rate">기본금리</td>
+                                <td class="rate">연 2.1%~4.5%</td>
+                                <td class="rate">연 1.9%~4.3%</td>
+                            </tr>
+                            <tr>
+                                <td>대출기간</td>
+                                <td>2년 (갱신가능)</td>
+                                <td>2년 (갱신가능)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="highlight-box">
+                        <h4>금리 결정요소</h4>
+                        <p>대출금리는 한국주택금융공사 기준금리 + 가산금리로 결정되며, 신용도, 소득수준, 우대조건 등에 따라 차등 적용됩니다.</p>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="process">
+                    <h4 style="margin-bottom: 16px; font-size: 16px; font-weight: 600;">신청 절차</h4>
+                    <div class="step-list">
+                        <div class="step-item">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h4>자격 확인</h4>
+                                <p>한국주택금융공사 홈페이지에서 대출자격과 예상금리를 미리 확인합니다.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-item">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h4>전세계약 체결</h4>
+                                <p>임대인과 전세계약을 체결하고 계약서를 준비합니다.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-item">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h4>대출 신청</h4>
+                                <p>온라인 또는 취급은행 방문을 통해 대출을 신청합니다.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-item">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h4>심사 및 승인</h4>
+                                <p>소득·신용 심사 완료 후 대출승인 시 전세보증금을 지급받습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 필요서류 안내 -->
+        <section class="info-tabs">
+            <div style="padding: 20px;">
+                <h3 style="margin-bottom: 16px; font-size: 18px; font-weight: 700;">
+                    <i class="fas fa-file-alt" style="color: #DC3545; margin-right: 8px;"></i>
+                    필요 서류
+                </h3>
+                <div style="background: #F3E5F5; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+                    <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #7B1FA2;">공통 서류</h4>
+                    <ul style="list-style: disc; padding-left: 20px; color: #7B1FA2; line-height: 1.8;">
+                        <li>신분증, 주민등록등본</li>
+                        <li>소득확인서류 (재직증명서, 소득금액증명원 등)</li>
+                        <li>전세계약서</li>
+                        <li>건물등기부등본, 주택공시가격확인원</li>
+                        <li>통장사본</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #E8F5E8; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+                    <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #2E7D32;">추가 서류 (해당시)</h4>
+                    <ul style="list-style: disc; padding-left: 20px; color: #2E7D32; line-height: 1.8;">
+                        <li>혼인관계증명서 (신혼부부)</li>
+                        <li>가족관계증명서 (다자녀가구)</li>
+                        <li>청약통장 가입확인서</li>
+                        <li>임신확인서 (해당시)</li>
+                    </ul>
+                </div>
+                
+                <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 12px;">문의처</h4>
+                <p style="color: #666; line-height: 1.5;">
+                    <strong>한국주택금융공사:</strong> 1688-8114<br>
+                    <strong>홈페이지:</strong> <a href="https://www.hf.go.kr" style="color: #2196F3;">www.hf.go.kr</a><br>
+                    <strong>취급은행:</strong> 국민, 신한, 하나, 우리, 농협 등 주요 시중은행
+                </p>
+            </div>
+        </section>
+
+        <!-- 하단 고정 버튼 -->
+        <div style="position: fixed; bottom: 80px; left: 0; right: 0; padding: 20px; background: white; border-top: 1px solid #e0e0e0;">
+            <a href="https://www.hf.go.kr" class="primary-btn" style="width: 100%; display: block; text-align: center;" target="_blank">주택금융공사에서 신청하기</a>
+            <button style="background: none; border: none; color: #666; margin-top: 8px; width: 100%; padding: 8px;">공유하기 <i class="fas fa-share-alt"></i></button>
+        </div>
+
+        <!-- 제공서비스 안내 -->
+        <section class="service-info">
+            <div class="service-header">
+                <h3>지원금 24 | 정부 지원금, 정책 자금, 정부 대출 관련 정보 제공 서비스</h3>
+            </div>
+            <div class="service-description">
+                <p>정부지원금 정보를 쉽고 빠르게 전달하는 서비스입니다. 본 사이트에서 제공하는 정보는 참고용이며, 정확한 내용은 해당 기관에서 확인하시기 바랍니다. 해당 사이트에서 제공되는 정보는 신뢰할 만한 자료 및 정보로부터 수집되었지만, 그 정확성이나 완전성을 보장할 수 없으며 사전의 경고없이 변경될 수 있습니다. 그로 인하여 데이터 오차나 부정확성 발견시 그 결과에 대한 책임을 수 있습니다.</p>
+            </div>
+            <div class="service-contact">
+                <p>아드시롬즈나 | 대표: 김지수 | 사업자 등록 번호: 379-43-01260 | 통신판매업신고번호 경기도 145-5, 3층 301-42호 (고양동 동일로타시아)</p>
+                <p>info@loworld.co.kr | 02-151-6384</p>
+            </div>
+            <div class="service-links">
+                <p>오스틸 서비스 제공: 주식회사 로월드 (https://loworldfoundation.org | https://loworld.co.kr)</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- 하단 네비게이션 -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>홈</span>
+        </a>
+        <button class="nav-item">
+            <i class="fas fa-search"></i>
+            <span>맞춤 정책</span>
+        </button>
+        <button class="nav-item">
+            <i class="fas fa-newspaper"></i>
+            <span>머니 피드</span>
+        </button>
+        <button class="nav-item">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>로그인</span>
+        </button>
+        <button class="nav-item">
+            <i class="fas fa-ellipsis-h"></i>
+            <span>더보기</span>
+        </button>
+    </nav>
+
+    <!-- 사이드 메뉴 -->
+    <div class="side-menu" id="sideMenu">
+        <div class="menu-overlay" id="menuOverlay"></div>
+        <div class="menu-content">
+            <div class="menu-header">
+                <h3>메뉴</h3>
+                <button class="close-btn" id="closeBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="menu-list">
+                <li><a href="index.html"><i class="fas fa-home"></i> 홈</a></li>
+                <li><a href="#"><i class="fas fa-money-bill-wave"></i> 지원금</a></li>
+                <li><a href="#"><i class="fas fa-undo-alt"></i> 환급금</a></li>
+                <li><a href="#"><i class="fas fa-hand-holding-usd"></i> 대출 정보</a></li>
+                <li><a href="#"><i class="fas fa-calculator"></i> 계산기</a></li>
+                <li><a href="#"><i class="fas fa-newspaper"></i> 머니 피드</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> 마이페이지</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> 설정</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // 탭 전환 기능
+        document.querySelectorAll('.tab-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const target = header.getAttribute('data-target');
+                
+                // 모든 탭 헤더에서 active 클래스 제거
+                document.querySelectorAll('.tab-header').forEach(h => h.classList.remove('active'));
+                header.classList.add('active');
+                
+                // 모든 탭 콘텐츠 숨기기
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                
+                // 해당 탭 콘텐츠 보이기
+                const targetContent = document.getElementById(target);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            });
+        });
+        
+        // 기본 스크립트 포함
+        document.addEventListener('DOMContentLoaded', () => {
+            // 메뉴 기능
+            const menuBtn = document.getElementById('menuBtn');
+            const sideMenu = document.getElementById('sideMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+            const closeBtn = document.getElementById('closeBtn');
+            
+            if (menuBtn && sideMenu) {
+                menuBtn.addEventListener('click', () => {
+                    sideMenu.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+                
+                function closeSideMenu() {
+                    sideMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+                
+                if (closeBtn) closeBtn.addEventListener('click', closeSideMenu);
+                if (menuOverlay) menuOverlay.addEventListener('click', closeSideMenu);
+            }
+            
+            // 버튼 클릭 애니메이션
+            document.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
