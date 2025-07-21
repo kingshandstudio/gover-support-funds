@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대출 정보 - 숨은지원금24</title>
+    <meta name="description" content="다양한 대출 정보를 한눈에! 주택담보대출, 전세자금대출, 신용대출, 정부지원대출 등 대출 상품 정보와 신청 방법 안내.">
+    <meta name="keywords" content="대출, 주택담보대출, 전세자금대출, 신용대출, 정부지원대출, 대출 신청">
+    <script src="common-head.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .loan-header {
+            background: white;
+            padding: 16px 20px;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .loan-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        
+        .loan-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        
+        .loan-tab {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        .loan-tab.active {
+            background: #333;
+            color: white;
+        }
+        
+        .loan-tab:not(.active) {
+            background: #f5f5f5;
+            color: #666;
+        }
+        
+        .loan-list {
+            padding: 20px;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .loan-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .loan-card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .loan-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        
+        .loan-info {
+            flex: 1;
+        }
+        
+        .loan-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .loan-agency {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .loan-amount {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2196F3;
+            margin-bottom: 8px;
+        }
+        
+        .loan-rate {
+            font-size: 12px;
+            color: #999;
+            background: #f8f9fa;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        
+        .loan-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        
+        .loan-eligibility {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .loan-eligibility h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .loan-eligibility ul {
+            margin: 0;
+            padding-left: 16px;
+        }
+        
+        .loan-eligibility li {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        
+        .loan-apply-btn {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+        
+        .loan-apply-btn:hover {
+            background: #1976D2;
+            transform: translateY(-1px);
+        }
+        
+        .floating-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .floating-banner-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .floating-banner-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 4px;
+        }
+        
+        .main-content {
+            margin-top: 48px;
+        }
+        
+        .search-menu-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: auto;
+        }
+        
+        .search-btn, .menu-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 상단 알림 배너 -->
+    <div class="floating-banner" id="topBanner" onclick="openSupportModal()">
+        <div class="floating-banner-content">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>새로운 신규 지원금 할인이 있어요!</span>
+        </div>
+        <button class="floating-banner-close" onclick="closeBanner()">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- 메인 콘텐츠 -->
+    <div class="main-content">
+        <!-- 대출 헤더 -->
+        <header class="loan-header">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <h1 class="loan-title">대출 정보</h1>
+                <div class="search-menu-area">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="menu-btn" id="menuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="loan-tabs">
+                <button class="loan-tab active" onclick="switchLoanTab('housing')">주택담보대출</button>
+                <button class="loan-tab" onclick="switchLoanTab('jeonse')">전세자금대출</button>
+                <button class="loan-tab" onclick="switchLoanTab('credit')">신용대출</button>
+                <button class="loan-tab" onclick="switchLoanTab('government')">정부지원대출</button>
+            </div>
+        </header>
+
+        <!-- 대출 목록 -->
+        <main class="loan-list">
+            <!-- 주택담보대출 -->
+            <div class="loan-card">
+                <div class="loan-card-header">
+                    <div class="loan-logo" style="background: #4CAF50;">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="loan-info">
+                        <div class="loan-name">주택담보대출</div>
+                        <div class="loan-agency">주택도시보증공사</div>
+                        <div class="loan-amount">최대 3억원</div>
+                        <div class="loan-rate">금리: 연 3.5~4.5%</div>
+                    </div>
+                </div>
+                <div class="loan-description">
+                    주택을 담보로 하는 대출로, 낮은 금리와 긴 상환기간이 특징입니다. 주택 구입, 개량, 전세자금 등에 활용할 수 있습니다.
+                </div>
+                <div class="loan-eligibility">
+                    <h4>📋 대출 조건</h4>
+                    <ul>
+                        <li>주택 소유자 또는 구입 예정자</li>
+                        <li>소득 및 신용도 기준 충족</li>
+                        <li>담보가치의 70% 한도</li>
+                        <li>상환기간: 최대 30년</li>
+                    </ul>
+                </div>
+                <button class="loan-apply-btn" onclick="showToast('주택담보대출 신청 페이지로 이동합니다.')">
+                    신청하기
+                </button>
+            </div>
+
+            <!-- 전세자금대출 -->
+            <div class="loan-card">
+                <div class="loan-card-header">
+                    <div class="loan-logo" style="background: #FF9800;">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <div class="loan-info">
+                        <div class="loan-name">전세자금대출</div>
+                        <div class="loan-agency">주택도시보증공사</div>
+                        <div class="loan-amount">최대 1억원</div>
+                        <div class="loan-rate">금리: 연 4.0~5.0%</div>
+                    </div>
+                </div>
+                <div class="loan-description">
+                    전세 계약 시 필요한 자금을 대출받는 상품입니다. 전세보증금 지급을 위한 자금으로 활용할 수 있습니다.
+                </div>
+                <div class="loan-eligibility">
+                    <h4>📋 대출 조건</h4>
+                    <ul>
+                        <li>전세 계약 예정자</li>
+                        <li>소득 및 신용도 기준 충족</li>
+                        <li>전세보증금의 80% 한도</li>
+                        <li>상환기간: 최대 10년</li>
+                    </ul>
+                </div>
+                <button class="loan-apply-btn" onclick="showToast('전세자금대출 신청 페이지로 이동합니다.')">
+                    신청하기
+                </button>
+            </div>
+
+            <!-- 신용대출 -->
+            <div class="loan-card">
+                <div class="loan-card-header">
+                    <div class="loan-logo" style="background: #9C27B0;">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="loan-info">
+                        <div class="loan-name">신용대출</div>
+                        <div class="loan-agency">각 금융기관</div>
+                        <div class="loan-amount">최대 5천만원</div>
+                        <div class="loan-rate">금리: 연 5.0~15.0%</div>
+                    </div>
+                </div>
+                <div class="loan-description">
+                    담보 없이 신용도만으로 대출받는 상품입니다. 용도 제한이 없어 다양한 목적으로 활용할 수 있습니다.
+                </div>
+                <div class="loan-eligibility">
+                    <h4>📋 대출 조건</h4>
+                    <ul>
+                        <li>만 19세 이상의 개인</li>
+                        <li>안정적인 소득 증명</li>
+                        <li>신용도 기준 충족</li>
+                        <li>상환기간: 최대 7년</li>
+                    </ul>
+                </div>
+                <button class="loan-apply-btn" onclick="showToast('신용대출 신청 페이지로 이동합니다.')">
+                    신청하기
+                </button>
+            </div>
+
+            <!-- 정부지원대출 -->
+            <div class="loan-card">
+                <div class="loan-card-header">
+                    <div class="loan-logo" style="background: #2196F3;">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <div class="loan-info">
+                        <div class="loan-name">정부지원대출</div>
+                        <div class="loan-agency">정부/공공기관</div>
+                        <div class="loan-amount">최대 2억원</div>
+                        <div class="loan-rate">금리: 연 2.0~4.0%</div>
+                    </div>
+                </div>
+                <div class="loan-description">
+                    정부가 지원하는 저금리 대출 상품입니다. 청년, 신혼부부, 소상공인 등 특정 대상자에게 혜택을 제공합니다.
+                </div>
+                <div class="loan-eligibility">
+                    <h4>📋 지원 대상</h4>
+                    <ul>
+                        <li>청년 (만 19~34세)</li>
+                        <li>신혼부부 (혼인 7년 이내)</li>
+                        <li>소상공인</li>
+                        <li>저소득층</li>
+                    </ul>
+                </div>
+                <button class="loan-apply-btn" onclick="showToast('정부지원대출 신청 페이지로 이동합니다.')">
+                    신청하기
+                </button>
+            </div>
+
+            <!-- 소상공인 대출 -->
+            <div class="loan-card">
+                <div class="loan-card-header">
+                    <div class="loan-logo" style="background: #795548;">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div class="loan-info">
+                        <div class="loan-name">소상공인 대출</div>
+                        <div class="loan-agency">중소기업은행</div>
+                        <div class="loan-amount">최대 3억원</div>
+                        <div class="loan-rate">금리: 연 3.0~5.0%</div>
+                    </div>
+                </div>
+                <div class="loan-description">
+                    소상공인을 위한 특별 대출 상품입니다. 사업자금, 운영자금, 시설개선자금 등 다양한 용도로 활용 가능합니다.
+                </div>
+                <div class="loan-eligibility">
+                    <h4>📋 대출 조건</h4>
+                    <ul>
+                        <li>소상공인 등록자</li>
+                        <li>사업자등록 1년 이상</li>
+                        <li>매출 증빙서류</li>
+                        <li>상환기간: 최대 10년</li>
+                    </ul>
+                </div>
+                <button class="loan-apply-btn" onclick="showToast('소상공인 대출 신청 페이지로 이동합니다.')">
+                    신청하기
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- 민생회복지원금 모달 -->
+    <div class="modal-overlay" id="supportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>민생회복지원금</h2>
+                <button class="modal-close" onclick="closeSupportModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-logo">
+                    <img src="public/gov.png" alt="행정안전부" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+                </div>
+                <div class="modal-info">
+                    <div class="support-badge">지원금</div>
+                    <h3>민생회복지원금 신청</h3>
+                    <p class="support-agency">행정안전부 · 신청마감: 25.10.30(목)</p>
+                    <div class="support-amount">
+                        <span class="amount-text">최대 55만원</span>
+                        <span class="amount-desc">가구원 수와 소득에 따라 지원</span>
+                    </div>
+                    <div class="support-description">
+                        <h4>📋 지원 대상</h4>
+                        <ul>
+                            <li>기준 중위소득 75% 이하 가구</li>
+                            <li>건강보험료 기준으로 선정</li>
+                            <li>1인 가구 ~ 6인 이상 가구</li>
+                        </ul>
+                        <h4>💰 지원 내용</h4>
+                        <ul>
+                            <li>1인 가구: 25만원</li>
+                            <li>2인 가구: 40만원</li>
+                            <li>3인 가구: 50만원</li>
+                            <li>4인 이상: 55만원</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="detail.html" class="modal-apply-btn">
+                    <i class="fas fa-external-link-alt"></i>
+                    신청 바로가기
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 더보기 메뉴 모달 -->
+    <div class="more-menu-overlay" id="moreMenuOverlay" onclick="closeMoreMenu()"></div>
+    <div class="more-menu-modal" id="moreMenuModal">
+        <div class="more-menu-header">
+            <h2 class="elementor-heading-title elementor-size-default">원하시는 정보를 찾아보세요</h2>
+            <button class="close-btn" onclick="closeMoreMenu()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="more-menu-body">
+            <div class="menu-items-container">
+                <a class="menu-link-box" href="policy.html">
+                    <div class="menu-link-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#0067FF"><path d="M600-160q-134 0-227-93t-93-227q0-134 93-227t227-93q134 0 227 93t93 227q0 134-93 227t-227 93Zm-306-12q-113-14-183.5-103.5T40-480q0-115 70.5-204.5T294-788v58q-88 16-141 87.5T100-480q0 91 53 162.5T294-230v58Zm306-308Zm0 260q107 0 183.5-76.5T860-480q0-107-76.5-183.5T600-740q-107 0-183.5 76.5T340-480q0 107 76.5 183.5T600-220Z"></path></svg>
+                    </div>
+                    <div class="menu-link-text-content">
+                        <h3 class="menu-link-title">지원금 정보</h3>
+                        <span class="menu-link-subtitle">Gov. Fund</span>
+                    </div>
+                </a>
+                <a class="menu-link-box" href="loan.html">
+                    <div class="menu-link-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#0067FF"><path d="M212-241v-339h60v339h-60Zm242 0v-339h60v339h-60ZM80-640v-53l400-228 400 228v53H80Zm134-60h532L480-852 214-700ZM80-121v-60h500q2 14 3.5 28.5T591-121H80Zm608-291v-168h60v138l-60 30ZM800 0q-69-17-114.5-79.5T640-218v-102l160-80 160 80v102q0 76-45.5 138.5T800 0Zm-21-120 142-142-28-28-114 114-59-59-28 28 87 87ZM214-700h532-532Z"></path></svg>
+                    </div>
+                    <div class="menu-link-text-content">
+                        <h3 class="menu-link-title">대출 정보</h3>
+                        <span class="menu-link-subtitle">Capital</span>
+                    </div>
+                </a>
+                <a class="menu-link-box" href="refund.html">
+                    <div class="menu-link-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#0067FF"><path d="M480-80q-75 0-140.5-28T225-185q-49-49-77-114.5T120-440h60q0 125 87.5 212.5T480-140q125 0 212.5-87.5T780-440q0-125-85-212.5T485-740h-23l73 73-41 42-147-147 147-147 41 41-78 78h23q75 0 140.5 28T735-695q49 49 77 114.5T840-440q0 75-28 140.5T735-185q-49 49-114.5 77T480-80Z"></path></svg>
+                    </div>
+                    <div class="menu-link-text-content">
+                        <h3 class="menu-link-title">환급금 정보</h3>
+                        <span class="menu-link-subtitle">Refund</span>
+                    </div>
+                </a>
+                <a class="menu-link-box" href="feed.html">
+                    <div class="menu-link-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#0067FF"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h440l200 200v440q0 33-23.5 56.5T760-120H200Zm80-160h400v-80H280v80Zm0-160h400v-80H280v80Zm320-160h160L600-760v160Zm-320 0h200v-80H280v80Z"></path></svg>
+                    </div>
+                    <div class="menu-link-text-content">
+                        <h3 class="menu-link-title">머니 피드</h3>
+                        <span class="menu-link-subtitle">Money Feed</span>
+                    </div>
+                </a>
+            </div>
+            <div class="kakao-action-wrapper">
+                <a class="kakao-button" href="javascript:showToast('카카오톡 상담 기능은 준비 중입니다.')">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" height="16" viewBox="0 0 16 16" width="16"><path d="m8 2c3.866 0 7 2.44267 7 5.45667 0 3.01333-3.134 5.45603-7 5.45603-.38495.0002-.76952-.0243-1.15133-.0734l-2.93867 1.922c-.334.1767-.452.1574-.31467-.2753l.59467-2.452c-1.92-.9733-3.19-2.66-3.19-4.57733 0-3.01334 3.134-5.45667 7-5.45667z" fill="#000000"></path></svg>
+                    <span>카카오톡으로 문의하기</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 스팸 클릭 방지
+        let clickCount = 0;
+        const maxClickCount = 10;
+        const clickTimeout = 5000; // 5초
+
+        function preventSpamClick(element) {
+            clickCount++;
+            if (clickCount > maxClickCount) {
+                showToast('너무 빠른 클릭입니다. 잠시 후 다시 시도해주세요.');
+                return false;
+            }
+            
+            setTimeout(() => {
+                clickCount = Math.max(0, clickCount - 1);
+            }, clickTimeout);
+            
+            return true;
+        }
+
+        // 토스트 메시지 표시
+        function showToast(message) {
+            const existingToast = document.querySelector('.toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            
+            Object.assign(toast.style, {
+                position: 'fixed',
+                top: '20px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                background: '#333',
+                color: 'white',
+                padding: '12px 24px',
+                borderRadius: '20px',
+                fontSize: '14px',
+                zIndex: '9999',
+                opacity: '0',
+                transition: 'all 0.3s ease'
+            });
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateX(-50%) translateY(10px)';
+            }, 100);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(-50%) translateY(-10px)';
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // 지원금 모달 관련 함수들
+        function openSupportModal() {
+            if (!preventSpamClick()) return;
+            
+            const modal = document.getElementById('supportModal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeSupportModal() {
+            const modal = document.getElementById('supportModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // 더보기 메뉴 열기
+        function openMoreMenu() {
+            if (!preventSpamClick()) return;
+            
+            const overlay = document.getElementById('moreMenuOverlay');
+            const modal = document.getElementById('moreMenuModal');
+            if (overlay && modal) {
+                overlay.classList.add('active');
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // 더보기 메뉴 닫기
+        function closeMoreMenu() {
+            const overlay = document.getElementById('moreMenuOverlay');
+            const modal = document.getElementById('moreMenuModal');
+            if (overlay && modal) {
+                overlay.classList.remove('active');
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // 배너 닫기
+        function closeBanner() {
+            const banner = document.getElementById('topBanner');
+            if (banner) {
+                banner.style.display = 'none';
+                document.querySelector('.main-content').style.marginTop = '0';
+            }
+        }
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', () => {
+            // 햄버거 메뉴 버튼 기능
+            const menuBtn = document.getElementById('menuBtn');
+            if (menuBtn) {
+                menuBtn.addEventListener('click', () => {
+                    if (!preventSpamClick(menuBtn)) return;
+                    openMoreMenu();
+                });
+            }
+
+            // 검색 버튼 기능
+            document.querySelector('.search-btn').addEventListener('click', () => {
+                if (!preventSpamClick()) return;
+                showToast('검색 기능이 곧 업데이트됩니다! 🔍');
+            });
+
+            // 대출 탭 전환 함수
+            function switchLoanTab(tabType) {
+                if (!preventSpamClick()) return;
+                
+                const tabs = document.querySelectorAll('.loan-tab');
+                tabs.forEach(tab => tab.classList.remove('active'));
+                event.target.classList.add('active');
+                
+                // 탭별 내용 변경
+                switch(tabType) {
+                    case 'housing':
+                        showToast('주택담보대출 정보를 확인하세요.');
+                        break;
+                    case 'jeonse':
+                        showToast('전세자금대출 정보를 확인하세요.');
+                        break;
+                    case 'credit':
+                        showToast('신용대출 정보를 확인하세요.');
+                        break;
+                    case 'government':
+                        showToast('정부지원대출 정보를 확인하세요.');
+                        break;
+                }
+            }
+
+            // 탭 기능
+            const tabs = document.querySelectorAll('.loan-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    showToast('카테고리가 변경되었습니다.');
+                });
+            });
+
+            // ESC 키로 모달 닫기
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeMoreMenu();
+                    closeSupportModal();
+                }
+            });
+            
+            // 개발자 도구 방지
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                    e.preventDefault();
+                    showToast('개발자 도구 사용이 제한됩니다.');
+                    return false;
+                }
+            });
+            
+            // 우클릭 방지 (선택적)
+            document.addEventListener('contextmenu', function(e) {
+                if (e.target.closest('.allow-right-click')) {
+                    return true;
+                }
+                e.preventDefault();
+                showToast('우클릭이 제한됩니다.');
+                return false;
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>환급금 정보 - 숨은지원금24</title>
+    <meta name="description" content="다양한 환급금 정보를 한눈에! 근로장려금, 부가가치세 환급, 소득공제 환급 등 정부 환급금 정보와 신청 방법 안내.">
+    <meta name="keywords" content="환급금, 근로장려금, 부가가치세 환급, 소득공제, 정부 환급금, 환급 신청">
+    <script src="common-head.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .refund-header {
+            background: white;
+            padding: 16px 20px;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .refund-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        
+        .refund-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        
+        .refund-tab {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        .refund-tab.active {
+            background: #333;
+            color: white;
+        }
+        
+        .refund-tab:not(.active) {
+            background: #f5f5f5;
+            color: #666;
+        }
+        
+        .refund-list {
+            padding: 20px;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .refund-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .refund-card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .refund-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        
+        .refund-info {
+            flex: 1;
+        }
+        
+        .refund-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .refund-agency {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .refund-amount {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2196F3;
+            margin-bottom: 8px;
+        }
+        
+        .refund-deadline {
+            font-size: 12px;
+            color: #999;
+            background: #f8f9fa;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        
+        .refund-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        
+        .refund-eligibility {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .refund-eligibility h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .refund-eligibility ul {
+            margin: 0;
+            padding-left: 16px;
+        }
+        
+        .refund-eligibility li {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        
+        .refund-apply-btn {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+        
+        .refund-apply-btn:hover {
+            background: #1976D2;
+            transform: translateY(-1px);
+        }
+        
+        .floating-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .floating-banner-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .floating-banner-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 4px;
+        }
+        
+        .main-content {
+            margin-top: 48px;
+        }
+        
+        .search-menu-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: auto;
+        }
+        
+        .search-btn, .menu-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 상단 알림 배너 -->
+    <div class="floating-banner" id="topBanner" onclick="openSupportModal()">
+        <div class="floating-banner-content">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>새로운 신규 지원금 할인이 있어요!</span>
+        </div>
+        <button class="floating-banner-close" onclick="closeBanner()">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- 메인 콘텐츠 -->
+    <div class="main-content">
+        <!-- 환급금 헤더 -->
+        <header class="refund-header">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <h1 class="refund-title">환급금</h1>
+                <div class="search-menu-area">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="menu-btn" id="menuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="refund-tabs">
+                <button class="refund-tab active" onclick="switchRefundTab('earned-income')">근로장려금</button>
+                <button class="refund-tab" onclick="switchRefundTab('vat')">부가가치세 환급</button>
+                <button class="refund-tab" onclick="switchRefundTab('income-deduction')">소득공제</button>
+                <button class="refund-tab" onclick="switchRefundTab('other')">기타 환급</button>
+            </div>
+        </header>
+
+        <!-- 환급금 목록 -->
+        <main class="refund-list">
+            <!-- 근로장려금 -->
+            <div class="refund-card">
+                <div class="refund-card-header">
+                    <div class="refund-logo" style="background: #4CAF50;">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="refund-info">
+                        <div class="refund-name">근로장려금</div>
+                        <div class="refund-agency">국세청</div>
+                        <div class="refund-amount">최대 120만원</div>
+                        <div class="refund-deadline">신청기간: 2025.3.1 ~ 2025.9.11</div>
+                    </div>
+                </div>
+                <div class="refund-description">
+                    근로소득이 있는 저소득 근로자에게 지급하는 세제지원 제도입니다. 근로의욕을 높이고 소득을 보전하는 정책입니다.
+                </div>
+                <div class="refund-eligibility">
+                    <h4>📋 지원 대상</h4>
+                    <ul>
+                        <li>근로소득이 있는 18세 이상 근로자</li>
+                        <li>소득기준: 기준중위소득 100% 이하</li>
+                        <li>재산기준: 기준재산가액 1억원 이하</li>
+                        <li>근로의욕이 있는 자</li>
+                    </ul>
+                </div>
+                <button class="refund-apply-btn" onclick="showToast('근로장려금 신청 페이지로 이동합니다.')">
+                    신청하기
+                </button>
+            </div>
+
+            <!-- 부가가치세 환급 -->
+            <div class="refund-card">
+                <div class="refund-card-header">
+                    <div class="refund-logo" style="background: #FF9800;">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="refund-info">
+                        <div class="refund-name">부가가치세 환급</div>
+                        <div class="refund-agency">국세청</div>
+                        <div class="refund-amount">과세표준에 따라 차등</div>
+                        <div class="refund-deadline">신고기간: 2025.3.1 ~ 2025.3.31</div>
+                    </div>
+                </div>
+                <div class="refund-description">
+                    사업자가 납부한 부가가치세를 환급받는 제도입니다. 일반과세자와 간이과세자에 따라 신고 방법이 다릅니다.
+                </div>
+                <div class="refund-eligibility">
+                    <h4>📋 환급 대상</h4>
+                    <ul>
+                        <li>일반과세자: 매출세액 - 매입세액</li>
+                        <li>간이과세자: 간이세율에 따른 환급</li>
+                        <li>신고납부 의무가 있는 사업자</li>
+                        <li>세무서 또는 홈택스 신고</li>
+                    </ul>
+                </div>
+                <button class="refund-apply-btn" onclick="showToast('부가가치세 환급 신청 페이지로 이동합니다.')">
+                    신청하기
+                </button>
+            </div>
+
+            <!-- 소득공제 환급 -->
+            <div class="refund-card">
+                <div class="refund-card-header">
+                    <div class="refund-logo" style="background: #9C27B0;">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <div class="refund-info">
+                        <div class="refund-name">소득공제 환급</div>
+                        <div class="refund-agency">국세청</div>
+                        <div class="refund-amount">공제액에 따라 차등</div>
+                        <div class="refund-deadline">신고기간: 2025.5.1 ~ 2025.5.31</div>
+                    </div>
+                </div>
+                <div class="refund-description">
+                    개인소득세 신고 시 각종 공제를 통해 환급받는 제도입니다. 의료비, 교육비, 보험료 등이 해당됩니다.
+                </div>
+                <div class="refund-eligibility">
+                    <h4>📋 공제 항목</h4>
+                    <ul>
+                        <li>의료비 공제: 연간 120만원 초과분</li>
+                        <li>교육비 공제: 자녀 교육비 일부</li>
+                        <li>보험료 공제: 국민연금, 건강보험료</li>
+                        <li>기부금 공제: 정치자금, 법정기부금</li>
+                    </ul>
+                </div>
+                <button class="refund-apply-btn" onclick="showToast('소득공제 환급 신청 페이지로 이동합니다.')">
+                    신청하기
+                </button>
+            </div>
+
+            <!-- 주택담보대출 이자공제 -->
+            <div class="refund-card">
+                <div class="refund-card-header">
+                    <div class="refund-logo" style="background: #2196F3;">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="refund-info">
+                        <div class="refund-name">주택담보대출 이자공제</div>
+                        <div class="refund-agency">국세청</div>
+                        <div class="refund-amount">연 300만원 한도</div>
+                        <div class="refund-deadline">신고기간: 2025.5.1 ~ 2025.5.31</div>
+                    </div>
+                </div>
+                <div class="refund-description">
+                    주택담보대출 이자를 소득공제받는 제도입니다. 연간 300만원 한도로 이자의 15.4%를 공제받을 수 있습니다.
+                </div>
+                <div class="refund-eligibility">
+                    <h4>📋 공제 조건</h4>
+                    <ul>
+                        <li>주택담보대출 이자 지급자</li>
+                        <li>연간 이자 한도: 300만원</li>
+                        <li>공제율: 15.4% (지방소득세 포함)</li>
+                        <li>소득금액에 따라 제한</li>
+                    </ul>
+                </div>
+                <button class="refund-apply-btn" onclick="showToast('주택담보대출 이자공제 신청 페이지로 이동합니다.')">
+                    신청하기
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- 민생회복지원금 모달 -->
+    <div class="modal-overlay" id="supportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>민생회복지원금</h2>
+                <button class="modal-close" onclick="closeSupportModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-logo">
+                    <img src="public/gov.png" alt="행정안전부" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+                </div>
+                <div class="modal-info">
+                    <div class="support-badge">지원금</div>
+                    <h3>민생회복지원금 신청</h3>
+                    <p class="support-agency">행정안전부 · 신청마감: 25.10.30(목)</p>
+                    <div class="support-amount">
+                        <span class="amount-text">최대 55만원</span>
+                        <span class="amount-desc">가구원 수와 소득에 따라 지원</span>
+                    </div>
+                    <div class="support-description">
+                        <h4>📋 지원 대상</h4>
+                        <ul>
+                            <li>기준 중위소득 75% 이하 가구</li>
+                            <li>건강보험료 기준으로 선정</li>
+                            <li>1인 가구 ~ 6인 이상 가구</li>
+                        </ul>
+                        <h4>💰 지원 내용</h4>
+                        <ul>
+                            <li>1인 가구: 25만원</li>
+                            <li>2인 가구: 40만원</li>
+                            <li>3인 가구: 50만원</li>
+                            <li>4인 이상: 55만원</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="detail.html" class="modal-apply-btn">
+                    <i class="fas fa-external-link-alt"></i>
+                    신청 바로가기
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 더보기 메뉴 모달 -->
+    <div class="more-menu-overlay" id="moreMenuOverlay" onclick="closeMoreMenu()"></div>
+    <div class="more-menu-modal" id="moreMenuModal">
+        <div class="more-menu-header">
+            <h2 class="elementor-heading-title elementor-size-default">원하시는 정보를 찾아보세요</h2>
+            <button class="close-btn" onclick="closeMoreMenu()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="more-menu-body">
+            <div class="menu-items-container">
+                <a class="menu-link-box" href="policy.html">
+                    <div class="menu-link-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#0067FF"><path d="M600-160q-134 0-227-93t-93-227q0-134 93-227t227-93q134 0 227 93t93 227q0 134-93 227t-227 93Zm-306-12q-113-14-183.5-103.5T40-480q0-115 70.5-204.5T294-788v58q-88 16-141 87.5T100-480q0 91 53 162.5T294-230v58Zm306-308Zm0 260q107 0 183.5-76.5T860-480q0-107-76.5-183.5T600-740q-107 0-183.5 76.5T340-480q0 107 76.5 183.5T600-220Z"></path></svg>
+                    </div>
+                    <div class="menu-link-text-content">
+                        <h3 class="menu-link-title">지원금 정보</h3>
+                        <span class="menu-link-subtitle">Gov. Fund</span>
+                    </div>
+                </a>
+                <a class="menu-link-box" href="detail-jeonse.html">
+                    <div class="menu-link-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#0067FF"><path d="M212-241v-339h60v339h-60Zm242 0v-339h60v339h-60ZM80-640v-53l400-228 400 228v53H80Zm134-60h532L480-852 214-700ZM80-121v-60h500q2 14 3.5 28.5T591-121H80Zm608-291v-168h60v138l-60 30ZM800 0q-69-17-114.5-79.5T640-218v-102l160-80 160 80v102q0 76-45.5 138.5T800 0Zm-21-120 142-142-28-28-114 114-59-59-28 28 87 87ZM214-700h532-532Z"></path></svg>
+                    </div>
+                    <div class="menu-link-text-content">
+                        <h3 class="menu-link-title">대출 정보</h3>
+                        <span class="menu-link-subtitle">Capital</span>
+                    </div>
+                </a>
+                <a class="menu-link-box" href="refund.html">
+                    <div class="menu-link-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#0067FF"><path d="M480-80q-75 0-140.5-28T225-185q-49-49-77-114.5T120-440h60q0 125 87.5 212.5T480-140q125 0 212.5-87.5T780-440q0-125-85-212.5T485-740h-23l73 73-41 42-147-147 147-147 41 41-78 78h23q75 0 140.5 28T735-695q49 49 77 114.5T840-440q0 75-28 140.5T735-185q-49 49-114.5 77T480-80Z"></path></svg>
+                    </div>
+                    <div class="menu-link-text-content">
+                        <h3 class="menu-link-title">환급금 정보</h3>
+                        <span class="menu-link-subtitle">Refund</span>
+                    </div>
+                </a>
+                <a class="menu-link-box" href="feed.html">
+                    <div class="menu-link-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#0067FF"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h440l200 200v440q0 33-23.5 56.5T760-120H200Zm80-160h400v-80H280v80Zm0-160h400v-80H280v80Zm320-160h160L600-760v160Zm-320 0h200v-80H280v80Z"></path></svg>
+                    </div>
+                    <div class="menu-link-text-content">
+                        <h3 class="menu-link-title">머니 피드</h3>
+                        <span class="menu-link-subtitle">Money Feed</span>
+                    </div>
+                </a>
+            </div>
+            <div class="kakao-action-wrapper">
+                <a class="kakao-button" href="javascript:showToast('카카오톡 상담 기능은 준비 중입니다.')">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" height="16" viewBox="0 0 16 16" width="16"><path d="m8 2c3.866 0 7 2.44267 7 5.45667 0 3.01333-3.134 5.45603-7 5.45603-.38495.0002-.76952-.0243-1.15133-.0734l-2.93867 1.922c-.334.1767-.452.1574-.31467-.2753l.59467-2.452c-1.92-.9733-3.19-2.66-3.19-4.57733 0-3.01334 3.134-5.45667 7-5.45667z" fill="#000000"></path></svg>
+                    <span>카카오톡으로 문의하기</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 스팸 클릭 방지
+        let clickCount = 0;
+        const maxClickCount = 10;
+        const clickTimeout = 5000; // 5초
+
+        function preventSpamClick(element) {
+            clickCount++;
+            if (clickCount > maxClickCount) {
+                showToast('너무 빠른 클릭입니다. 잠시 후 다시 시도해주세요.');
+                return false;
+            }
+            
+            setTimeout(() => {
+                clickCount = Math.max(0, clickCount - 1);
+            }, clickTimeout);
+            
+            return true;
+        }
+
+        // 토스트 메시지 표시
+        function showToast(message) {
+            const existingToast = document.querySelector('.toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            
+            Object.assign(toast.style, {
+                position: 'fixed',
+                top: '20px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                background: '#333',
+                color: 'white',
+                padding: '12px 24px',
+                borderRadius: '20px',
+                fontSize: '14px',
+                zIndex: '9999',
+                opacity: '0',
+                transition: 'all 0.3s ease'
+            });
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateX(-50%) translateY(10px)';
+            }, 100);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(-50%) translateY(-10px)';
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // 지원금 모달 관련 함수들
+        function openSupportModal() {
+            if (!preventSpamClick()) return;
+            
+            const modal = document.getElementById('supportModal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeSupportModal() {
+            const modal = document.getElementById('supportModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // 더보기 메뉴 열기
+        function openMoreMenu() {
+            if (!preventSpamClick()) return;
+            
+            const overlay = document.getElementById('moreMenuOverlay');
+            const modal = document.getElementById('moreMenuModal');
+            if (overlay && modal) {
+                overlay.classList.add('active');
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // 더보기 메뉴 닫기
+        function closeMoreMenu() {
+            const overlay = document.getElementById('moreMenuOverlay');
+            const modal = document.getElementById('moreMenuModal');
+            if (overlay && modal) {
+                overlay.classList.remove('active');
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // 배너 닫기
+        function closeBanner() {
+            const banner = document.getElementById('topBanner');
+            if (banner) {
+                banner.style.display = 'none';
+                document.querySelector('.main-content').style.marginTop = '0';
+            }
+        }
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', () => {
+            // 햄버거 메뉴 버튼 기능
+            const menuBtn = document.getElementById('menuBtn');
+            if (menuBtn) {
+                menuBtn.addEventListener('click', () => {
+                    if (!preventSpamClick(menuBtn)) return;
+                    openMoreMenu();
+                });
+            }
+
+            // 검색 버튼 기능
+            document.querySelector('.search-btn').addEventListener('click', () => {
+                if (!preventSpamClick()) return;
+                showToast('검색 기능이 곧 업데이트됩니다! 🔍');
+            });
+
+            // 환급금 탭 전환 함수
+            function switchRefundTab(tabType) {
+                if (!preventSpamClick()) return;
+                
+                const tabs = document.querySelectorAll('.refund-tab');
+                tabs.forEach(tab => tab.classList.remove('active'));
+                event.target.classList.add('active');
+                
+                // 탭별 내용 변경
+                switch(tabType) {
+                    case 'earned-income':
+                        showToast('근로장려금 정보를 확인하세요.');
+                        break;
+                    case 'vat':
+                        showToast('부가가치세 환급 정보를 확인하세요.');
+                        break;
+                    case 'income-deduction':
+                        showToast('소득공제 정보를 확인하세요.');
+                        break;
+                    case 'other':
+                        showToast('기타 환급 정보를 확인하세요.');
+                        break;
+                }
+            }
+
+            // 탭 기능
+            const tabs = document.querySelectorAll('.refund-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    showToast('카테고리가 변경되었습니다.');
+                });
+            });
+
+            // ESC 키로 모달 닫기
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeMoreMenu();
+                    closeSupportModal();
+                }
+            });
+            
+            // 개발자 도구 방지
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                    e.preventDefault();
+                    showToast('개발자 도구 사용이 제한됩니다.');
+                    return false;
+                }
+            });
+            
+            // 우클릭 방지 (선택적)
+            document.addEventListener('contextmenu', function(e) {
+                if (e.target.closest('.allow-right-click')) {
+                    return true;
+                }
+                e.preventDefault();
+                showToast('우클릭이 제한됩니다.');
+                return false;
+            });
+        });
+    </script>
+</body>
+</html> 
