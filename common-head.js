@@ -14,7 +14,7 @@ function loadCommonHead() {
     if (!document.querySelector('meta[name="google-site-verification"]')) {
         const googleVerification = document.createElement('meta');
         googleVerification.name = 'google-site-verification';
-        googleVerification.content = '1y9emmE8Sg_geNGc6lHUnytT3enu4zOE4vP0lZXXCr8';
+        googleVerification.content = '0PrOCTmIh0lbD6mV2wjUdistXs8AueQ32erdKj13A9w';
         document.head.appendChild(googleVerification);
     }
     
