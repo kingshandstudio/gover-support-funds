@@ -123,8 +123,8 @@
             </div>
             <div class="tab-navigation">
                 <button class="tab-btn active" data-tab="support">지원금</button>
-                <button class="tab-btn" onclick="window.location.href='refund.html'">환급금</button>
-                <button class="tab-btn" onclick="window.location.href='loan.html'">대출 정보</button>
+                <button class="tab-btn" data-tab="refund">환급금</button>
+                <button class="tab-btn" data-tab="loan">대출 정보</button>
             </div>
             <div class="tab-content">
                 <div class="tab-panel active" id="support">
@@ -162,9 +162,27 @@
                     </div>
                 </div>
                 <div class="tab-panel" id="refund">
-                    <div class="support-item">
+                    <div class="support-item clickable-item" onclick="window.location.href='detail-geunro.html'">
                         <div class="item-image">
-                            <img src="https://via.placeholder.com/80x80/FFC107/FFFFFF?text=환급" alt="에너지캐시백">
+                            <img src="public/nts.png" alt="근로장려금" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover;">
+                        </div>
+                        <div class="item-content">
+                            <div class="item-header">
+                                <h4>근로장려금</h4>
+                                <span class="item-category">환급금</span>
+                            </div>
+                            <div class="item-details">
+                                <p class="item-agency">기관: 국세청</p>
+                                <p class="item-deadline">신청마감: 25.09.11(목)</p>
+                            </div>
+                        </div>
+                        <a href="detail-geunro.html" class="item-apply-btn" onclick="event.stopPropagation();">신청하기</a>
+                    </div>
+                    <div class="support-item clickable-item" onclick="window.location.href='detail-energy.html'">
+                        <div class="item-image">
+                            <div style="width: 80px; height: 80px; border-radius: 12px; background: linear-gradient(135deg, #FF6B35, #FF8E53); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 12px; text-align: center;">
+                                한국전력공사
+                            </div>
                         </div>
                         <div class="item-content">
                             <div class="item-header">
@@ -176,13 +194,31 @@
                                 <p class="item-deadline">신청마감: 25.12.30(화)</p>
                             </div>
                         </div>
-                        <a href="detail-energy.html" class="item-apply-btn">신청하기</a>
+                        <a href="detail-energy.html" class="item-apply-btn" onclick="event.stopPropagation();">신청하기</a>
+                    </div>
+                    <div class="support-item clickable-item" onclick="window.location.href='detail.html'">
+                        <div class="item-image">
+                            <img src="public/nts.png" alt="국세청" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover;">
+                        </div>
+                        <div class="item-content">
+                            <div class="item-header">
+                                <h4>부가가치세 환급</h4>
+                                <span class="item-category">환급금</span>
+                            </div>
+                            <div class="item-details">
+                                <p class="item-agency">기관: 국세청</p>
+                                <p class="item-deadline">신청마감: 25.12.31(수)</p>
+                            </div>
+                        </div>
+                        <a href="detail.html" class="item-apply-btn" onclick="event.stopPropagation();">신청하기</a>
                     </div>
                 </div>
                 <div class="tab-panel" id="loan">
-                    <div class="support-item">
+                    <div class="support-item clickable-item" onclick="window.location.href='detail-jeonse.html'">
                         <div class="item-image">
-                            <img src="https://via.placeholder.com/80x80/DC3545/FFFFFF?text=대출" alt="전세자금대출">
+                            <div style="width: 80px; height: 80px; border-radius: 12px; background: linear-gradient(135deg, #1976D2, #42A5F5); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 10px; text-align: center;">
+                                한국주택<br>금융공사
+                            </div>
                         </div>
                         <div class="item-content">
                             <div class="item-header">
@@ -194,7 +230,97 @@
                                 <p class="item-deadline">신청마감: 25.12.30(화)</p>
                             </div>
                         </div>
-                        <a href="detail-jeonse.html" class="item-apply-btn">신청하기</a>
+                        <a href="detail-jeonse.html" class="item-apply-btn" onclick="event.stopPropagation();">신청하기</a>
+                    </div>
+                    <div class="support-item clickable-item" onclick="window.location.href='detail.html'">
+                        <div class="item-image">
+                            <div style="width: 80px; height: 80px; border-radius: 12px; background: linear-gradient(135deg, #1976D2, #42A5F5); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 10px; text-align: center;">
+                                한국주택<br>금융공사
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <div class="item-header">
+                                <h4>주택담보대출</h4>
+                                <span class="item-category">대출 정보</span>
+                            </div>
+                            <div class="item-details">
+                                <p class="item-agency">기관: 한국주택금융공사</p>
+                                <p class="item-deadline">신청마감: 25.12.30(화)</p>
+                            </div>
+                        </div>
+                        <a href="detail.html" class="item-apply-btn" onclick="event.stopPropagation();">신청하기</a>
+                    </div>
+                    <div class="support-item clickable-item" onclick="window.location.href='detail.html'">
+                        <div class="item-image">
+                            <div style="width: 80px; height: 80px; border-radius: 12px; background: linear-gradient(135deg, #FF6B35, #FF8E53); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 10px; text-align: center;">
+                                중소기업<br>은행
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <div class="item-header">
+                                <h4>소상공인 신용대출</h4>
+                                <span class="item-category">대출 정보</span>
+                            </div>
+                            <div class="item-details">
+                                <p class="item-agency">기관: 중소기업은행</p>
+                                <p class="item-deadline">신청마감: 25.12.30(화)</p>
+                            </div>
+                        </div>
+                        <a href="detail.html" class="item-apply-btn" onclick="event.stopPropagation();">신청하기</a>
+                    </div>
+                    <div class="support-item clickable-item" onclick="window.location.href='detail.html'">
+                        <div class="item-image">
+                            <div style="width: 80px; height: 80px; border-radius: 12px; background: linear-gradient(135deg, #28A745, #4CAF50); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 9px; text-align: center;">
+                                중소기업<br>진흥공단
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <div class="item-header">
+                                <h4>정부지원 소상공인대출</h4>
+                                <span class="item-category">대출 정보</span>
+                            </div>
+                            <div class="item-details">
+                                <p class="item-agency">기관: 중소기업진흥공단</p>
+                                <p class="item-deadline">신청마감: 25.12.30(화)</p>
+                            </div>
+                        </div>
+                        <a href="detail.html" class="item-apply-btn" onclick="event.stopPropagation();">신청하기</a>
+                    </div>
+                    <div class="support-item clickable-item" onclick="window.location.href='detail.html'">
+                        <div class="item-image">
+                            <div style="width: 80px; height: 80px; border-radius: 12px; background: linear-gradient(135deg, #9C27B0, #BA68C8); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 10px; text-align: center;">
+                                신용보증<br>기금
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <div class="item-header">
+                                <h4>개인사업자 대출</h4>
+                                <span class="item-category">대출 정보</span>
+                            </div>
+                            <div class="item-details">
+                                <p class="item-agency">기관: 신용보증기금</p>
+                                <p class="item-deadline">신청마감: 25.12.30(화)</p>
+                            </div>
+                        </div>
+                        <a href="detail.html" class="item-apply-btn" onclick="event.stopPropagation();">신청하기</a>
+                    </div>
+                    <div class="support-item clickable-item" onclick="window.location.href='detail.html'">
+                        <div class="item-image">
+                            <div style="width: 80px; height: 80px; border-radius: 12px; background: linear-gradient(135deg, #28A745, #4CAF50); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 9px; text-align: center;">
+                                중소기업<br>진흥공단
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <div class="item-header">
+                                <h4>창업자금 대출</h4>
+                                <span class="item-category">대출 정보</span>
+                            </div>
+                            <div class="item-details">
+                                <p class="item-agency">기관: 중소기업진흥공단</p>
+                                <p class="item-deadline">신청마감: 25.12.30(화)</p>
+                            </div>
+                        </div>
+                        <a href="detail.html" class="item-apply-btn" onclick="event.stopPropagation();">신청하기</a>
                     </div>
                 </div>
             </div>
@@ -209,6 +335,9 @@
                 <h2>돈 되는 읽을 거리, 머니 피드에서 확인!</h2>
             </div>
             <div class="category-tabs-container">
+                <button class="scroll-arrow left" onclick="scrollTabs('left')" style="display: none;">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
                 <div class="category-tabs">
                     <button class="category-tab active" onclick="switchFeedTab('support', this)">지원/정책</button>
                     <button class="category-tab" onclick="switchFeedTab('small-business', this)">소상공인</button>
@@ -791,5 +920,143 @@
         });
     </script>
     <script src="script.js"></script>
+    <script>
+        // 머니피드 탭 전환 기능
+        function switchFeedTab(tabType, clickedElement) {
+            // 모든 탭에서 active 클래스 제거
+            const tabs = document.querySelectorAll('.category-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // 클릭된 탭에 active 클래스 추가
+            if (clickedElement) {
+                clickedElement.classList.add('active');
+            }
+            
+            // 모든 피드 숨기기
+            const feeds = document.querySelectorAll('.news-grid');
+            feeds.forEach(feed => feed.style.display = 'none');
+            
+            // 해당 피드 보이기
+            const targetFeed = document.getElementById(tabType + '-feed');
+            if (targetFeed) {
+                targetFeed.style.display = 'grid';
+            }
+            
+            // 버튼 클릭 효과
+            if (clickedElement) {
+                clickedElement.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    clickedElement.style.transform = 'scale(1)';
+                }, 150);
+            }
+            
+            // 토스트 메시지
+            const tabNames = {
+                'support': '지원/정책',
+                'small-business': '소상공인',
+                'mortgage': '담보대출',
+                'insurance': '보험',
+                'credit': '신용대출',
+                'credit-card': '신용카드',
+                'savings': '예적금',
+                'asset': '자산관리',
+                'jeonse': '전세대출'
+            };
+            
+            if (typeof showToast === 'function') {
+                showToast(`${tabNames[tabType]} 피드를 확인하세요!`);
+            }
+        }
+        
+        // 탭 스크롤 기능
+        function scrollTabs(direction) {
+            const tabsContainer = document.querySelector('.category-tabs');
+            if (!tabsContainer) {
+                console.log('category-tabs를 찾을 수 없습니다.');
+                return;
+            }
+            
+            const scrollAmount = 200; // 한 번에 스크롤할 픽셀 수
+            const currentScroll = tabsContainer.scrollLeft;
+            
+            if (direction === 'right') {
+                tabsContainer.scrollLeft = currentScroll + scrollAmount;
+                console.log('오른쪽으로 스크롤:', currentScroll + scrollAmount);
+            } else if (direction === 'left') {
+                tabsContainer.scrollLeft = currentScroll - scrollAmount;
+                console.log('왼쪽으로 스크롤:', currentScroll - scrollAmount);
+            }
+            
+            // 스크롤 후 화살표 상태 업데이트
+            setTimeout(updateScrollArrows, 100);
+        }
+        
+        // 스크롤 화살표 상태 업데이트
+        function updateScrollArrows() {
+            const tabsContainer = document.querySelector('.category-tabs');
+            const leftArrow = document.querySelector('.scroll-arrow.left');
+            const rightArrow = document.querySelector('.scroll-arrow.right');
+            
+            if (!tabsContainer || !leftArrow || !rightArrow) return;
+            
+            const scrollLeft = tabsContainer.scrollLeft;
+            const scrollWidth = tabsContainer.scrollWidth;
+            const clientWidth = tabsContainer.clientWidth;
+            
+            // 왼쪽 화살표: 스크롤이 0이 아니면 보이기
+            if (scrollLeft > 0) {
+                leftArrow.style.display = 'flex';
+            } else {
+                leftArrow.style.display = 'none';
+            }
+            
+            // 오른쪽 화살표: 끝까지 스크롤되지 않았으면 보이기
+            if (scrollLeft < scrollWidth - clientWidth - 10) {
+                rightArrow.style.display = 'flex';
+            } else {
+                rightArrow.style.display = 'none';
+            }
+        }
+        
+        // 탭 전환 기능 직접 구현
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabPanels = document.querySelectorAll('.tab-panel');
+            
+            console.log('탭 버튼 개수:', tabBtns.length);
+            console.log('탭 패널 개수:', tabPanels.length);
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+                    console.log('클릭된 탭:', targetTab);
+                    
+                    // 모든 탭 버튼에서 active 클래스 제거
+                    tabBtns.forEach(tab => tab.classList.remove('active'));
+                    // 클릭된 탭 버튼에 active 클래스 추가
+                    this.classList.add('active');
+                    
+                    // 모든 탭 패널 숨기기
+                    tabPanels.forEach(panel => panel.classList.remove('active'));
+                    // 해당 탭 패널 보이기
+                    const targetPanel = document.getElementById(targetTab);
+                    if (targetPanel) {
+                        targetPanel.classList.add('active');
+                        console.log('패널 활성화됨:', targetTab);
+                    } else {
+                        console.log('패널을 찾을 수 없음:', targetTab);
+                    }
+                });
+            });
+            
+            // 카테고리 탭 스크롤 이벤트 리스너 추가
+            const categoryTabs = document.querySelector('.category-tabs');
+            if (categoryTabs) {
+                categoryTabs.addEventListener('scroll', updateScrollArrows);
+                // 초기 화살표 상태 설정
+                updateScrollArrows();
+            }
+        });
+    </script>
 </body>
 </html> 

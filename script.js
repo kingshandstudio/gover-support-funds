@@ -1,14 +1,6 @@
-// DOM 요소들
-const menuBtn = document.getElementById('menuBtn');
-const searchBtn = document.getElementById('searchBtn');
-const sideMenu = document.getElementById('sideMenu');
-const menuOverlay = document.getElementById('menuOverlay');
-const closeBtn = document.getElementById('closeBtn');
-const tabBtns = document.querySelectorAll('.tab-btn');
-const tabPanels = document.querySelectorAll('.tab-panel');
-const categoryTabs = document.querySelectorAll('.category-tab');
-const navItems = document.querySelectorAll('.nav-item');
-const loadMoreBtn = document.querySelector('.load-more-btn');
+// DOM 요소들 (DOMContentLoaded에서 초기화)
+let menuBtn, searchBtn, sideMenu, menuOverlay, closeBtn;
+let tabBtns, tabPanels, categoryTabs, navItems, loadMoreBtn;
 
 // ===================================
 // 보안 및 방지 기능
@@ -904,4 +896,73 @@ const utils = {
 };
 
 // 전역으로 유틸리티 노출
-window.supportUtils = utils; 
+window.supportUtils = utils;
+
+// DOM이 로드된 후 초기화
+document.addEventListener('DOMContentLoaded', function() {
+    // DOM 요소들 초기화
+    menuBtn = document.getElementById('menuBtn');
+    searchBtn = document.getElementById('searchBtn');
+    sideMenu = document.getElementById('sideMenu');
+    menuOverlay = document.getElementById('menuOverlay');
+    closeBtn = document.getElementById('closeBtn');
+    tabBtns = document.querySelectorAll('.tab-btn');
+    tabPanels = document.querySelectorAll('.tab-panel');
+    categoryTabs = document.querySelectorAll('.category-tab');
+    navItems = document.querySelectorAll('.nav-item');
+    loadMoreBtn = document.querySelector('.load-more-btn');
+    
+    console.log('DOM 요소들 초기화 완료:', {
+        tabBtns: tabBtns.length,
+        tabPanels: tabPanels.length
+    });
+    
+    // 탭 전환 기능 초기화
+    if (tabBtns && tabBtns.length > 0) {
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // preventSpamClick 체크 제거 (탭 전환은 스팸이 아님)
+                
+                const targetTab = btn.getAttribute('data-tab');
+                console.log('탭 클릭됨:', targetTab);
+                
+                // 모든 탭 버튼에서 active 클래스 제거
+                tabBtns.forEach(tab => tab.classList.remove('active'));
+                // 클릭된 탭 버튼에 active 클래스 추가
+                btn.classList.add('active');
+                
+                // 모든 탭 패널 숨기기
+                tabPanels.forEach(panel => panel.classList.remove('active'));
+                // 해당 탭 패널 보이기
+                const targetPanel = document.getElementById(targetTab);
+                if (targetPanel) {
+                    targetPanel.classList.add('active');
+                    console.log('패널 활성화:', targetTab);
+                } else {
+                    console.log('패널을 찾을 수 없음:', targetTab);
+                }
+                
+                // 탭 전환 애니메이션
+                btn.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    btn.style.transform = 'scale(1)';
+                }, 150);
+                
+                // 토스트 메시지
+                const tabNames = {
+                    'support': '지원금',
+                    'refund': '환급금',
+                    'loan': '대출 정보'
+                };
+                
+                if (tabNames[targetTab]) {
+                    showToast(`${tabNames[targetTab]} 탭을 확인하세요!`);
+                }
+            });
+        });
+        
+        console.log('탭 전환 기능이 초기화되었습니다.');
+    } else {
+        console.log('탭 버튼을 찾을 수 없습니다.');
+    }
+}); 

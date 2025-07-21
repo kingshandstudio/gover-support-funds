@@ -437,6 +437,8 @@ body {
 .category-tabs-container {
     position: relative;
     margin-bottom: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .category-tabs {
@@ -477,12 +479,12 @@ body {
 }
 
 .scroll-arrow.right {
-    right: -16px;
+    right: 0px;
     display: flex !important;
 }
 
 .scroll-arrow.left {
-    left: -16px;
+    left: 0px;
 }
 
 .scroll-arrow i {
