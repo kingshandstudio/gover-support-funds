@@ -423,6 +423,40 @@ const utils = {
     }
 };
 
+// 더보기 메뉴 관련 함수들
+function openMoreMenu() {
+    const overlay = document.getElementById('moreMenuOverlay');
+    const modal = document.getElementById('moreMenuModal');
+    
+    if (overlay && modal) {
+        overlay.classList.add('active');
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeMoreMenu() {
+    const overlay = document.getElementById('moreMenuOverlay');
+    const modal = document.getElementById('moreMenuModal');
+    
+    if (overlay && modal) {
+        overlay.classList.remove('active');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+// ESC 키로 더보기 메뉴 닫기
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeMoreMenu();
+    }
+});
+
+// 전역으로 함수들 노출
+window.openMoreMenu = openMoreMenu;
+window.closeMoreMenu = closeMoreMenu;
+
 // 전역으로 유틸리티 노출
 window.supportUtils = utils;
 

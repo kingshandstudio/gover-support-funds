@@ -330,11 +330,68 @@
             <i class="fas fa-sign-in-alt"></i>
             <span>로그인</span>
         </button>
-        <button class="nav-item">
+        <button class="nav-item" onclick="openMoreMenu()">
             <i class="fas fa-ellipsis-h"></i>
             <span>더보기</span>
         </button>
     </nav>
+
+    <!-- 더보기 메뉴 모달 -->
+    <div class="more-menu-overlay" id="moreMenuOverlay" onclick="closeMoreMenu()"></div>
+    <div class="more-menu-modal" id="moreMenuModal">
+        <div class="more-menu-header">
+            <h3>원하시는 정보를 찾아보세요</h3>
+            <button class="close-btn" onclick="closeMoreMenu()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="more-menu-content">
+            <div class="menu-grid">
+                <div class="menu-item" onclick="window.location.href='policy.html'">
+                    <div class="menu-icon" style="background: linear-gradient(135deg, #4FC3F7, #29B6F6);">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="menu-text">
+                        <div class="menu-title">지원금 정보</div>
+                        <div class="menu-subtitle">Gov.Fund</div>
+                    </div>
+                </div>
+                <div class="menu-item" onclick="window.location.href='detail.html'">
+                    <div class="menu-icon" style="background: linear-gradient(135deg, #66BB6A, #4CAF50);">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="menu-text">
+                        <div class="menu-title">대출 정보</div>
+                        <div class="menu-subtitle">Capital</div>
+                    </div>
+                </div>
+                <div class="menu-item" onclick="window.location.href='detail-geunro.html'">
+                    <div class="menu-icon" style="background: linear-gradient(135deg, #42A5F5, #2196F3);">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <div class="menu-text">
+                        <div class="menu-title">환급금 정보</div>
+                        <div class="menu-subtitle">Refund</div>
+                    </div>
+                </div>
+                <div class="menu-item" onclick="window.location.href='feed.html'">
+                    <div class="menu-icon" style="background: linear-gradient(135deg, #5C6BC0, #3F51B5);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="menu-text">
+                        <div class="menu-title">머니 피드</div>
+                        <div class="menu-subtitle">Money Feed</div>
+                    </div>
+                </div>
+            </div>
+            <div class="kakao-talk-section">
+                <button class="kakao-talk-btn" onclick="alert('카카오톡 상담 기능은 준비 중입니다.')">
+                    <i class="fas fa-comment"></i>
+                    카카오톡으로 문의하기
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- 사이드 메뉴 -->
     <div class="side-menu" id="sideMenu">
