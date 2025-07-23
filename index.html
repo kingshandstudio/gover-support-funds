@@ -13,7 +13,7 @@
 </head>
 <body>
     <!-- 상단 알림 배너 -->
-    <div class="top-banner" onclick="openSupportModal()">
+    <div class="top-banner" onclick="openSupportModal()" style="cursor: pointer;">
         <div class="banner-content">
             <i class="fas fa-info-circle"></i>
             <span>새로운 신규 지원금 알림이 있어요!</span>
@@ -338,7 +338,7 @@
                 <button class="scroll-arrow left" onclick="scrollTabs('left')" style="display: none;">
                     <i class="fas fa-chevron-left"></i>
                 </button>
-                <div class="category-tabs">
+            <div class="category-tabs">
                     <button class="category-tab active" onclick="switchFeedTab('support', this)">지원/정책</button>
                     <button class="category-tab" onclick="switchFeedTab('small-business', this)">소상공인</button>
                     <button class="category-tab" onclick="switchFeedTab('mortgage', this)">담보대출</button>
@@ -608,7 +608,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2>민생회복지원금</h2>
-                <button class="modal-close" onclick="closeSupportModal()">
+                <button class="modal-close" onclick="closeSupportModal()" style="cursor: pointer;">
                     <i class="fas fa-times"></i>
                 </button>
             </div>

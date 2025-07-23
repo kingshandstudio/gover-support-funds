@@ -605,6 +605,15 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         showToast('숨은지원금24에 오신 것을 환영합니다!');
     }, 1000);
+    
+    // 상단 배너 클릭 이벤트 추가 확인
+    const topBanner = document.querySelector('.top-banner');
+    if (topBanner) {
+        topBanner.addEventListener('click', function(e) {
+            console.log('상단 배너가 클릭되었습니다.');
+            openSupportModal();
+        });
+    }
 });
 
 // ===================================
@@ -723,12 +732,22 @@ function initializeModals() {
         const topBanner = document.querySelector('.top-banner');
         const closeSupportBtn = document.querySelector('.modal-close');
 
-        if(topBanner) topBanner.onclick = openSupportModal;
-        if(closeSupportBtn) closeSupportBtn.onclick = closeSupportModal;
+        if(topBanner) {
+            topBanner.onclick = openSupportModal;
+            console.log('상단 배너 클릭 이벤트가 설정되었습니다.');
+        }
+        if(closeSupportBtn) {
+            closeSupportBtn.onclick = closeSupportModal;
+            console.log('모달 닫기 버튼 클릭 이벤트가 설정되었습니다.');
+        }
         
         supportModal.addEventListener('click', (e) => {
             if (e.target === supportModal) closeSupportModal();
         });
+        
+        console.log('민생회복지원금 모달이 초기화되었습니다.');
+    } else {
+        console.error('supportModal을 찾을 수 없습니다.');
     }
 
     // More Menu Modal 초기화
@@ -792,12 +811,14 @@ function closeMoreMenu() {
 
 // 지원금 모달 관련 함수들
 function openSupportModal() {
-    if (!preventSpamClick()) return;
-    
+    // 스팸 클릭 방지를 제거하여 모달이 정상적으로 열리도록 함
     const modal = document.getElementById('supportModal');
     if (modal) {
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        console.log('민생회복지원금 모달이 열렸습니다.');
+    } else {
+        console.error('supportModal을 찾을 수 없습니다.');
     }
 }
 
@@ -806,6 +827,9 @@ function closeSupportModal() {
     if (modal) {
         modal.classList.remove('active');
         document.body.style.overflow = '';
+        console.log('민생회복지원금 모달이 닫혔습니다.');
+    } else {
+        console.error('supportModal을 찾을 수 없습니다.');
     }
 }
 

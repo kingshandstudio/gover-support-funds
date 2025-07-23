@@ -2437,20 +2437,12 @@ button, a {
     background: linear-gradient(135deg, #FF6B35, #E55100);
 }
 
-.company-logo.citi {
-    background: linear-gradient(135deg, #056DAE, #004080);
-}
-
 .company-logo.woori {
     background: linear-gradient(135deg, #0067B1, #004D85);
 }
 
 .company-logo.hana {
     background: linear-gradient(135deg, #00A651, #008040);
-}
-
-.company-logo.suhyup {
-    background: linear-gradient(135deg, #1E88E5, #1976D2);
 }
 
 .company-name {
